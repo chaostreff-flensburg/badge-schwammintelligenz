@@ -15,4 +15,23 @@
   - Die laufen möglicherweise mit ESP-NOW auf einem bestimmten ESP32 (citation needed)
   - Wir könnten denselben Controller nutzen, um mit den Katzenohren meshen zu können
 
+## BOM
+
+Die folgenden Preise beziehen sich auf ein einzelnes Badge wenn wir Material für 50 Stück kaufen.
+
+- JLCPCB Preis vom 2026-06-15
+  - PCB ca. 100 mm x 100 mm
+  - Silkscreen gleb
+  - 1,6 mm dick
+  - LeadFree HASL
+  - je 110 St. XINGLIGHT XL-0201UWC (LCSC C965789) von JLCPCB auf der Vorderseite bestückt
+  - 258,80 € (Material und Produktion) + 48,03 € (Versand EuroPacket) = 306,83 €
+  - Es ist mit 2 Wochen Lieferzeit zu rechnen, wenn es keine Rücksprachen braucht
+
+| Anzahl | Preis | Bezeichnung |
+| --- | --- | --- |
+| 1 | 6,14 € | PCB mit LEDs (Stand 2026-06-15 von JLCPCB teilbestückt) |
+| 1 | ca. 4 € | ESP32-C6(?) |
+| ? | ??? | ??? |
+
 
