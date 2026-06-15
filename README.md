@@ -12,7 +12,8 @@
     - [Beispielcode für Charlieplexing](https://goodarduinocode.com/guides/charlieplexing) -> Zeilenweise ansteuern
   - [XINGLIGHT XL0201UWC](https://jlcpcb.com/partdetail/XINGLIGHT-XL0201UWC/C965789) wäre z.B. nur 0,7 mm * 0,4 mm groß (Pads komplett unter dem Package) und kostet nur 0,0326 USD / St. bei 5000 St. Abnahme
 - Kompatibilität zu Mesh-Cat-Ears?
-  - Die laufen möglicherweise mit ESP-NOW auf einem bestimmten ESP32 (citation needed)
+  - [Rudelblinken](https://github.com/zebreus/rudelblinken)
+  - Die laufen mit BLE auf einem ESP32-C3
   - Wir könnten denselben Controller nutzen, um mit den Katzenohren meshen zu können
 
 ## BOM
@@ -31,7 +32,7 @@ Die folgenden Preise beziehen sich auf ein einzelnes Badge wenn wir Material fü
 | Anzahl | Preis | Bezeichnung |
 | --- | --- | --- |
 | 1 | 6,14 € | PCB mit LEDs (Stand 2026-06-15 von JLCPCB teilbestückt) |
-| 1 | ca. 4 € | ESP32-C6(?) |
+| 1 | ca. 4 € | ESP32-C3 |
 | ? | ??? | ??? |
 
 
