@@ -15,6 +15,11 @@
   - [Rudelblinken](https://github.com/zebreus/rudelblinken)
   - Die laufen mit BLE auf einem ESP32-C3
   - Wir könnten denselben Controller nutzen, um mit den Katzenohren meshen zu können
+- ein Taster auf der Rückseite, um einen Puls auszulösen
+  - erstmal an den eigenen LEDs
+  - langfristig sonst auch auf Gehirnen in der Nähe
+  - evtl. jeder Mesh-Teilnehmer eine eigene LED?
+  - 3-4 Taster (Soft touch)
 
 ## BOM
 
