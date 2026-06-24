@@ -19,7 +19,7 @@
   - erstmal an den eigenen LEDs
   - langfristig sonst auch auf Gehirnen in der Nähe
   - evtl. jeder Mesh-Teilnehmer eine eigene LED?
-  - 3-4 Taster (Soft touch)
+  - 3-4 Taster (Soft touch) (Typ [Alps SKPM](https://tech.alpsalpine.com/e/products/detail/SKPMANE010/)?)
 
 ## BOM
 
