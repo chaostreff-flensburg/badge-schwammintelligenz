@@ -21,6 +21,32 @@
   - evtl. jeder Mesh-Teilnehmer eine eigene LED?
   - 3-4 Taster (Soft touch) (Typ [Alps SKPM](https://tech.alpsalpine.com/e/products/detail/SKPMANE010/)?)
 
+## Implementierung der Farben
+
+Die Platine wird mit **gelbem Lötstopplack** und **weißem Bestückungsdruck** gefertigt.
+
+Kupfer auf der Rückseite minimal halten und wo möglich unter dem Kupfer der Oberseite verlegen.
+
+### Farbaufbau
+
+| Farbe | Objekte | Beteiligte Lagen | Notizen |
+| --- | --- | --- | --- |
+| weiß | ??? | F.Silkscreen | Bestückungsdruck (muss auf Lötstopplack liegen) |
+| silber | ??? | F.Cu, F.Mask | freies Kupfer mit HASL Finish |
+| hellergelb | Schwammoberfläche | F.Mask | blankes FR4 (kein Kupfer auf der Rückseite) - ca. `e9d645ff` |
+| hellgelb | Vertiefung flach | none | Lötstopplack auf FR4 (kein Kupfer auf der Rückseite) - ca. `f6c50eff` |
+| dunkelgelb | Vertiefung tief | F.Cu | Lötstopplack auf Kupfer - ca. `e8b203ff` |
+| grüngelb | --- | F.Cu, F.Mask | blankes FR4 mit Kupfer auf der Rückseite |
+
+### Lagenaufbau
+
+| Lage | Objekte |
+| --- | --- |
+| F.Cu | union( silber, dunkelgelb ) |
+| F.Mask | invert( union( weiß, hellgelb, dunkelgelb ) ) |
+| F.Silkscreen | weiß |
+
+
 ## BOM
 
 Die folgenden Preise beziehen sich auf ein einzelnes Badge wenn wir Material für 50 Stück kaufen.
