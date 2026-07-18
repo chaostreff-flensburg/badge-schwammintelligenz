@@ -920,7 +920,7 @@
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D17"
-			(at 0 -1.000001 150)
+			(at 0 -1 150)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "a7aefb56-09e0-4abe-bb47-a56714115f5c")
@@ -932,7 +932,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1.000001 150)
+			(at 0 1 150)
 			(layer "F.Fab")
 			(uuid "4a5a48f6-bf99-4c43-945b-302dd2fd7e27")
 			(effects
@@ -1503,11 +1503,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "140ced94-c2cc-4b2b-9a18-649991cd09db")
-		(at 190 68)
+		(at 181.1 85.9 165)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D49"
-			(at 0 -1 0)
+			(at 0 -1 165)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "e60eb16c-ca42-4f23-b53d-bccbc94f3f5d")
@@ -1519,7 +1519,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1 165)
 			(layer "F.Fab")
 			(uuid "aa322184-fbc0-4cee-8ce1-b064c40dfc13")
 			(effects
@@ -1530,7 +1530,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 165)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0b293abc-0110-442b-a40f-ca34a3a8e016")
@@ -1541,7 +1541,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 165)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "b9e30dd4-ab24-4bb0-b6a9-897fc41267ef")
@@ -1552,7 +1552,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 165)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "b60ffed3-e188-4316-a512-8a8b3495049c")
@@ -1564,7 +1564,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 165)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -1577,7 +1577,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 165)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -1596,8 +1596,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.039998 -0.099999)
+			(end -0.039998 0.1)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -1605,9 +1605,10 @@
 			(layer "F.SilkS")
 			(uuid "38618b45-1d22-4f4e-8f62-1713461b95fd")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.600002 -0.299997) (xy 0.6 -0.300001) (xy 0.600002 0.299997) (xy -0.6 0.300001)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -1617,8 +1618,8 @@
 			(uuid "7a67ad2d-c4ca-4859-9396-8b1a62411490")
 		)
 		(fp_line
-			(start -0.075 0.175)
-			(end -0.075 -0.175)
+			(start -0.074998 0.175)
+			(end -0.074999 -0.175001)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -1626,9 +1627,10 @@
 			(layer "F.Fab")
 			(uuid "449c21a3-1cc4-4b1f-a9e0-d935051f423a")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.324998 -0.174998) (xy 0.324998 -0.174998) (xy 0.324998 0.174998) (xy -0.324998 0.174998)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -1638,7 +1640,7 @@
 			(uuid "9ac1e012-ba96-4155-b2e2-7897cbd3139b")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 165)
 			(layer "F.Fab")
 			(uuid "940f6953-b00d-4442-bf1d-5c6f8417ae17")
 			(effects
@@ -1649,21 +1651,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 165)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "1e17fb73-af2b-432d-8f53-616a21475d35")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 165)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "ccfee9fc-c868-4f72-b23d-11eed2fa1674")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 165)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -1673,7 +1675,7 @@
 			(uuid "2edb9e49-be12-4735-9352-0e2d73077e57")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 165)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -3067,11 +3069,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "2037bdee-ed42-4b40-8a52-e0d9c7d457f2")
-		(at 179.995 64)
+		(at 159.7 76.7 -45)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D37"
-			(at 0 -1 0)
+			(at 0 -1 135)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "a6b8f5a6-56cb-420a-8d84-27605d686107")
@@ -3083,7 +3085,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1 135)
 			(layer "F.Fab")
 			(uuid "0b601add-6a4e-4d0b-a370-ab4fb05bf5ea")
 			(effects
@@ -3094,7 +3096,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 135)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "3a97d3f7-c26a-426c-8267-ea7e6bf67a3a")
@@ -3105,7 +3107,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 135)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1f561f7e-520b-4a03-b163-a3edc7a2be9f")
@@ -3116,7 +3118,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 135)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "a0f2dd5f-a1cb-46e5-a5d7-18c9baf2d847")
@@ -3128,7 +3130,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 315)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -3141,7 +3143,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 315)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -3160,8 +3162,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.04 -0.099999)
+			(end -0.039999 0.100001)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -3169,9 +3171,10 @@
 			(layer "F.SilkS")
 			(uuid "9a140670-b87e-4535-a2b7-deeed4f98c40")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.6 -0.3) (xy 0.600001 -0.299999) (xy 0.6 0.3) (xy -0.600001 0.299999)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -3182,7 +3185,7 @@
 		)
 		(fp_line
 			(start -0.075 0.175)
-			(end -0.075 -0.175)
+			(end -0.075 -0.174999)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -3190,9 +3193,10 @@
 			(layer "F.Fab")
 			(uuid "90406579-ed23-4050-9b84-7064acdb5af7")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.325 -0.174999) (xy 0.324999 -0.175) (xy 0.325 0.174999) (xy -0.324999 0.175)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -3202,7 +3206,7 @@
 			(uuid "0d957132-f502-4ab5-b8c9-7d458775533c")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 135)
 			(layer "F.Fab")
 			(uuid "060545d1-77fe-4540-91aa-84eea678540e")
 			(effects
@@ -3213,21 +3217,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 315)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "e5fb5e1c-8ecb-4975-94a8-5b7e5dd5e53a")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 315)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "743cd9cf-8979-47f3-acf3-f7f16426cbcd")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 315)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -3237,7 +3241,7 @@
 			(uuid "aa40bc1b-de07-4642-bce4-9456dde2ae9e")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 315)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -4044,11 +4048,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "34a74f39-541f-44bd-a9f7-124b2a64ddb8")
-		(at 180 68)
+		(at 151.7 91.4 75)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D39"
-			(at 0 -1 0)
+			(at 0 -1 75)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "2f752709-839a-4ed2-8cf2-5e5929f74396")
@@ -4060,7 +4064,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1 75)
 			(layer "F.Fab")
 			(uuid "97e1d9b0-56fd-4359-a0a7-53454fa004a2")
 			(effects
@@ -4071,7 +4075,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 75)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "894eae11-65be-4004-9a89-69b839b874cf")
@@ -4082,7 +4086,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 75)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "89400cc8-6892-4485-90d9-76d0c3ef5c59")
@@ -4093,7 +4097,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 75)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "50b28975-97da-4f5c-8f1f-bd0abe7c7611")
@@ -4105,7 +4109,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 75)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -4118,7 +4122,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 75)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -4137,8 +4141,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.039999 -0.100001)
+			(end -0.039999 0.099999)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -4146,9 +4150,10 @@
 			(layer "F.SilkS")
 			(uuid "d9da0881-6817-4d17-ae87-084284b8b2ff")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.6 -0.300001) (xy 0.6 -0.300001) (xy 0.6 0.300001) (xy -0.6 0.300001)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -4158,8 +4163,8 @@
 			(uuid "0ceccecb-db76-48c4-8bed-a31a602d9f98")
 		)
 		(fp_line
-			(start -0.075 0.175)
-			(end -0.075 -0.175)
+			(start -0.074999 0.174999)
+			(end -0.075 -0.175001)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -4167,9 +4172,10 @@
 			(layer "F.Fab")
 			(uuid "ef1e9976-f071-4a92-bf04-34249281c2bf")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.324998 -0.175) (xy 0.325 -0.174998) (xy 0.324998 0.175) (xy -0.325 0.174998)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -4179,7 +4185,7 @@
 			(uuid "64286929-ee06-463c-9b4c-3e8778568900")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 75)
 			(layer "F.Fab")
 			(uuid "30043059-547d-47cd-a00d-d341c9689c77")
 			(effects
@@ -4190,21 +4196,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 75)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "2c61bdef-f3b0-40ae-bc94-7002483c8c2d")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 75)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "0369e0ce-68e6-4c0f-a6cb-86402a142b0c")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 75)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -4214,7 +4220,7 @@
 			(uuid "7ab3f546-8518-4856-ad4a-bc391a9c7550")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 75)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -4631,11 +4637,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "384fceb4-fc8e-4160-af55-f5fd0bb35484")
-		(at 190 66)
+		(at 187.1 86.7 -150)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D48"
-			(at 0 -1 0)
+			(at 0 -1.000001 30)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "69223ca6-64e3-4475-8e86-4ec866f154f2")
@@ -4647,7 +4653,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1.000001 30)
 			(layer "F.Fab")
 			(uuid "c8a36a6c-71f6-4ba4-b77b-47ff72597c00")
 			(effects
@@ -4658,7 +4664,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 30)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "deed4727-f5ff-4cc1-bb12-a2f02528dfc0")
@@ -4669,7 +4675,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 30)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "c2999b77-455c-4442-9e87-c86975cec0f8")
@@ -4680,7 +4686,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 30)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "535d6bd1-7278-4458-9643-6b5c9e123318")
@@ -4692,7 +4698,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 210)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -4705,7 +4711,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 210)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -4724,8 +4730,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.039998 -0.099999)
+			(end -0.039998 0.100001)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -4733,9 +4739,10 @@
 			(layer "F.SilkS")
 			(uuid "13615e89-5358-4216-b92f-a84aed4e5b4b")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.600002 -0.299997) (xy 0.6 -0.3) (xy 0.600002 0.299997) (xy -0.6 0.3)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -4745,8 +4752,8 @@
 			(uuid "14d361c1-ccc0-409d-817f-e8419e09b734")
 		)
 		(fp_line
-			(start -0.075 0.175)
-			(end -0.075 -0.175)
+			(start -0.074998 0.175)
+			(end -0.074999 -0.175001)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -4754,9 +4761,10 @@
 			(layer "F.Fab")
 			(uuid "5311cd90-5b77-416e-b93a-62f6c75d00d2")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.324999 -0.174998) (xy 0.324998 -0.174999) (xy 0.324999 0.174998) (xy -0.324998 0.174999)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -4766,7 +4774,7 @@
 			(uuid "d2c3a64a-0736-4760-b998-1fff335b9f93")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 30)
 			(layer "F.Fab")
 			(uuid "f5d7f148-6aa0-414c-8a8e-644db8a954cf")
 			(effects
@@ -4777,21 +4785,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 210)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "41d96b69-408f-4ce8-9ce6-3d240332793f")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 210)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "9544d273-702c-4ddb-bfa4-0abd8ab953a0")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 210)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -4801,7 +4809,7 @@
 			(uuid "72f2ae7e-13c7-417a-b026-8b04631618af")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 210)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -6392,11 +6400,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "4a4d9920-0f7d-48d0-9fc8-384a6f196b28")
-		(at 190 58)
+		(at 175.5 88.2 -15)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D44"
-			(at 0 -1 0)
+			(at 0 -1 165)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "9c5216f9-d75d-4249-bc6c-3cfc1eb0ff48")
@@ -6408,7 +6416,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1 165)
 			(layer "F.Fab")
 			(uuid "42341afb-36ce-41fc-a460-a26cbba36e4e")
 			(effects
@@ -6419,7 +6427,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 165)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "30d6201b-88b7-4108-813c-d8f35440b0aa")
@@ -6430,7 +6438,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 165)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "3e142ecc-b7fc-4edf-8f80-32e716b2916e")
@@ -6441,7 +6449,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 165)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "ecfa2f0b-98c3-4adc-978b-e5ec2540bd78")
@@ -6453,7 +6461,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 345)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -6466,7 +6474,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 345)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -6494,9 +6502,10 @@
 			(layer "F.SilkS")
 			(uuid "ed341c98-e318-4d3d-bf16-707203a5d132")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.6 -0.3) (xy 0.6 -0.3) (xy 0.6 0.3) (xy -0.6 0.3)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -6515,9 +6524,10 @@
 			(layer "F.Fab")
 			(uuid "eb6f714f-8506-471d-bdf0-a8964a452dd9")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.325 -0.175) (xy 0.325 -0.175) (xy 0.325 0.175) (xy -0.325 0.175)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -6527,7 +6537,7 @@
 			(uuid "32228b43-0724-4c48-b5d9-a05e4ab6ce44")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 165)
 			(layer "F.Fab")
 			(uuid "4a243e06-a1c6-4c14-a995-f2c75b88e11a")
 			(effects
@@ -6538,21 +6548,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 345)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "438a0792-abd0-41fe-9dab-9a2ad2859572")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 345)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "dc94d50a-ddf3-4b8a-8a63-93f73985c4b6")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 345)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -6562,7 +6572,7 @@
 			(uuid "c3d8a612-0ad6-406d-a2b5-9f656e31988e")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 345)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -6979,11 +6989,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "4b852d17-480e-45dc-a288-5e4aaa83eda7")
-		(at 179.995 66)
+		(at 156.1 83.1 -15)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D38"
-			(at 0 -1 0)
+			(at 0 -1 165)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "c98b58e0-5b05-467b-83bb-37d6fb7eaa43")
@@ -6995,7 +7005,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1 165)
 			(layer "F.Fab")
 			(uuid "c37d6c50-6f3e-4bdc-8ead-3b6545b1b3e9")
 			(effects
@@ -7006,7 +7016,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 165)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "b07baaba-89a6-4535-9e14-644bb87ada21")
@@ -7017,7 +7027,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 165)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "cc63d15b-d88b-4091-96e6-62e2c02aa54d")
@@ -7028,7 +7038,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 165)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "1d526975-519d-47a5-ba8d-6f8160f304aa")
@@ -7040,7 +7050,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 345)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -7053,7 +7063,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 345)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -7081,9 +7091,10 @@
 			(layer "F.SilkS")
 			(uuid "8f918424-7ebf-4ede-8b38-11973bf816d0")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.6 -0.300001) (xy 0.6 -0.3) (xy 0.6 0.300001) (xy -0.6 0.3)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -7102,9 +7113,10 @@
 			(layer "F.Fab")
 			(uuid "4cead0bc-8ea6-4fb9-bac2-feca78ec2f09")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.325 -0.175) (xy 0.325 -0.175) (xy 0.325 0.175) (xy -0.325 0.175)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -7114,7 +7126,7 @@
 			(uuid "9f47d188-4dbc-4b45-9ca6-ad9fd203b7b3")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 165)
 			(layer "F.Fab")
 			(uuid "a5605421-703b-4d83-bf73-462356f57d44")
 			(effects
@@ -7125,21 +7137,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 345)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "1c3d2c92-f33c-4ac1-83ef-ac63ebd35224")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 345)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "f3d2b010-ed84-4416-8667-cc8ae5405a92")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 345)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -7149,7 +7161,7 @@
 			(uuid "1c119e72-418a-4be5-a18e-4762db7d4554")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 345)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -9725,7 +9737,7 @@
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D21"
-			(at 0 -1.000001 120)
+			(at 0 -1 120)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "97a30619-b19c-4a7d-a4b0-b8980e21ab00")
@@ -9737,7 +9749,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1.000001 120)
+			(at 0 1 120)
 			(layer "F.Fab")
 			(uuid "50e6c0a8-5b69-4abd-a0fa-e60755321389")
 			(effects
@@ -12654,7 +12666,7 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "92b0913d-4f79-4b53-b1c7-62514626e5a1")
-		(at 129.2 89.1 180)
+		(at 129.2 89.1)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D23"
@@ -12715,7 +12727,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 180)
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -12728,7 +12740,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 180)
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -12747,8 +12759,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.039998 -0.1)
-			(end -0.039998 0.1)
+			(start -0.04 -0.1)
+			(end -0.04 0.100001)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -12769,7 +12781,7 @@
 			(uuid "48d4c3ec-f704-4b53-b008-56b161791fbe")
 		)
 		(fp_line
-			(start -0.074998 0.174999)
+			(start -0.074998 0.175)
 			(end -0.074999 -0.175001)
 			(stroke
 				(width 0.1)
@@ -12780,7 +12792,7 @@
 		)
 		(fp_poly
 			(pts
-				(xy -0.324998 -0.174998) (xy 0.324998 -0.174998) (xy 0.324998 0.174998) (xy -0.324998 0.174998)
+				(xy -0.325 -0.175) (xy 0.325 -0.175) (xy 0.325 0.175) (xy -0.325 0.175)
 			)
 			(stroke
 				(width 0.1)
@@ -12802,21 +12814,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0 180)
+			(at -0.205 0)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "21d8e0c6-d4b5-430b-8553-9cfa88503a78")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0 180)
+			(at 0.205 0)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "c8d5c0e7-504b-4cd1-9e86-88d0c877cfec")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0 180)
+			(at -0.205 0)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -12826,7 +12838,7 @@
 			(uuid "4786f133-830a-4d85-8b20-e5adf497a138")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0 180)
+			(at 0.205 0)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -13241,11 +13253,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "983d0e80-95df-4ac0-845f-be209fc514c2")
-		(at 190 62)
+		(at 177.5 99.3 150)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D46"
-			(at 0 -1 0)
+			(at 0 -1.000001 150)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "b83625dd-1733-4f19-8c19-5c84c165454a")
@@ -13257,7 +13269,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1.000001 150)
 			(layer "F.Fab")
 			(uuid "49056596-66fd-4d76-bf0a-183dbd39ab65")
 			(effects
@@ -13268,7 +13280,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 150)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2b16f6b7-c3a9-40ec-a223-0bd22fdfaa6c")
@@ -13279,7 +13291,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 150)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "9bc84de1-b349-405f-b677-c348dbc7b371")
@@ -13290,7 +13302,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 150)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "fa8c44df-bcb9-4638-bf01-0eff3633a850")
@@ -13302,7 +13314,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 150)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -13315,7 +13327,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 150)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -13334,8 +13346,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.039998 -0.100001)
+			(end -0.039998 0.099999)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -13343,9 +13355,10 @@
 			(layer "F.SilkS")
 			(uuid "7a0128df-83f5-4139-a4eb-b048e88c2e65")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.600002 -0.299997) (xy 0.6 -0.3) (xy 0.600002 0.299997) (xy -0.6 0.3)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -13355,8 +13368,8 @@
 			(uuid "6e412b22-4c00-43cb-9464-d43c3f92f928")
 		)
 		(fp_line
-			(start -0.075 0.175)
-			(end -0.075 -0.175)
+			(start -0.074999 0.174999)
+			(end -0.074999 -0.175001)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -13364,9 +13377,10 @@
 			(layer "F.Fab")
 			(uuid "b112e748-0d32-4c43-b809-c9ce7fad8808")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.324998 -0.174999) (xy 0.324999 -0.174998) (xy 0.324998 0.174999) (xy -0.324999 0.174998)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -13376,7 +13390,7 @@
 			(uuid "7564b23e-dacd-477b-b4e3-b083fbe8b990")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 150)
 			(layer "F.Fab")
 			(uuid "0ae2dbac-102d-4284-abe1-987c3dc0ef0d")
 			(effects
@@ -13387,21 +13401,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 150)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "2b10e692-cce3-4087-924c-459b40a93d1f")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 150)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "4506f3c9-227e-49b3-be2d-62a8dcb67bb7")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 150)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -13411,7 +13425,7 @@
 			(uuid "f5a295a1-e592-40cf-ab61-afecb4d5074c")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 150)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -13440,7 +13454,7 @@
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D24"
-			(at 0 -1.000001 150)
+			(at 0 -1 150)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "e57e89d6-f7bf-4946-a709-2984ed4a6929")
@@ -13452,7 +13466,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1.000001 150)
+			(at 0 1 150)
 			(layer "F.Fab")
 			(uuid "b3d6df6a-56b5-4501-a0a2-e94214b7f81f")
 			(effects
@@ -14413,11 +14427,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "a486dd7f-dc15-45ca-b260-6ae1ab9f2f1d")
-		(at 190 56)
+		(at 174.4 81.2 60)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D43"
-			(at 0 -1 0)
+			(at 0 -1.000001 60)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "0263b5cf-d54d-415d-ad65-67f2497e5b61")
@@ -14429,7 +14443,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1.000001 60)
 			(layer "F.Fab")
 			(uuid "354a4b13-4e6d-4a62-9304-461f4b87095e")
 			(effects
@@ -14440,7 +14454,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 60)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "58e23461-5c86-4d8f-a165-30425ab2ce67")
@@ -14451,7 +14465,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 60)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "f0d800c1-32c0-4876-8c8c-9f2e56abeca1")
@@ -14462,7 +14476,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 60)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "501479a6-cea1-4fdd-85c9-90c99dd0032a")
@@ -14474,7 +14488,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 60)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -14487,7 +14501,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 60)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -14506,8 +14520,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.039999 -0.100001)
+			(end -0.039999 0.099999)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -14515,9 +14529,10 @@
 			(layer "F.SilkS")
 			(uuid "347096b2-595e-4eab-8bc6-af129fcc903a")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.6 -0.299999) (xy 0.6 -0.3) (xy 0.6 0.299999) (xy -0.6 0.3)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -14527,7 +14542,7 @@
 			(uuid "066db5f4-923b-4b99-846e-90199a316492")
 		)
 		(fp_line
-			(start -0.075 0.175)
+			(start -0.074999 0.174999)
 			(end -0.075 -0.175)
 			(stroke
 				(width 0.1)
@@ -14536,9 +14551,10 @@
 			(layer "F.Fab")
 			(uuid "a8aad5fe-0113-46ab-8fed-8881b827e73a")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.324999 -0.175) (xy 0.325001 -0.174999) (xy 0.324999 0.175) (xy -0.325001 0.174999)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -14548,7 +14564,7 @@
 			(uuid "3fa93012-6325-485f-9bdd-d96d581d7f82")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 60)
 			(layer "F.Fab")
 			(uuid "51e7c604-0dec-45f1-b138-fb807137c1ef")
 			(effects
@@ -14559,21 +14575,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 60)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "30443ca3-ae23-4ec7-9b14-0f8c37b4282f")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 60)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "9e54106a-157f-4e60-96bf-08030cba97a1")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 60)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -14583,7 +14599,7 @@
 			(uuid "621fd621-383b-4cb9-880a-fdfbd8a8d43f")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 60)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -15197,7 +15213,7 @@
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D15"
-			(at 0 -1.000001 120)
+			(at 0 -1 120)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "8ee4974d-f0a5-4d10-8727-aa02457a027c")
@@ -15209,7 +15225,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1.000001 120)
+			(at 0 1 120)
 			(layer "F.Fab")
 			(uuid "9bde0326-bef4-4687-a410-249a311e4957")
 			(effects
@@ -15390,11 +15406,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "b30fb228-083d-43e9-9614-394317ad4109")
-		(at 179.995 62)
+		(at 165.2 73.1 -60)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D36"
-			(at 0 -1 0)
+			(at 0 -1.000001 120)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "51fee6b8-6456-4c5f-af6d-82727c37f117")
@@ -15406,7 +15422,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1.000001 120)
 			(layer "F.Fab")
 			(uuid "144375e1-1a02-4484-9e64-89f9de69ab5e")
 			(effects
@@ -15417,7 +15433,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 120)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a83361c4-3881-4cce-8857-b914e4eeebb0")
@@ -15428,7 +15444,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 120)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "fcacbbc7-f20d-4d36-893d-3e4aea936cb1")
@@ -15439,7 +15455,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 120)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "6982cbc7-9be6-40c8-9723-31ab15015ed5")
@@ -15451,7 +15467,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 300)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15464,7 +15480,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 300)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15483,8 +15499,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.039999 -0.099999)
+			(end -0.039998 0.100001)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -15492,9 +15508,10 @@
 			(layer "F.SilkS")
 			(uuid "c8423696-7bad-4486-b9a9-502db89ae9d7")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.600002 -0.299997) (xy 0.6 -0.3) (xy 0.600002 0.299997) (xy -0.6 0.3)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -15504,8 +15521,8 @@
 			(uuid "2a0ca58f-ccf7-4547-b1d5-047dca690283")
 		)
 		(fp_line
-			(start -0.075 0.175)
-			(end -0.075 -0.175)
+			(start -0.074998 0.175)
+			(end -0.074999 -0.175001)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -15513,9 +15530,10 @@
 			(layer "F.Fab")
 			(uuid "9ec4ed03-6dff-4e3d-a666-5fc1fc0af91c")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.325001 -0.174999) (xy 0.324999 -0.175) (xy 0.325001 0.174999) (xy -0.324999 0.175)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -15525,7 +15543,7 @@
 			(uuid "8b78c7ab-9a7b-48d0-a969-d86e4b96c6a4")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 120)
 			(layer "F.Fab")
 			(uuid "faab61cc-46d1-4a9d-ac95-50458f03a0b7")
 			(effects
@@ -15536,21 +15554,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 300)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "9039f05f-3f4c-4b14-949c-020f1e0d35aa")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 300)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "57ea6c79-a4f7-45a7-a91f-29bbc1cc3835")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 300)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -15560,7 +15578,7 @@
 			(uuid "d8923408-cde2-418e-a0ee-8700e5243e76")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 300)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -15782,11 +15800,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "b6585f51-a790-4b81-b24e-86e644f98be9")
-		(at 180 56)
+		(at 180.1 74 60)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D33"
-			(at 0 -1 0)
+			(at 0 -1.000001 60)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "7b68450b-66b5-48e3-b410-523afdf6cb85")
@@ -15798,7 +15816,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1.000001 60)
 			(layer "F.Fab")
 			(uuid "8466c34b-2541-42df-b439-dab78220abef")
 			(effects
@@ -15809,7 +15827,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 60)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "fc9262a9-9cb7-4347-8ca5-04632905e0d0")
@@ -15820,7 +15838,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 60)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2673d44a-4fa9-4208-905e-fc3afa22e1b8")
@@ -15831,7 +15849,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 60)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "61c9b510-c186-4c19-a9f7-16bc42478d77")
@@ -15843,7 +15861,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 60)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15856,7 +15874,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 60)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15875,8 +15893,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.039999 -0.100001)
+			(end -0.039999 0.099999)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -15884,9 +15902,10 @@
 			(layer "F.SilkS")
 			(uuid "4e8fc749-1d74-4af8-a6f5-4f9f958ef94e")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.6 -0.299999) (xy 0.6 -0.3) (xy 0.6 0.299999) (xy -0.6 0.3)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -15896,7 +15915,7 @@
 			(uuid "f8eac086-5134-4330-b521-4b192d3596bf")
 		)
 		(fp_line
-			(start -0.075 0.175)
+			(start -0.074999 0.174999)
 			(end -0.075 -0.175)
 			(stroke
 				(width 0.1)
@@ -15905,9 +15924,10 @@
 			(layer "F.Fab")
 			(uuid "1b3ba0a6-d1a4-4c16-ae39-f9bae3e43924")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.324999 -0.175) (xy 0.325001 -0.174999) (xy 0.324999 0.175) (xy -0.325001 0.174999)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -15917,7 +15937,7 @@
 			(uuid "4595e0a0-db94-4c36-9bbf-210c21ae4cdb")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 60)
 			(layer "F.Fab")
 			(uuid "3c3f8c8e-e15e-461c-b3e8-37e9a9b9895a")
 			(effects
@@ -15928,21 +15948,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 60)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "bfd0753d-cc6f-4932-871c-5d9ce1e9326b")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 60)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "9bd3263b-ac50-4c12-b2aa-d2540f5fc455")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 60)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -15952,7 +15972,7 @@
 			(uuid "7e62e831-cb52-452c-a262-533883a3e12e")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 60)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -16172,11 +16192,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "ba7075b2-ea13-4065-a848-0e7375bfd811")
-		(at 179.995 60)
+		(at 173 75.4 -105)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D35"
-			(at 0 -1 0)
+			(at 0 -1 75)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "6b7f9a33-d822-43ee-8327-831efb52842b")
@@ -16188,7 +16208,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1 75)
 			(layer "F.Fab")
 			(uuid "c706925f-0f80-4691-b6f9-11a02c259960")
 			(effects
@@ -16199,7 +16219,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 75)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "ecf0212e-c543-44f8-adeb-4dc24958c478")
@@ -16210,7 +16230,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 75)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2d9158cb-238c-4765-895f-e611e01a7804")
@@ -16221,7 +16241,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 75)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "48d4a917-d0ae-4828-b44a-ebd366bf0aca")
@@ -16233,7 +16253,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 255)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -16246,7 +16266,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 255)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -16265,8 +16285,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.039999 -0.099999)
+			(end -0.039999 0.100001)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -16274,9 +16294,10 @@
 			(layer "F.SilkS")
 			(uuid "3ae88fd7-bc46-46eb-ac90-d8747c98a755")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.6 -0.300001) (xy 0.600001 -0.299998) (xy 0.6 0.300001) (xy -0.600001 0.299998)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -16286,8 +16307,8 @@
 			(uuid "451b5085-a35f-435f-adea-fe89af56c5b6")
 		)
 		(fp_line
-			(start -0.075 0.175)
-			(end -0.075 -0.175)
+			(start -0.074999 0.175001)
+			(end -0.074999 -0.174999)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -16295,9 +16316,10 @@
 			(layer "F.Fab")
 			(uuid "9d2f6692-c44e-4fe9-901d-3a6e6dbbadfd")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.325 -0.174998) (xy 0.324998 -0.175) (xy 0.325 0.174998) (xy -0.324998 0.175)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -16307,7 +16329,7 @@
 			(uuid "454585c6-38a7-4dc5-860f-81850ba40f71")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 75)
 			(layer "F.Fab")
 			(uuid "dae67180-0d22-4769-ad1f-16ba16cc84b5")
 			(effects
@@ -16318,21 +16340,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 255)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "d6f4dccd-1776-4883-96f2-f868a62b1b7a")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 255)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "b2f38dad-4718-4273-82bd-9c860ea8ebb6")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 255)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -16342,7 +16364,7 @@
 			(uuid "b793850c-f2d2-4c08-8584-c05cd4d41757")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 255)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -16367,11 +16389,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "bc0b9606-17da-45ae-953c-813304dd4e01")
-		(at 190 52)
+		(at 164.4 86.5 150)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D41"
-			(at 0 -1 0)
+			(at 0 -1.000001 150)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "83b621ed-3138-4603-8087-d83848253874")
@@ -16383,7 +16405,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1.000001 150)
 			(layer "F.Fab")
 			(uuid "28f52a9f-a9e6-411a-9853-d891528a7b9e")
 			(effects
@@ -16394,7 +16416,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 150)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "3f07c70c-9e61-4037-b585-c3b5b88fd961")
@@ -16405,7 +16427,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 150)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "6cc133f6-fa8b-4f62-99a4-1e16005ec78f")
@@ -16416,7 +16438,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 150)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "5a90f72e-e53a-424b-bcec-f30907d13cfe")
@@ -16428,7 +16450,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 150)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -16441,7 +16463,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 150)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -16460,8 +16482,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.039998 -0.100001)
+			(end -0.039998 0.099999)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -16469,9 +16491,10 @@
 			(layer "F.SilkS")
 			(uuid "8bb2838e-245c-4c12-86aa-34503633386d")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.600001 -0.299998) (xy 0.6 -0.3) (xy 0.600001 0.299998) (xy -0.6 0.3)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -16481,8 +16504,8 @@
 			(uuid "5cd108cf-755a-48d4-9642-3d8c71e27b54")
 		)
 		(fp_line
-			(start -0.075 0.175)
-			(end -0.075 -0.175)
+			(start -0.074999 0.174999)
+			(end -0.074999 -0.175001)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -16490,9 +16513,10 @@
 			(layer "F.Fab")
 			(uuid "5c7aa3f7-3b0a-46f0-9e34-d35870f0347d")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.324998 -0.174999) (xy 0.324999 -0.174998) (xy 0.324998 0.174999) (xy -0.324999 0.174998)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -16502,7 +16526,7 @@
 			(uuid "bd35b94e-79fd-4e8f-ad7d-d7e784d30c3c")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 150)
 			(layer "F.Fab")
 			(uuid "911e7f9e-4ef5-46a9-a1fc-230902e2dbca")
 			(effects
@@ -16513,21 +16537,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 150)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "d8a614e2-ee3c-4c57-a464-6c939fbb7edc")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 150)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "3b11c4c3-51e3-4981-99b5-63800080b7b1")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 150)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -16537,7 +16561,7 @@
 			(uuid "b5664431-7917-48f2-8944-ce76c4e66c8d")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 150)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -16562,11 +16586,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "bc994d73-7db3-4e05-b123-65bc2af6aa5b")
-		(at 190 54)
+		(at 167 79.6 120)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D42"
-			(at 0 -1 0)
+			(at 0 -1.000001 120)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "640b6986-e97b-47ca-b3b1-f3bab92173d7")
@@ -16578,7 +16602,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1.000001 120)
 			(layer "F.Fab")
 			(uuid "64d1f019-fe75-4560-b661-b09235160659")
 			(effects
@@ -16589,7 +16613,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 120)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "c20cd8d8-ad0b-4ea9-8506-7ae579257d12")
@@ -16600,7 +16624,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 120)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "9174fab9-2a26-4846-a599-71ab051620a4")
@@ -16611,7 +16635,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 120)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "038ded35-4c98-46e4-8e36-391dff3b2307")
@@ -16623,7 +16647,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 120)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -16636,7 +16660,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 120)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -16655,8 +16679,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.039998 -0.100001)
+			(end -0.039998 0.099999)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -16664,9 +16688,10 @@
 			(layer "F.SilkS")
 			(uuid "9913289e-90e7-4040-b503-ebaf63a9bb7a")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.6 -0.3) (xy 0.600002 -0.299997) (xy 0.6 0.3) (xy -0.600002 0.299997)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -16676,8 +16701,8 @@
 			(uuid "74e387ba-1029-4fde-bc87-a2703fb6a0da")
 		)
 		(fp_line
-			(start -0.075 0.175)
-			(end -0.075 -0.175)
+			(start -0.074999 0.175001)
+			(end -0.074998 -0.175)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -16685,9 +16710,10 @@
 			(layer "F.Fab")
 			(uuid "43afa1d8-6d3b-4b37-9cb1-5d2973c7bfa5")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.324998 -0.174999) (xy 0.324999 -0.174998) (xy 0.324998 0.174999) (xy -0.324999 0.174998)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -16697,7 +16723,7 @@
 			(uuid "2faf6c78-5d1c-4bac-a234-f08eb45cae03")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 120)
 			(layer "F.Fab")
 			(uuid "144a5d54-ec54-4128-a702-a149a7c24b10")
 			(effects
@@ -16708,21 +16734,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 120)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "756d8eee-27ea-4d81-83ab-4a94a6fda9cb")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 120)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "4cfc8f1b-e3f4-44fc-bffc-61d1216c8a01")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 120)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -16732,7 +16758,7 @@
 			(uuid "954467c9-d3e1-450e-95ec-e95ff8d835c8")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 120)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -17147,11 +17173,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "c685cbb0-60cc-4c2a-a7c9-2f7d281610ff")
-		(at 190 64)
+		(at 183.2 92.8 150)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D47"
-			(at 0 -1 0)
+			(at 0 -1.000001 150)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "bb1c15bd-2ff4-4290-aa90-492671de4ca7")
@@ -17163,7 +17189,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1.000001 150)
 			(layer "F.Fab")
 			(uuid "1d2fa10f-b7b1-4581-9e49-cd272bb8273d")
 			(effects
@@ -17174,7 +17200,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 150)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8188635b-ac11-4eaf-9f1f-986b31dd6030")
@@ -17185,7 +17211,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 150)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "46250ecd-cc53-4f5b-9069-ee292d11a76f")
@@ -17196,7 +17222,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 150)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "d064e25c-2f40-4c84-b312-f459092547cc")
@@ -17208,7 +17234,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 150)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -17221,7 +17247,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 150)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -17240,8 +17266,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.039998 -0.100001)
+			(end -0.039998 0.099999)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -17249,9 +17275,10 @@
 			(layer "F.SilkS")
 			(uuid "e8e2df79-1385-4380-8e3d-47b81f7a9917")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.600001 -0.299998) (xy 0.6 -0.3) (xy 0.600001 0.299998) (xy -0.6 0.3)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -17261,8 +17288,8 @@
 			(uuid "7460eb27-3467-45ff-8345-c509a5b754db")
 		)
 		(fp_line
-			(start -0.075 0.175)
-			(end -0.075 -0.175)
+			(start -0.074999 0.174999)
+			(end -0.074999 -0.175001)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -17270,9 +17297,10 @@
 			(layer "F.Fab")
 			(uuid "ff9357bb-7cd1-45e9-a65e-29a63abc45f5")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.324998 -0.174999) (xy 0.324999 -0.174998) (xy 0.324998 0.174999) (xy -0.324999 0.174998)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -17282,7 +17310,7 @@
 			(uuid "c17f8076-9039-4065-b237-94ba8b8e4ec3")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 150)
 			(layer "F.Fab")
 			(uuid "a1604ede-9f40-4da9-a0a9-36d2b8001bc2")
 			(effects
@@ -17293,21 +17321,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 150)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "ac253b58-3bc1-4d3e-8516-9d70e233a846")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 150)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "2c313fe8-a234-4089-9513-ac8b671866a1")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 150)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -17317,7 +17345,7 @@
 			(uuid "2eb18165-f5a1-435c-b4e5-f83d2923b4bb")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 150)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -17342,11 +17370,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "c8bff5a3-6cba-46aa-b391-3a9411326f4f")
-		(at 180 54)
+		(at 173.1 70 60)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D32"
-			(at 0 -1 0)
+			(at 0 -1.000001 60)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "0c0bf3d7-ef79-41ef-8903-7d18e3a1f2f5")
@@ -17358,7 +17386,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1.000001 60)
 			(layer "F.Fab")
 			(uuid "08e08a8f-e544-4421-828b-6531f200eaf2")
 			(effects
@@ -17369,7 +17397,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 60)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "fd0a1b83-1afd-444c-bf5c-ffedaecc0e5a")
@@ -17380,7 +17408,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 60)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "ea4eb3e9-029a-456d-b737-25886817464c")
@@ -17391,7 +17419,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 60)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "5c65674c-ba78-447f-9623-6991bd6ae81a")
@@ -17403,7 +17431,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 60)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -17416,7 +17444,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 60)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -17435,8 +17463,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.039998 -0.100001)
+			(end -0.039999 0.099999)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -17444,9 +17472,10 @@
 			(layer "F.SilkS")
 			(uuid "8c6ee06a-ec69-4fe8-882a-69b831fa18cf")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.6 -0.299999) (xy 0.6 -0.3) (xy 0.6 0.299999) (xy -0.6 0.3)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -17456,7 +17485,7 @@
 			(uuid "5066a1e7-e871-425a-84c3-3329b8657ab2")
 		)
 		(fp_line
-			(start -0.075 0.175)
+			(start -0.074999 0.174999)
 			(end -0.075 -0.175)
 			(stroke
 				(width 0.1)
@@ -17465,9 +17494,10 @@
 			(layer "F.Fab")
 			(uuid "c0221fe8-2215-4fc7-8b0d-fa2195b14428")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.324999 -0.175) (xy 0.325001 -0.174999) (xy 0.324999 0.175) (xy -0.325001 0.174999)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -17477,7 +17507,7 @@
 			(uuid "ec2eb5eb-2146-4f7e-a07c-c60a43409ad9")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 60)
 			(layer "F.Fab")
 			(uuid "7d8a05c1-04fb-447c-9a33-8b91c41cd4d9")
 			(effects
@@ -17488,21 +17518,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 60)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "dfd6a1a5-c055-4216-aec7-a701c5197765")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 60)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "41bd16f3-3c2a-4402-a33a-7593fb89c145")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 60)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -17512,7 +17542,7 @@
 			(uuid "6bb5286f-4424-4c0f-ac07-3f6214de384a")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 60)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -17537,11 +17567,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "caaaaa90-9be0-46ea-abf5-c859086716cb")
-		(at 180 70)
+		(at 157.4 88.7 75)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D40"
-			(at 0 -1 0)
+			(at 0 -1 75)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "461b6889-9a64-4a23-baf0-194329d73eb9")
@@ -17553,7 +17583,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1 75)
 			(layer "F.Fab")
 			(uuid "59a359a1-f480-4b95-a0c0-75f846ba34dc")
 			(effects
@@ -17564,7 +17594,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 75)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "471276a5-0454-4500-9065-fcab7651909a")
@@ -17575,7 +17605,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 75)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "f79228df-719c-4ef7-b33d-3675ac49cf67")
@@ -17586,7 +17616,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 75)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "4690ccf7-53e5-4e04-8a15-f31022e23deb")
@@ -17598,7 +17628,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 75)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -17611,7 +17641,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 75)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -17630,8 +17660,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.039998 -0.100001)
+			(end -0.039999 0.099999)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -17639,9 +17669,10 @@
 			(layer "F.SilkS")
 			(uuid "d5dbda15-d99a-4a99-9bbb-57639dced096")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.6 -0.299999) (xy 0.6 -0.300001) (xy 0.6 0.299999) (xy -0.6 0.300001)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -17651,8 +17682,8 @@
 			(uuid "0585c2f1-4023-48eb-ba89-7c2e979670c2")
 		)
 		(fp_line
-			(start -0.075 0.175)
-			(end -0.075 -0.175)
+			(start -0.074999 0.174999)
+			(end -0.075 -0.175001)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -17660,9 +17691,10 @@
 			(layer "F.Fab")
 			(uuid "69792041-1072-4f32-8898-ec757a4fde87")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.324998 -0.175) (xy 0.325 -0.174998) (xy 0.324998 0.175) (xy -0.325 0.174998)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -17672,7 +17704,7 @@
 			(uuid "1eff7bae-48e7-40f7-8ba4-191b6ad5fa34")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 75)
 			(layer "F.Fab")
 			(uuid "bf2eb7aa-7903-4aa4-b341-89734a7f23ea")
 			(effects
@@ -17683,21 +17715,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 75)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "998563f3-e9f5-4189-a24c-12281ae2a745")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 75)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "858cc2ca-6240-4ca5-be08-58951b68544e")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 75)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -17707,7 +17739,7 @@
 			(uuid "d355f2a7-5e0e-4334-919c-54bcd607aa66")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 75)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -18317,11 +18349,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "cf99b426-2099-40d1-b5fc-2e942e4fb479")
-		(at 190 60)
+		(at 168.9 92.1 -30)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D45"
-			(at 0 -1 0)
+			(at 0 -1.000001 150)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "8a61c74a-feeb-4342-9c43-33af4b071b2a")
@@ -18333,7 +18365,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1.000001 150)
 			(layer "F.Fab")
 			(uuid "28e632e0-0e6f-4fa8-88ef-88459481bceb")
 			(effects
@@ -18344,7 +18376,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 150)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "7d8ae6ee-e67a-475d-ac58-f72a7f0a12ab")
@@ -18355,7 +18387,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 150)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "c00720e0-643c-4f3e-9790-a5844a2e736d")
@@ -18366,7 +18398,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 150)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "1554ce68-6c1f-49be-865d-10bf28a7bdf8")
@@ -18378,7 +18410,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 330)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -18391,7 +18423,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 330)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -18419,9 +18451,10 @@
 			(layer "F.SilkS")
 			(uuid "f3c2d3ff-77d8-41d4-8b5d-b859a847a9a2")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.6 -0.3) (xy 0.6 -0.299999) (xy 0.6 0.3) (xy -0.6 0.299999)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -18431,7 +18464,7 @@
 			(uuid "3a431ea9-0cef-4198-b182-0e57aad5602d")
 		)
 		(fp_line
-			(start -0.075 0.175)
+			(start -0.075 0.175001)
 			(end -0.075 -0.175)
 			(stroke
 				(width 0.1)
@@ -18440,9 +18473,10 @@
 			(layer "F.Fab")
 			(uuid "3d0ffaed-1d5e-4744-a7fc-4a7d1777842a")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.325 -0.174999) (xy 0.325 -0.175) (xy 0.325 0.174999) (xy -0.325 0.175)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -18452,7 +18486,7 @@
 			(uuid "9cdfaa7b-5dd8-4efc-b53b-a626e5e84b32")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 150)
 			(layer "F.Fab")
 			(uuid "49c1daf8-f075-464f-bfd6-0c8be741fc9b")
 			(effects
@@ -18463,21 +18497,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 330)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "473ef9ab-cf64-46e2-bb4f-a0a5e29a85db")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 330)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "740815de-7dc6-47c3-b412-4237051a7729")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 330)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -18487,7 +18521,7 @@
 			(uuid "06167a31-9dfd-43ee-87bb-00533e6ab8ff")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 330)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -19292,7 +19326,7 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "d7e106cf-87f3-430b-99cc-ade81dcaaaa5")
-		(at 190 70)
+		(at 182.2 80.4 180)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D50"
@@ -19353,7 +19387,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -19366,7 +19400,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -19385,8 +19419,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.039998 -0.1)
+			(end -0.039998 0.1)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -19394,9 +19428,10 @@
 			(layer "F.SilkS")
 			(uuid "37541541-142c-4afa-b366-b272af0d1547")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.600001 -0.299999) (xy 0.6 -0.300001) (xy 0.600001 0.299999) (xy -0.6 0.300001)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -19406,8 +19441,8 @@
 			(uuid "4f64db2e-f36c-46f9-93d3-48d0d9a21c48")
 		)
 		(fp_line
-			(start -0.075 0.175)
-			(end -0.075 -0.175)
+			(start -0.074998 0.174999)
+			(end -0.074999 -0.175001)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -19415,9 +19450,10 @@
 			(layer "F.Fab")
 			(uuid "8c8d6f95-dcaf-4520-9b79-5841d621dff4")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.324998 -0.174998) (xy 0.324998 -0.174998) (xy 0.324998 0.174998) (xy -0.324998 0.174998)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -19438,21 +19474,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 180)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "6d6cf00a-ae5b-4451-bfbe-6e7729d6c08f")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 180)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "e68107b7-d606-4cc6-bdb7-b59b03ab1154")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 180)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -19462,7 +19498,7 @@
 			(uuid "ba43edb6-8c6d-4405-851f-e25f26dc4ad7")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 180)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -19487,14 +19523,14 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "daeb9de0-5ae5-4947-88a6-ff96251761bb")
-		(at 180 52)
+		(at 164.5 67.9 90)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D31"
-			(at 0 -1 0)
+			(at 0 -1 90)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "0a298ec4-af8d-4af1-978a-2000bd93f068")
+			(uuid "dcc33869-83e8-4812-b76f-9b0daf4bcfb2")
 			(effects
 				(font
 					(size 1 1)
@@ -19503,9 +19539,9 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1 90)
 			(layer "F.Fab")
-			(uuid "094db38d-0ca6-4364-92db-4329a7b17aff")
+			(uuid "4dfb64dd-f1a4-4374-8833-9246bd7bf9e5")
 			(effects
 				(font
 					(size 1 1)
@@ -19514,10 +19550,10 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "8b25761d-9f0e-45dd-9b34-97cbcb1dfafd")
+			(uuid "9a97fb61-6627-42b8-bf90-762c522ebe63")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19525,10 +19561,10 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "50d2cf87-0f09-4d35-a7da-f5cd980bb608")
+			(uuid "3cb7f4e8-de20-4859-9d1c-8932d1a5cfe6")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19536,7 +19572,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "f690e340-c65b-464f-bee2-59330c97aea6")
@@ -19548,7 +19584,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -19561,7 +19597,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -19580,8 +19616,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.04 -0.1)
-			(end -0.04 0.1)
+			(start -0.039999 -0.100001)
+			(end -0.039999 0.099999)
 			(stroke
 				(width 0.15)
 				(type solid)
@@ -19589,9 +19625,10 @@
 			(layer "F.SilkS")
 			(uuid "c43d96ed-13ba-4951-856f-b94b99edaff7")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.6 -0.299999) (xy 0.6 -0.300001) (xy 0.6 0.299999) (xy -0.6 0.300001)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -19601,8 +19638,8 @@
 			(uuid "802c0b01-addf-4e9b-bea2-3cf819740efb")
 		)
 		(fp_line
-			(start -0.075 0.175)
-			(end -0.075 -0.175)
+			(start -0.074999 0.174999)
+			(end -0.075 -0.175001)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -19610,9 +19647,10 @@
 			(layer "F.Fab")
 			(uuid "03fdb5ff-0e08-4851-b00d-71e6ff8a6f94")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.324998 -0.175) (xy 0.325 -0.174998) (xy 0.324998 0.175) (xy -0.325 0.174998)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -19622,7 +19660,7 @@
 			(uuid "fb08fbd6-1343-4003-bddb-675ceee96bb2")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 90)
 			(layer "F.Fab")
 			(uuid "7c668c51-4fc7-4b87-9952-55d2930798ab")
 			(effects
@@ -19633,21 +19671,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 90)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "d9d20de9-0e65-4087-b358-ea2daee6e484")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 90)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "a0cad3cb-9ae7-4f67-866d-704894f65854")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 90)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -19657,7 +19695,7 @@
 			(uuid "7151569d-babc-416c-8c90-2a06857a6f0b")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 90)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -20860,7 +20898,7 @@
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D27"
-			(at 0 -1.000001 120)
+			(at 0 -1 120)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "60e7ac7a-30dd-4c28-8ba5-c9f7a8f5ee7b")
@@ -20872,7 +20910,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1.000001 120)
+			(at 0 1 120)
 			(layer "F.Fab")
 			(uuid "fd6ac6a0-5d78-4808-bfe9-04c818486883")
 			(effects
@@ -21248,11 +21286,11 @@
 	(footprint "pcb:XL-0201"
 		(layer "F.Cu")
 		(uuid "fc9ea2a8-3de5-418b-951b-4a1a5c673731")
-		(at 179.995 58)
+		(at 187.1 80.1 -45)
 		(descr "LED SMD 0.7 mm x 0.4 mm, XINGLIGHT XL-0201 series")
 		(tags "LED")
 		(property "Reference" "D34"
-			(at 0 -1 0)
+			(at 0 -1 135)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "c4c60da5-26a6-4f2d-a0d1-ffd43e9d6108")
@@ -21264,7 +21302,7 @@
 			)
 		)
 		(property "Value" "LED_Small"
-			(at 0 1 0)
+			(at 0 1 135)
 			(layer "F.Fab")
 			(uuid "85f65db1-091d-4bef-91b8-5c18fc3759ca")
 			(effects
@@ -21275,7 +21313,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 135)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a44a294d-8b26-4902-8b1d-42c1dfb4f796")
@@ -21286,7 +21324,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 0)
+			(at 0 0 135)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "24f4f462-ba31-458c-bfb8-b7d8be106a33")
@@ -21297,7 +21335,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 135)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "258e25ab-efe6-48a1-b648-b65ce1695784")
@@ -21309,7 +21347,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 0 0 0)
+			(at 0 0 315)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -21322,7 +21360,7 @@
 			)
 		)
 		(property "LCSC" "C965789"
-			(at 0 0 0)
+			(at 0 0 315)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -21350,9 +21388,10 @@
 			(layer "F.SilkS")
 			(uuid "dcc0778c-6a99-4e63-bf25-49af1906ec7a")
 		)
-		(fp_rect
-			(start -0.6 -0.3)
-			(end 0.6 0.3)
+		(fp_poly
+			(pts
+				(xy -0.6 -0.3) (xy 0.6 -0.3) (xy 0.6 0.3) (xy -0.6 0.3)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -21363,7 +21402,7 @@
 		)
 		(fp_line
 			(start -0.075 0.175)
-			(end -0.075 -0.175)
+			(end -0.075 -0.174999)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -21371,9 +21410,10 @@
 			(layer "F.Fab")
 			(uuid "645bffe1-4591-41ef-b747-ba27a93e8381")
 		)
-		(fp_rect
-			(start -0.325 -0.175)
-			(end 0.325 0.175)
+		(fp_poly
+			(pts
+				(xy -0.325 -0.174999) (xy 0.324999 -0.175) (xy 0.325 0.174999) (xy -0.324999 0.175)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -21383,7 +21423,7 @@
 			(uuid "8a0f9c62-14a9-422b-b352-f0bb295f136a")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -0.62 0)
+			(at 0 -0.62 135)
 			(layer "F.Fab")
 			(uuid "5de1f7ba-5f6b-4820-8b76-032fdb714468")
 			(effects
@@ -21394,21 +21434,21 @@
 			)
 		)
 		(pad "" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 315)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "1ca8850c-b063-45f7-9465-3be17084eaaf")
 		)
 		(pad "" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 315)
 			(size 0.15 0.2)
 			(layers "F.Paste")
 			(roundrect_rratio 0.25)
 			(uuid "bec4e315-8d14-4cdf-808b-a0e9c80289be")
 		)
 		(pad "1" smd roundrect
-			(at -0.205 0)
+			(at -0.205 0 315)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -21418,7 +21458,7 @@
 			(uuid "46ed498b-04dc-4350-92ca-d011f5eccfe7")
 		)
 		(pad "2" smd roundrect
-			(at 0.205 0)
+			(at 0.205 0 315)
 			(size 0.17 0.28)
 			(layers "F.Cu" "F.Mask")
 			(roundrect_rratio 0.25)
@@ -21951,7 +21991,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -1.000001 0 150)
+			(at -1 0 150)
 			(size 1.2 1.4)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.208333)
@@ -21960,7 +22000,7 @@
 			(uuid "9178d25f-fba4-4217-8d31-9b1573d7d996")
 		)
 		(pad "2" smd roundrect
-			(at 1.000001 0 150)
+			(at 1 0 150)
 			(size 1.2 1.4)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.208333)
@@ -21984,13 +22024,13 @@
 	(footprint "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 		(layer "B.Cu")
 		(uuid "39a05bba-f6ea-41ec-a619-5178bd0b661b")
-		(at 180 50 180)
+		(at 148.1 78.1 -150)
 		(descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R4"
-			(at 0 1.65 0)
+			(at 0 1.65 30)
 			(layer "B.SilkS")
-			(uuid "53da2574-f0a7-42a1-8742-dc76c12405a4")
+			(uuid "37655ebc-664c-4e2f-b377-c0c7609bb7f1")
 			(effects
 				(font
 					(size 1 1)
@@ -22000,9 +22040,9 @@
 			)
 		)
 		(property "Value" "10"
-			(at 0 -1.65 0)
+			(at 0 -1.65 30)
 			(layer "B.Fab")
-			(uuid "774f04ce-3c35-46d9-9026-c0d6888f3678")
+			(uuid "4ba882a8-93b3-4d12-a38c-f67095f95e57")
 			(effects
 				(font
 					(size 1 1)
@@ -22012,10 +22052,10 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 30)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "a7fc4e22-15f6-4089-99f5-25ad7b409ad0")
+			(uuid "49dce4a1-4595-4000-89a5-1f45bb7b5ac9")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22024,10 +22064,10 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 0 0 0)
+			(at 0 0 30)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "ea552f4f-75fb-4b8e-aecc-0405331df214")
+			(uuid "b694854a-4dda-420f-9130-952d9aa20e09")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22036,7 +22076,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 30)
 			(layer "B.SilkS")
 			(hide yes)
 			(uuid "91b63486-c008-4e8f-99ee-c29dfa76dafa")
@@ -22080,9 +22120,10 @@
 			(layer "B.SilkS")
 			(uuid "11be00f2-c220-4d2e-86ac-76185012ca16")
 		)
-		(fp_rect
-			(start -1.85 0.95)
-			(end 1.85 -0.95)
+		(fp_poly
+			(pts
+				(xy 1.85 0.95) (xy -1.85 0.95) (xy -1.85 -0.95) (xy 1.85 -0.95)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -22091,9 +22132,10 @@
 			(layer "B.CrtYd")
 			(uuid "be4de9ae-d52d-4f61-a2e0-57d299d8a548")
 		)
-		(fp_rect
-			(start -1 0.625)
-			(end 1 -0.625)
+		(fp_poly
+			(pts
+				(xy 1 0.625) (xy -1 0.625) (xy -1 -0.625) (xy 1 -0.625)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -22103,7 +22145,7 @@
 			(uuid "5bd87d3e-a1bc-4f41-9061-6dcc0ec5c4f3")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 30)
 			(layer "B.Fab")
 			(uuid "6e667ec7-0433-4bfc-84ad-7dd08c7cd951")
 			(effects
@@ -22115,7 +22157,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -1 0 180)
+			(at -1.000001 0 210)
 			(size 1.2 1.4)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.208333)
@@ -22124,7 +22166,7 @@
 			(uuid "6097a1b8-375e-4f61-ad4d-ef50b8e74f23")
 		)
 		(pad "2" smd roundrect
-			(at 1 0 180)
+			(at 1.000001 0 210)
 			(size 1.2 1.4)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.208333)
@@ -23298,11 +23340,11 @@
 	(footprint "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 		(layer "B.Cu")
 		(uuid "d2f2991d-29c6-4e5b-87e7-96c1c995ff30")
-		(at 190 50 180)
+		(at 124.4 92.5 165)
 		(descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor handsolder")
 		(property "Reference" "R5"
-			(at 0 1.65 0)
+			(at -0.000001 1.65 165)
 			(layer "B.SilkS")
 			(uuid "62f01852-b047-4eec-98e0-30c4f0c2e348")
 			(effects
@@ -23314,7 +23356,7 @@
 			)
 		)
 		(property "Value" "10"
-			(at 0 -1.65 0)
+			(at 0.000001 -1.65 165)
 			(layer "B.Fab")
 			(uuid "28e4699d-8b6d-467a-9dfa-0f08951c6c48")
 			(effects
@@ -23326,7 +23368,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 165)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "b9dbf1a5-5576-426d-a793-7101123eec68")
@@ -23338,7 +23380,7 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 0 0 0)
+			(at 0 0 165)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "fe592b4b-b70c-4da0-9475-6d3f8e0a5edd")
@@ -23350,7 +23392,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 165)
 			(layer "B.SilkS")
 			(hide yes)
 			(uuid "03c7bafe-e372-4482-afa5-adef3f245432")
@@ -23375,16 +23417,6 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
-			(start -0.227064 0.735)
-			(end 0.227064 0.735)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "B.SilkS")
-			(uuid "9d0ec8f1-726a-4aaa-8d59-7d839174a986")
-		)
-		(fp_line
 			(start -0.227064 -0.735)
 			(end 0.227064 -0.735)
 			(stroke
@@ -23394,9 +23426,20 @@
 			(layer "B.SilkS")
 			(uuid "1ac43a22-456c-417d-8f43-fcef9bc76a2e")
 		)
-		(fp_rect
-			(start -1.85 0.95)
-			(end 1.85 -0.95)
+		(fp_line
+			(start -0.227064 0.735)
+			(end 0.227064 0.735)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "B.SilkS")
+			(uuid "9d0ec8f1-726a-4aaa-8d59-7d839174a986")
+		)
+		(fp_poly
+			(pts
+				(xy 1.85 0.95) (xy -1.85 0.95) (xy -1.85 -0.95) (xy 1.85 -0.95)
+			)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -23405,9 +23448,10 @@
 			(layer "B.CrtYd")
 			(uuid "9b061755-f122-4094-88ec-751b956dcf7a")
 		)
-		(fp_rect
-			(start -1 0.625)
-			(end 1 -0.625)
+		(fp_poly
+			(pts
+				(xy 1 0.625) (xy -1 0.625) (xy -1 -0.625) (xy 1 -0.625)
+			)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -23417,7 +23461,7 @@
 			(uuid "76fa8eb4-1801-430a-99ee-9d33c11e3d80")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 165)
 			(layer "B.Fab")
 			(uuid "4b1a4183-1c68-4d06-8bae-46e6f96bd364")
 			(effects
@@ -23429,7 +23473,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -1 0 180)
+			(at -1 0 165)
 			(size 1.2 1.4)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.208333)
@@ -23438,7 +23482,7 @@
 			(uuid "6cba791b-7a41-4898-a1a4-c01366c1465d")
 		)
 		(pad "2" smd roundrect
-			(at 1 0 180)
+			(at 1 0 165)
 			(size 1.2 1.4)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.208333)
@@ -23458,6 +23502,42 @@
 				(xyz 0 0 0)
 			)
 		)
+	)
+	(gr_curve
+		(pts
+			(xy 121.577535 92.8025) (xy 121.7 92.6) (xy 121.8 92.5) (xy 121.8 92.3)
+		)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(layer "F.Cu")
+		(net "/Row4")
+		(uuid "45bd578c-f3ac-4e67-8945-0e7b3f5a1a22")
+	)
+	(gr_curve
+		(pts
+			(xy 121.6 91.3) (xy 121.8 91.6) (xy 121.8 91.9) (xy 121.8 92.3)
+		)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(layer "F.Cu")
+		(net "/Row4")
+		(uuid "84ff8cc9-90fd-429a-bf1b-f1a445fd53fc")
+	)
+	(gr_curve
+		(pts
+			(xy 134.153058 77.098015) (xy 134 77.2) (xy 133.9 77.3) (xy 133.8 77.5)
+		)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(layer "F.Cu")
+		(net "/Row4")
+		(uuid "742e8a85-88cb-4f84-afe6-3551f5add05c")
 	)
 	(gr_curve
 		(pts
@@ -23485,7 +23565,19 @@
 	)
 	(gr_curve
 		(pts
-			(xy 143 74.705) (xy 143.4 74.7) (xy 143.7 73.7) (xy 143.2 73.4)
+			(xy 143 74.705) (xy 143.3 74.7) (xy 143.4 74.6) (xy 143.6 74.4)
+		)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(layer "F.Cu")
+		(net "/Row3")
+		(uuid "05b4691c-103c-4f24-87d7-1151f5402732")
+	)
+	(gr_curve
+		(pts
+			(xy 143.6 74.4) (xy 143.5 74) (xy 143.6 73.8) (xy 143.2 73.4)
 		)
 		(stroke
 			(width 0.2)
@@ -23497,7 +23589,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 144.4 72.9) (xy 144.3 73.7) (xy 144.3 73.9) (xy 144.1 74.4)
+			(xy 144.4 72.9) (xy 144.1 73.4) (xy 144.1 73.8) (xy 144 74.8)
 		)
 		(stroke
 			(width 0.2)
@@ -23521,7 +23613,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 101.605001 100.2) (xy 101.605001 103) (xy 103.969432 107.194998) (xy 105.284716 109.497499)
+			(xy 101.605001 100.2) (xy 101.6 104.4) (xy 103.9 104.8) (xy 105.284716 109.497499)
 		)
 		(stroke
 			(width 0.2)
@@ -23533,7 +23625,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 105.084716 91.702501) (xy 103.6 94.6) (xy 101.605001 97.4) (xy 101.605001 100.2)
+			(xy 105.084716 91.702501) (xy 104.2 95.2) (xy 101.7 96.2) (xy 101.605001 100.2)
 		)
 		(stroke
 			(width 0.2)
@@ -23545,7 +23637,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 105.284716 109.497499) (xy 106.6 111.8) (xy 109.605 114.230568) (xy 111.5025 115.315284)
+			(xy 105.284716 109.497499) (xy 106.1 113) (xy 109.4 114.3) (xy 111.5025 115.315284)
 		)
 		(stroke
 			(width 0.2)
@@ -23557,7 +23649,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 109.600002 98.999999) (xy 109.600002 101.2) (xy 111.051474 106.148524) (xy 112.875737 108.024262)
+			(xy 109.600002 98.999999) (xy 109.600002 101.2) (xy 110 105.2) (xy 112.875737 108.024262)
 		)
 		(stroke
 			(width 0.2)
@@ -23569,7 +23661,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 110.379272 83.179274) (xy 109.2 84.6) (xy 106.569432 88.805002) (xy 105.084716 91.702501)
+			(xy 110.379272 83.179274) (xy 109.2 84.6) (xy 106.2 88.5) (xy 105.084716 91.702501)
 		)
 		(stroke
 			(width 0.2)
@@ -23581,7 +23673,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 111.5025 115.315284) (xy 113.4 116.4) (xy 119.400002 116.799999) (xy 120.600001 116.799999)
+			(xy 111.5025 115.315284) (xy 114 116.4) (xy 117.8 117.3) (xy 120.600001 116.799999)
 		)
 		(stroke
 			(width 0.2)
@@ -23605,7 +23697,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 112.875737 108.024262) (xy 114.7 109.9) (xy 120.948524 111.648526) (xy 122.424262 110.124263)
+			(xy 112.875737 108.024262) (xy 115.7 110.7) (xy 120.2 111.648526) (xy 122.424262 110.124263)
 		)
 		(stroke
 			(width 0.2)
@@ -23665,6 +23757,18 @@
 	)
 	(gr_curve
 		(pts
+			(xy 121.8 92.3) (xy 122.4 92) (xy 122.768148 92.1) (xy 123.434074 92.241181)
+		)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(layer "B.Cu")
+		(net "/Row4")
+		(uuid "12c40fe9-0242-40f5-9df3-7ea9f255948b")
+	)
+	(gr_curve
+		(pts
 			(xy 125.400002 80.580385) (xy 122.3 82.3) (xy 120.3 83.2) (xy 118.075738 85.075736)
 		)
 		(stroke
@@ -23689,7 +23793,19 @@
 	)
 	(gr_curve
 		(pts
-			(xy 128.600002 89.099999) (xy 126.4 90.4) (xy 123.460774 90.1) (xy 120.880387 92.4)
+			(xy 128.64471 100.979555) (xy 131.4 100.1) (xy 133.3 99.139228) (xy 136.5 98.119614)
+		)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(layer "B.Cu")
+		(net "/Col2")
+		(uuid "1f9c6e93-1bd9-40c5-a0e8-6d773ecb0348")
+	)
+	(gr_curve
+		(pts
+			(xy 129.799998 89.100001) (xy 127.4 90.9) (xy 123.460774 90.1) (xy 120.880387 92.4)
 		)
 		(stroke
 			(width 0.2)
@@ -23701,15 +23817,15 @@
 	)
 	(gr_curve
 		(pts
-			(xy 128.64471 100.979555) (xy 131.4 100.1) (xy 133.3 99.139228) (xy 136.5 98.119614)
+			(xy 133.8 77.5) (xy 130.8 80) (xy 122.3 90.1) (xy 121.6 91.3)
 		)
 		(stroke
 			(width 0.2)
 			(type default)
 		)
 		(layer "B.Cu")
-		(net "/Col2")
-		(uuid "1f9c6e93-1bd9-40c5-a0e8-6d773ecb0348")
+		(net "/Row4")
+		(uuid "e7dd599c-0772-44cb-b52b-3b83e212029e")
 	)
 	(gr_curve
 		(pts
@@ -23761,7 +23877,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 136.975738 81.775737) (xy 133.6 83.6) (xy 130.800004 87.799998) (xy 128.600002 89.099999)
+			(xy 136.975738 81.775737) (xy 133.6 83.6) (xy 132.3 86.9) (xy 129.799998 89.100001)
 		)
 		(stroke
 			(width 0.2)
@@ -23773,7 +23889,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 137.156586 69.984384) (xy 142.8 70.6) (xy 144 75) (xy 145.6 72.9)
+			(xy 137.156586 69.984384) (xy 143.7 69.2) (xy 143.1 75.5) (xy 145.6 72.9)
 		)
 		(stroke
 			(width 0.2)
@@ -23785,7 +23901,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 143.000001 73.900001) (xy 139.5 73.900001) (xy 136.68942 75.14089) (xy 133.94471 76.320445)
+			(xy 143 73.900001) (xy 139.5 73.900001) (xy 136.68942 75.14089) (xy 133.94471 76.320445)
 		)
 		(stroke
 			(width 0.2)
@@ -23797,7 +23913,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 143.2 73.4) (xy 140.5 70.5) (xy 129.705 72.647888) (xy 127.3025 73.923944)
+			(xy 143.2 73.4) (xy 139.8 71.1) (xy 129.705 72.647888) (xy 127.3025 73.923944)
 		)
 		(stroke
 			(width 0.2)
@@ -23809,7 +23925,31 @@
 	)
 	(gr_curve
 		(pts
-			(xy 144.1 74.4) (xy 142.5 77.6) (xy 137.2 78) (xy 137.4 81.1)
+			(xy 143.6 74.4) (xy 139.1 75.9) (xy 128.7 84.3) (xy 128.600002 89.099999)
+		)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(layer "B.Cu")
+		(net "/Row3")
+		(uuid "498292d5-82ba-4f8f-bae5-e4a8541bb6eb")
+	)
+	(gr_curve
+		(pts
+			(xy 143.6 74.4) (xy 145.6 74.1) (xy 143 76) (xy 147.233974 78.6)
+		)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(layer "B.Cu")
+		(net "/Row3")
+		(uuid "1a6c7b3c-0c5f-4d84-a949-e99bee9efc20")
+	)
+	(gr_curve
+		(pts
+			(xy 144 74.8) (xy 142.2 77.1) (xy 141.1 78.4) (xy 137.4 81.1)
 		)
 		(stroke
 			(width 0.2)
@@ -23869,7 +24009,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 146.800001 69.004999) (xy 149.3 68.2) (xy 149.6 70.7) (xy 147.833974 70.8)
+			(xy 146.800001 69.004999) (xy 147.5 69.5) (xy 147.7 69.9) (xy 147.833974 70.8)
 		)
 		(stroke
 			(width 0.2)
@@ -23905,7 +24045,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 147.833974 70.8) (xy 145.9 71.1) (xy 144.5 71.3) (xy 144.4 72.9)
+			(xy 147.833974 70.8) (xy 145.8 71.2) (xy 144.7 71.6) (xy 144.4 72.9)
 		)
 		(stroke
 			(width 0.2)
@@ -23917,7 +24057,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 150.3 73.4) (xy 150.3 72.8) (xy 146.4 71.6) (xy 145.6 72.9)
+			(xy 150.3 73.4) (xy 148.5 72.8) (xy 147 72.9) (xy 145.6 72.9)
 		)
 		(stroke
 			(width 0.2)
@@ -23929,7 +24069,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 150.900001 73.800001) (xy 147.8 74.1) (xy 144.500002 73.900001) (xy 143.000001 73.900001)
+			(xy 150.900001 73.800001) (xy 147.8 74.1) (xy 144.500002 73.900001) (xy 143 73.900001)
 		)
 		(stroke
 			(width 0.2)
@@ -23953,7 +24093,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 153.316258 68.816678) (xy 153.7 67.1) (xy 155.799998 67.599998) (xy 156.899999 67.699999)
+			(xy 153.316258 68.816678) (xy 154.6 67.8) (xy 155.799998 67.599998) (xy 156.899999 67.699999)
 		)
 		(stroke
 			(width 0.2)
@@ -23965,7 +24105,7 @@
 	)
 	(gr_curve
 		(pts
-			(xy 156.900001 66.500001) (xy 149.3 65.4) (xy 153.9 73.5) (xy 150.900001 73.800001)
+			(xy 156.900001 66.500001) (xy 151.2 66.4) (xy 153.1 69.9) (xy 149.566025 71.8)
 		)
 		(stroke
 			(width 0.2)
@@ -24394,16 +24534,16 @@
 		(uuid "e6da366e-2c60-40b4-acdf-3a7909b15236")
 	)
 	(segment
-		(start 189.795 52)
-		(end 189.4 52)
+		(start 164.577535 86.6025)
+		(end 164.919613 86.8)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row0")
 		(uuid "ed291d60-b158-4831-a738-156d60233c73")
 	)
 	(segment
-		(start 179.795 52)
-		(end 179.4 52)
+		(start 164.5 68.105)
+		(end 164.499999 68.499999)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row0")
@@ -24426,7 +24566,7 @@
 		(uuid "54957f78-ef53-413e-8450-b648c2d1c83d")
 	)
 	(via
-		(at 179.4 52)
+		(at 164.499999 68.499999)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -24458,7 +24598,7 @@
 		(uuid "8d418701-9012-4387-98c8-b16af652ee8f")
 	)
 	(via
-		(at 189.4 52)
+		(at 164.919613 86.8)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -24650,8 +24790,8 @@
 		(uuid "bcc0813d-72b9-4393-8e8d-dac14f421b9b")
 	)
 	(segment
-		(start 189.795 68)
-		(end 189.4 68)
+		(start 181.298015 85.953058)
+		(end 181.679553 86.055292)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row9")
@@ -24690,8 +24830,8 @@
 		(uuid "5ad06fcf-a0e4-4cc6-9ec3-389187180c0f")
 	)
 	(segment
-		(start 179.795 68)
-		(end 179.4 68)
+		(start 151.646942 91.598015)
+		(end 151.544708 91.979554)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row9")
@@ -24762,7 +24902,7 @@
 		(uuid "43035afc-0074-40e5-a69d-67474eba024c")
 	)
 	(via
-		(at 179.4 68)
+		(at 151.544708 91.979554)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -24794,7 +24934,7 @@
 		(uuid "a5d19c3e-ac88-4d00-ae97-e47d49a47d4a")
 	)
 	(via
-		(at 189.4 68)
+		(at 181.679553 86.055292)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -24978,8 +25118,8 @@
 		(uuid "23e19936-3441-4708-865e-06d4378f7d41")
 	)
 	(segment
-		(start 179.795 64)
-		(end 179.4 64)
+		(start 159.555043 76.555043)
+		(end 159.275736 76.275737)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row7")
@@ -25010,8 +25150,8 @@
 		(uuid "5c96fb34-84be-48f1-b176-5b52f7d116ef")
 	)
 	(segment
-		(start 189.795 64)
-		(end 189.4 64)
+		(start 183.377535 92.9025)
+		(end 183.719613 93.1)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row7")
@@ -25082,7 +25222,7 @@
 		(uuid "539d9a5a-4ba8-4996-9501-15bd13d64e6b")
 	)
 	(via
-		(at 179.4 64)
+		(at 159.275736 76.275737)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25106,7 +25246,7 @@
 		(uuid "dd18c247-7244-479e-a9d1-abd511305352")
 	)
 	(via
-		(at 189.4 64)
+		(at 183.719613 93.1)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25322,8 +25462,8 @@
 		(uuid "71a0a886-8f79-4a21-8e59-d91e21b1f333")
 	)
 	(segment
-		(start 189.795 70)
-		(end 189.4 70)
+		(start 182.405 80.4)
+		(end 182.799998 80.400001)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row10")
@@ -25338,8 +25478,8 @@
 		(uuid "95b65eea-f678-487c-8b02-ffa010132a28")
 	)
 	(segment
-		(start 179.795 70)
-		(end 179.4 70)
+		(start 157.346942 88.898015)
+		(end 157.244708 89.279554)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row10")
@@ -25370,7 +25510,7 @@
 		(uuid "cc0f2e74-d5f3-4b1d-9a1e-098589918175")
 	)
 	(via
-		(at 179.4 70)
+		(at 157.244708 89.279554)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25434,7 +25574,7 @@
 		(uuid "b4fc2d42-2d0f-4a9b-bfed-f705fb37f7c0")
 	)
 	(via
-		(at 189.4 70)
+		(at 182.799998 80.400001)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25483,7 +25623,7 @@
 	)
 	(segment
 		(start 143 74.295)
-		(end 143.000001 73.900001)
+		(end 143 73.900001)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col1")
@@ -25578,7 +25718,7 @@
 		(uuid "8efdc091-2725-482f-be55-eac54fe0f518")
 	)
 	(via
-		(at 143.000001 73.900001)
+		(at 143 73.900001)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25610,87 +25750,87 @@
 		(uuid "dcdb442b-3e0c-4d08-a8a9-32a7ba8aa0c2")
 	)
 	(segment
-		(start 190.205 60)
-		(end 190.6 60)
+		(start 169.077535 92.2025)
+		(end 169.419615 92.400001)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col4")
 		(uuid "15e531bb-41f8-41df-ac6a-0327bb610bad")
 	)
 	(segment
-		(start 190.205 54)
-		(end 190.6 54)
+		(start 166.8975 79.422465)
+		(end 166.7 79.080387)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col4")
 		(uuid "30eb9a08-703a-4a38-8e6a-41c1909cfa53")
 	)
 	(segment
-		(start 190.205 56)
-		(end 190.6 56)
+		(start 174.5025 81.022465)
+		(end 174.7 80.680386)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col4")
 		(uuid "646e3526-62f4-4df5-aca0-ee4b830c4903")
 	)
 	(segment
-		(start 190.205 52)
-		(end 190.6 52)
+		(start 164.222465 86.3975)
+		(end 163.880387 86.2)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col4")
 		(uuid "731e581e-2680-4d03-af97-44de41b7d700")
 	)
 	(segment
-		(start 190.205 64)
-		(end 190.6 64)
+		(start 183.022465 92.6975)
+		(end 182.680387 92.5)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col4")
 		(uuid "996e5787-a66c-481f-a9fc-4ee6bcfc4f2a")
 	)
 	(segment
-		(start 190.205 58)
-		(end 190.6 58)
+		(start 175.698015 88.253058)
+		(end 176.079555 88.355291)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col4")
 		(uuid "a83d7e6e-4d8f-4d36-8d73-575d39cb68bb")
 	)
 	(segment
-		(start 190.205 68)
-		(end 190.6 68)
+		(start 180.901985 85.846942)
+		(end 180.520447 85.744708)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col4")
 		(uuid "b6f300f3-fee2-479d-9f03-25c3f84872d5")
 	)
 	(segment
-		(start 190.205 70)
-		(end 190.6 70)
+		(start 181.995 80.4)
+		(end 181.600002 80.399999)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col4")
 		(uuid "e2d382eb-1402-4ed8-b45f-ab5f6e37898e")
 	)
 	(segment
-		(start 190.205 62)
-		(end 190.6 62)
+		(start 177.322465 99.1975)
+		(end 176.980387 99)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col4")
 		(uuid "ecf1cfb6-9e0e-40be-8d6b-fa593f326aed")
 	)
 	(segment
-		(start 190.205 66)
-		(end 190.6 66)
+		(start 186.922465 86.8025)
+		(end 186.580386 86.999998)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col4")
 		(uuid "f6bfaa59-d5fb-4079-bb3a-954a10c51e77")
 	)
 	(via
-		(at 190.6 58)
+		(at 176.079555 88.355291)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25698,7 +25838,7 @@
 		(uuid "37a5c132-5a7c-42c8-8ded-21c95f0df16c")
 	)
 	(via
-		(at 190.6 62)
+		(at 176.980387 99)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25706,7 +25846,7 @@
 		(uuid "602bacd6-1371-4044-b46e-1139019f25f7")
 	)
 	(via
-		(at 190.6 56)
+		(at 174.7 80.680386)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25714,7 +25854,7 @@
 		(uuid "6708c3ed-ec6a-4170-8bdc-6021d54abdde")
 	)
 	(via
-		(at 190.6 70)
+		(at 181.600002 80.399999)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25722,7 +25862,7 @@
 		(uuid "68f49a71-5999-425e-9ae5-31dd7a957b06")
 	)
 	(via
-		(at 190.6 64)
+		(at 182.680387 92.5)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25730,7 +25870,7 @@
 		(uuid "80aafb94-ce6d-420b-9d55-e26dd7bee900")
 	)
 	(via
-		(at 190.6 54)
+		(at 166.7 79.080387)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25738,7 +25878,7 @@
 		(uuid "b89df80a-bdb5-48a8-8964-b4f642f8af0f")
 	)
 	(via
-		(at 190.6 52)
+		(at 163.880387 86.2)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25746,7 +25886,7 @@
 		(uuid "c0aa6667-430a-4249-83a8-542829dccfd5")
 	)
 	(via
-		(at 190.6 60)
+		(at 169.419615 92.400001)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25754,7 +25894,7 @@
 		(uuid "de377759-abd5-4748-b909-aec1ed995eb2")
 	)
 	(via
-		(at 190.6 66)
+		(at 186.580386 86.999998)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25762,7 +25902,7 @@
 		(uuid "e610563a-fa77-4425-b845-f779f0b35bfa")
 	)
 	(via
-		(at 190.6 68)
+		(at 180.520447 85.744708)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25810,8 +25950,8 @@
 		(uuid "7bb6b7a7-8fb7-4e9c-a06e-82f02ea73f73")
 	)
 	(segment
-		(start 189.795 58)
-		(end 189.4 58)
+		(start 175.301985 88.146942)
+		(end 174.920444 88.044708)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row3")
@@ -25834,8 +25974,8 @@
 		(uuid "d6cbcba5-dbc4-45e1-94f0-63d26964115d")
 	)
 	(segment
-		(start 129.405 89.1)
-		(end 129.799998 89.100001)
+		(start 128.995 89.1)
+		(end 128.600002 89.099999)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row3")
@@ -25858,7 +25998,7 @@
 		(uuid "128badb3-4c3d-4930-a8c9-781d94287174")
 	)
 	(via
-		(at 189.4 58)
+		(at 174.920444 88.044708)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -25914,12 +26054,20 @@
 		(uuid "bd2e8775-0a7b-4a21-8e2d-25e2bafe24aa")
 	)
 	(via
-		(at 129.799998 89.100001)
+		(at 128.600002 89.099999)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
 		(net "/Row3")
 		(uuid "d4fe8de1-14ac-4212-86a8-a9aaead85d91")
+	)
+	(via
+		(at 143.6 74.4)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "/Row3")
+		(uuid "e42e4459-7b6e-4517-bdf1-6c8a4edab93d")
 	)
 	(segment
 		(start 110.658579 83.458578)
@@ -26282,8 +26430,8 @@
 		(uuid "7e81e2f7-41d5-4317-a40d-eda02e6651ed")
 	)
 	(segment
-		(start 179.795 62)
-		(end 179.4 62)
+		(start 165.0975 72.922465)
+		(end 164.900002 72.580386)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row6")
@@ -26298,8 +26446,8 @@
 		(uuid "8c553ea4-5e0b-402b-92a0-f7b606e3209b")
 	)
 	(segment
-		(start 189.795 62)
-		(end 189.4 62)
+		(start 177.677535 99.4025)
+		(end 178.019613 99.6)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row6")
@@ -26330,7 +26478,7 @@
 		(uuid "333fdbeb-0504-4675-bba4-77a543656398")
 	)
 	(via
-		(at 189.4 62)
+		(at 178.019613 99.6)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -26394,7 +26542,7 @@
 		(uuid "ce8b4e1a-7af4-4323-9a1a-6569ba8b1ca9")
 	)
 	(via
-		(at 179.4 62)
+		(at 164.900002 72.580386)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -26434,8 +26582,8 @@
 		(uuid "a6812ab9-0943-479a-bd2b-cb2e86661a9e")
 	)
 	(segment
-		(start 179.795 60)
-		(end 179.4 60)
+		(start 173.053058 75.201985)
+		(end 173.15529 74.820445)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row5")
@@ -26474,15 +26622,15 @@
 		(uuid "e4697691-6d38-4cef-91a9-b2c28086d8df")
 	)
 	(segment
-		(start 189.795 60)
-		(end 189.4 60)
+		(start 168.722464 91.9975)
+		(end 168.380385 91.8)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row5")
 		(uuid "f37be048-9972-4d54-80d8-fbcb1c62830b")
 	)
 	(via
-		(at 179.4 60)
+		(at 173.15529 74.820445)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -26522,7 +26670,7 @@
 		(uuid "5b962127-7322-4ffb-8143-2ded89ea8eec")
 	)
 	(via
-		(at 189.4 60)
+		(at 168.380385 91.8)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -26562,87 +26710,87 @@
 		(uuid "cd027204-997c-48de-8c7f-3d6815c19a97")
 	)
 	(segment
-		(start 180.205 60)
-		(end 180.6 60)
+		(start 172.946942 75.598015)
+		(end 172.84471 75.979555)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col3")
 		(uuid "1af12f8a-e91e-4b6c-9d77-d73b4761831a")
 	)
 	(segment
-		(start 180.205 54)
-		(end 180.6 54)
+		(start 173.2025 69.822465)
+		(end 173.4 69.480386)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col3")
 		(uuid "72583504-a5df-47e0-8387-170cb9b40089")
 	)
 	(segment
-		(start 180.205 62)
-		(end 180.6 62)
+		(start 165.3025 73.277535)
+		(end 165.499998 73.619614)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col3")
 		(uuid "7516a7c3-13ba-4183-8f46-a0e89baa4d14")
 	)
 	(segment
-		(start 180.205 64)
-		(end 180.6 64)
+		(start 159.844957 76.844957)
+		(end 160.124264 77.124263)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col3")
 		(uuid "a56101c2-431b-44e9-9e52-4222e45aea3a")
 	)
 	(segment
-		(start 180.205 58)
-		(end 180.6 58)
+		(start 187.244957 80.244957)
+		(end 187.524264 80.524263)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col3")
 		(uuid "b3428804-1d26-4617-bad7-5b6a79cab2bc")
 	)
 	(segment
-		(start 180.205 70)
-		(end 180.6 70)
+		(start 157.453058 88.501985)
+		(end 157.555292 88.120446)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col3")
 		(uuid "c50cc2a2-40fa-48d5-8e8a-d64e731c2447")
 	)
 	(segment
-		(start 180.205 56)
-		(end 180.6 56)
+		(start 180.2025 73.822465)
+		(end 180.4 73.480386)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col3")
 		(uuid "cac791ac-645f-4d43-a5e8-ebc0496af59e")
 	)
 	(segment
-		(start 180.205 66)
-		(end 180.6 66)
+		(start 156.298015 83.153058)
+		(end 156.679555 83.255291)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col3")
 		(uuid "d0406d07-6a02-41b6-a6bc-f6d2dcf0989b")
 	)
 	(segment
-		(start 180.205 68)
-		(end 180.6 68)
+		(start 151.753058 91.201985)
+		(end 151.855292 90.820446)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col3")
 		(uuid "da1a6af1-ed70-4e2e-83e1-014cbab44470")
 	)
 	(segment
-		(start 180.205 52)
-		(end 180.6 52)
+		(start 164.5 67.695)
+		(end 164.500001 67.300001)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col3")
 		(uuid "f7250acd-471e-4273-a550-a4a21e4bae08")
 	)
 	(via
-		(at 180.6 62)
+		(at 165.499998 73.619614)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -26650,7 +26798,7 @@
 		(uuid "42495a52-ed55-4ae2-a493-b4fbbb6904d9")
 	)
 	(via
-		(at 180.6 64)
+		(at 160.124264 77.124263)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -26658,7 +26806,7 @@
 		(uuid "534153b8-1c15-4de5-86a9-d7b84284e455")
 	)
 	(via
-		(at 180.6 54)
+		(at 173.4 69.480386)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -26666,7 +26814,7 @@
 		(uuid "7a824882-349b-4ff1-8f47-a9ae9b78977b")
 	)
 	(via
-		(at 180.6 56)
+		(at 180.4 73.480386)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -26674,7 +26822,7 @@
 		(uuid "8b389126-cdc6-458a-91c9-fe1c16c22e52")
 	)
 	(via
-		(at 180.6 58)
+		(at 187.524264 80.524263)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -26682,7 +26830,7 @@
 		(uuid "a01c806b-ccd6-4be7-8bc9-8da21eb9fdd0")
 	)
 	(via
-		(at 180.6 68)
+		(at 151.855292 90.820446)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -26690,7 +26838,7 @@
 		(uuid "b1058f2b-ff56-4818-9ea3-937e5603956a")
 	)
 	(via
-		(at 180.6 60)
+		(at 172.84471 75.979555)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -26698,7 +26846,7 @@
 		(uuid "b482e566-d5d5-44fe-96ed-8f47fdb284bf")
 	)
 	(via
-		(at 180.6 70)
+		(at 157.555292 88.120446)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -26706,7 +26854,7 @@
 		(uuid "ddad84ce-a825-4733-924c-ec6034002732")
 	)
 	(via
-		(at 180.6 52)
+		(at 164.500001 67.300001)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -26714,7 +26862,7 @@
 		(uuid "ec553b48-bcb2-480b-b330-f300876f0d56")
 	)
 	(via
-		(at 180.6 66)
+		(at 156.679555 83.255291)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -26882,16 +27030,16 @@
 		(uuid "9bcd022b-e4c3-465a-b7ff-328f5b99b131")
 	)
 	(segment
-		(start 179.795 66)
-		(end 179.4 66)
+		(start 155.901985 83.046942)
+		(end 155.520445 82.944709)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row8")
 		(uuid "07652b21-addb-4996-b4f4-58606af0ad57")
 	)
 	(segment
-		(start 189.795 66)
-		(end 189.4 66)
+		(start 187.277535 86.5975)
+		(end 187.619614 86.400002)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row8")
@@ -26939,7 +27087,7 @@
 	)
 	(segment
 		(start 110.405 99)
-		(end 110.799998 99.000001)
+		(end 110.799998 99)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row8")
@@ -26986,7 +27134,7 @@
 		(uuid "356d96ac-e651-441a-95ef-319e0fff0a04")
 	)
 	(via
-		(at 110.799998 99.000001)
+		(at 110.799998 99)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -26994,7 +27142,7 @@
 		(uuid "4947b503-3de8-4fa0-ab8a-1f3e4bef6a10")
 	)
 	(via
-		(at 189.4 66)
+		(at 187.619614 86.400002)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -27026,7 +27174,7 @@
 		(uuid "85725aed-ee15-4d21-8e2d-cc93dbab8e8a")
 	)
 	(via
-		(at 179.4 66)
+		(at 155.520445 82.944709)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -27106,8 +27254,8 @@
 		(uuid "cb1e4336-91a9-4311-a9ff-29e20f7788f5")
 	)
 	(segment
-		(start 128.995 89.1)
-		(end 128.600002 89.099999)
+		(start 129.405 89.1)
+		(end 129.799998 89.100001)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Col2")
@@ -27170,7 +27318,7 @@
 		(uuid "7d570777-4105-490c-a1aa-49e4f572361b")
 	)
 	(via
-		(at 128.600002 89.099999)
+		(at 129.799998 89.100001)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -27362,8 +27510,8 @@
 		(uuid "e29c715d-5b6b-4afc-962b-ce43e7e46ade")
 	)
 	(segment
-		(start 179.795 56)
-		(end 179.4 56)
+		(start 179.9975 74.177535)
+		(end 179.8 74.519614)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row2")
@@ -27418,8 +27566,8 @@
 		(uuid "a7c03ae1-efcd-466e-91cc-c68729486149")
 	)
 	(segment
-		(start 189.795 56)
-		(end 189.4 56)
+		(start 174.2975 81.377535)
+		(end 174.1 81.719614)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row2")
@@ -27442,7 +27590,7 @@
 		(uuid "0e2c33e1-b77b-465f-8a85-a3fd2277ac25")
 	)
 	(via
-		(at 189.4 56)
+		(at 174.1 81.719614)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -27466,7 +27614,7 @@
 		(uuid "5f39b749-3c4a-4be8-83c1-892aec647af1")
 	)
 	(via
-		(at 179.4 56)
+		(at 179.8 74.519614)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -27530,8 +27678,8 @@
 		(uuid "371047c0-9713-43f8-ab1e-ffb9209a8957")
 	)
 	(segment
-		(start 189.795 54)
-		(end 189.4 54)
+		(start 167.1025 79.777535)
+		(end 167.3 80.119613)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row1")
@@ -27570,8 +27718,8 @@
 		(uuid "7d553185-bdbf-48e1-8842-4b7a21642fa6")
 	)
 	(segment
-		(start 179.795 54)
-		(end 179.4 54)
+		(start 172.9975 70.177535)
+		(end 172.8 70.519614)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row1")
@@ -27618,7 +27766,7 @@
 		(uuid "50c994f4-2de8-4a54-8f90-d519456ea900")
 	)
 	(via
-		(at 189.4 54)
+		(at 167.3 80.119613)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -27658,7 +27806,7 @@
 		(uuid "b8791565-1e90-4430-97ed-92d1832213ab")
 	)
 	(via
-		(at 179.4 54)
+		(at 172.8 70.519614)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -27666,7 +27814,7 @@
 		(uuid "e01b42a9-9bb2-416d-96b1-c3d0dc77b22a")
 	)
 	(via
-		(at 144.1 74.4)
+		(at 144 74.8)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -27680,14 +27828,6 @@
 		(layers "F.Cu" "B.Cu")
 		(net "/Row1")
 		(uuid "f04ac098-f1c8-4796-a383-95f7c349c6a5")
-	)
-	(segment
-		(start 121.577535 92.8025)
-		(end 121.919613 93)
-		(width 0.2)
-		(layer "F.Cu")
-		(net "/Row4")
-		(uuid "03679777-51ff-4a39-94c1-3e585f8d1c80")
 	)
 	(segment
 		(start 119.795 140)
@@ -27730,8 +27870,8 @@
 		(uuid "b11db45a-667f-4cff-aefd-33083d0d94c9")
 	)
 	(segment
-		(start 179.795 58)
-		(end 179.4 58)
+		(start 186.955043 79.955043)
+		(end 186.675736 79.675737)
 		(width 0.2)
 		(layer "F.Cu")
 		(net "/Row4")
@@ -27754,7 +27894,7 @@
 		(uuid "fc70ccd9-1125-4aa2-b545-af78c86c6bab")
 	)
 	(via
-		(at 179.4 58)
+		(at 186.675736 79.675737)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
@@ -27770,12 +27910,20 @@
 		(uuid "56fe7c15-210d-445e-9555-87f06ec6219a")
 	)
 	(via
-		(at 121.919613 93)
+		(at 121.8 92.3)
 		(size 0.4)
 		(drill 0.2)
 		(layers "F.Cu" "B.Cu")
 		(net "/Row4")
 		(uuid "6755c80a-01e0-4093-a28d-e613b189e435")
+	)
+	(via
+		(at 121.6 91.3)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "/Row4")
+		(uuid "73e854a8-8e52-4ca0-8393-fd15cb4e26b5")
 	)
 	(via
 		(at 159.4 160)
@@ -27784,6 +27932,14 @@
 		(layers "F.Cu" "B.Cu")
 		(net "/Row4")
 		(uuid "870f106a-b01a-49ae-8af4-0e021f8ce5ef")
+	)
+	(via
+		(at 133.8 77.5)
+		(size 0.4)
+		(drill 0.2)
+		(layers "F.Cu" "B.Cu")
+		(net "/Row4")
+		(uuid "8c92132d-384e-42a7-90be-0c858922732e")
 	)
 	(via
 		(at 189.4 150)
@@ -69628,7 +69784,7 @@
 				(xy 183.430584 120.774324) (xy 183.746675 121.111702) (xy 183.766958 121.12621) (xy 183.743295 121.258012)
 				(xy 183.670469 121.335139) (xy 183.560262 121.370268) (xy 183.274833 121.36523) (xy 182.917646 121.348461)
 				(xy 182.012254 121.38005) (xy 181.822889 121.359555) (xy 181.631014 121.433971) (xy 181.346279 121.468081)
-				(xy 180.752081 121.480562) (xy 180.653914 121.481461) (xy 180.496589 121.476618) (xy 179.995389 121.588409)
+				(xy 180.752081 121.480562) (xy 180.653914 121.481461) (xy 180.496589 121.476618) (xy 2147.483637 121.588409)
 				(xy 179.901581 121.569867) (xy 179.843616 121.498541) (xy 179.837295 121.361056) (xy 179.910506 121.186435)
 				(xy 180.061298 121.020208) (xy 180.259104 120.89592) (xy 180.556362 120.785713) (xy 180.91999 120.716091)
 				(xy 181.153674 120.733724) (xy 181.306576 120.801799) (xy 181.380704 120.893882) (xy 181.39033 121.016499)
