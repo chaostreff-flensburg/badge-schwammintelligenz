@@ -7,7 +7,7 @@
 		(at -10.5 11 90)
 		(unlocked yes)
 		(layer "F.SilkS")
-		(uuid "aad2f1f3-fea1-4268-b6d2-0cc6290a1331")
+		(uuid "08ea2a5d-d7fb-45b7-b690-fa7a439da2ec")
 		(effects
 			(font
 				(size 1 1)
@@ -19,7 +19,7 @@
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "3744a2ba-5916-44a0-9cf4-8cb3d3d7ef25")
+		(uuid "8ef120ab-dd63-485b-a7ab-1c20191fba54")
 		(effects
 			(font
 				(size 1 1)
@@ -32,7 +32,7 @@
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "34496ecb-945b-48ea-819d-0b10550b934a")
+		(uuid "6075c3a3-da40-4790-84b0-e950845af2ff")
 		(effects
 			(font
 				(size 1 1)
@@ -45,7 +45,7 @@
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "43e762a6-5e62-4f9b-82b0-62e966d97729")
+		(uuid "d6ccd556-bb22-494f-8f5c-08f56ea36aa2")
 		(effects
 			(font
 				(size 1 1)
@@ -64,7 +64,7 @@
 		)
 		(fill no)
 		(layer "F.SilkS")
-		(uuid "7c8d54e5-e223-4e26-80ea-6cc0eafffd45")
+		(uuid "16d37975-3daf-4934-a9cf-b013d14ce507")
 	)
 	(fp_rect
 		(start -3.85 -11.5)
@@ -75,7 +75,7 @@
 		)
 		(fill no)
 		(layer "F.SilkS")
-		(uuid "bb5398ab-8e72-4716-9e6b-eb984cefc4a1")
+		(uuid "589939df-5593-454f-8d5f-e91739ee8937")
 	)
 	(fp_rect
 		(start -9.5 -13.5)
@@ -86,13 +86,13 @@
 		)
 		(fill no)
 		(layer "F.CrtYd")
-		(uuid "56fa8698-6fe3-4ddd-994d-7a82c3aeb73c")
+		(uuid "2106c0c0-c9ca-46ee-b0b3-1af9aa29aa62")
 	)
 	(fp_text user "${REFERENCE}"
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "55a36d52-7348-407d-b6ee-fd25b0cb1497")
+		(uuid "2b0dd540-cf7c-4dbd-9639-c4b71771f80d")
 		(effects
 			(font
 				(size 1 1)
@@ -105,135 +105,135 @@
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "e210de61-7ae6-4038-aa5d-fc00d301367d")
+		(uuid "f14ff3fe-599b-4c1e-bfcc-b0a206fe4355")
 	)
 	(pad "2" smd rect
 		(at -7.74 -7.37)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "90b8cd2a-4b98-44ef-9e39-9ce029508203")
+		(uuid "c59fc4eb-bf4e-4de3-8f5f-bb611178d9e7")
 	)
 	(pad "3" smd rect
 		(at -7.74 -4.83)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "b17d97aa-f56b-43f9-8253-8f76a55ab559")
+		(uuid "23f78295-ba84-417f-9e91-66eca723734f")
 	)
 	(pad "4" smd rect
 		(at -7.74 -2.29)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "d94122e0-b610-4944-8753-5ee8935c6f63")
+		(uuid "291a490b-2f81-411f-8504-0ded7b911c56")
 	)
 	(pad "5" smd rect
 		(at -7.74 0.25)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "1233b364-5408-47ad-90ff-fb78fcf4d00a")
+		(uuid "7f585f49-b656-415b-b43e-1e6f72b33609")
 	)
 	(pad "6" smd rect
 		(at -7.74 2.79)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "b491f9d5-5db4-44d8-a70f-40df0c97b169")
+		(uuid "d98e86fc-fb96-41c5-85b7-5ce7372f614f")
 	)
 	(pad "7" smd rect
 		(at -7.74 5.33)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "1bd83338-d338-49f9-a368-d9bd190b695f")
+		(uuid "27fd4c87-411c-46f2-99ca-dcf92b7f831d")
 	)
 	(pad "8" smd rect
 		(at -7.74 7.87)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "7e4e8661-ec50-47b8-ab4c-27d45a24996f")
+		(uuid "80291f96-e18d-4061-bcd3-15bc7e2f87b1")
 	)
 	(pad "9" smd rect
 		(at -7.74 10.41)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "9f9958bd-5887-46a6-9daa-6fc777ed2c80")
+		(uuid "6537d509-82cb-4518-8385-a18455f15846")
 	)
 	(pad "10" smd rect
 		(at 8.75 10.41)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "9cc7b6af-564a-4cb4-851e-b87b627400c3")
+		(uuid "cd9cb093-369b-4ca5-9e06-fd4b6b4a5324")
 	)
 	(pad "11" smd rect
 		(at 8.75 7.87)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "619aa2ed-31ef-4f00-a760-dce2e941a703")
+		(uuid "dc97b1fd-2a71-456e-b738-7798604c2682")
 	)
 	(pad "12" smd rect
 		(at 8.75 5.33)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "4cb8dc90-95e9-466c-9cc5-de5425cd39eb")
+		(uuid "0a72b7cd-9ce2-4da8-9472-e721df5cb980")
 	)
 	(pad "13" smd rect
 		(at 8.75 2.79)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "1f4e7217-e777-462e-991a-d0f87c8ee828")
+		(uuid "47bc4d03-30a0-4428-8455-b6c8e633ca1f")
 	)
 	(pad "14" smd rect
 		(at 8.75 0.25)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "ba3ae1e9-b4cd-4914-ac93-e3a67c141db7")
+		(uuid "8eda0990-6e52-40b4-80e3-8d46fd86dcf2")
 	)
 	(pad "15" smd rect
 		(at 8.75 -2.29)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "e5e0dcdd-b2fa-47e5-9cbd-9243f2e4e792")
+		(uuid "be1b03ad-11ed-4b51-a585-9f4c8cb16042")
 	)
 	(pad "16" smd rect
 		(at 8.75 -4.83)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "f6d65cdf-e349-4aed-8fd0-668dc95fba96")
+		(uuid "867fbf9d-85de-4f00-83af-f9658b80585e")
 	)
 	(pad "17" smd rect
 		(at 8.75 -7.37)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "c4b550f7-683c-418d-8ce5-e62c31932bed")
+		(uuid "1095e0a7-50ba-4834-a9fe-ba6f3578eaa4")
 	)
 	(pad "18" smd rect
 		(at 8.75 -9.91)
 		(size 3 1.5)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
-		(uuid "2c627d59-8dc5-4881-964c-bea4ab82aaf2")
+		(uuid "0252e7fc-ead2-42bc-a79d-656b11583b40")
 	)
 	(zone
-		(layers "F.Cu" "B.Cu" "In1.Cu" "In2.Cu" "In3.Cu" "In4.Cu" "In5.Cu" "In6.Cu"
-			"In7.Cu" "In8.Cu" "In9.Cu" "In10.Cu" "In11.Cu" "In12.Cu" "In13.Cu" "In14.Cu"
-			"In15.Cu" "In16.Cu" "In17.Cu" "In18.Cu" "In19.Cu" "In20.Cu" "In21.Cu"
-			"In22.Cu" "In23.Cu" "In24.Cu" "In25.Cu" "In26.Cu" "In27.Cu" "In28.Cu"
-			"In29.Cu" "In30.Cu"
+		(layers "F.Cu" "In1.Cu" "In2.Cu" "In3.Cu" "In4.Cu" "In5.Cu" "In6.Cu" "In7.Cu"
+			"In8.Cu" "In9.Cu" "In10.Cu" "In11.Cu" "In12.Cu" "In13.Cu" "In14.Cu" "In15.Cu"
+			"In16.Cu" "In17.Cu" "In18.Cu" "In19.Cu" "In20.Cu" "In21.Cu" "In22.Cu"
+			"In23.Cu" "In24.Cu" "In25.Cu" "In26.Cu" "In27.Cu" "In28.Cu" "In29.Cu"
+			"In30.Cu"
 		)
-		(uuid "0e92a5ec-d8f2-47c5-8700-4416211c4ece")
+		(uuid "7db904e2-14f2-4eff-896d-30e440c0c2da")
 		(hatch edge 0.5)
 		(connect_pads
 			(clearance 0)
