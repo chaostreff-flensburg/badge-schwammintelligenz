@@ -8870,6 +8870,16 @@
 		)
 		(uuid "a0d849c3-e119-4cf9-b0ab-483cc884aafd")
 	)
+	(label "SwitchNode"
+		(at 50.8 96.52 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a54397a7-f28f-4035-afc2-5ffeed39067a")
+	)
 	(label "Col5"
 		(at 82.55 55.88 180)
 		(effects
