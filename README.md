@@ -27,6 +27,12 @@ Die Platine wird mit **gelbem Lötstopplack** und **weißem Bestückungsdruck** 
 
 Kupfer auf der Rückseite minimal halten und wo möglich unter dem Kupfer der Oberseite verlegen.
 
+Der Entwurf sieht folgendermaßen aus:
+
+![von vorne](./pcb/Front.png)
+
+![von hinten](./pcb/Back.png)
+
 ### Farbaufbau
 
 | Farbe | Objekte | Beteiligte Lagen | Notizen |
