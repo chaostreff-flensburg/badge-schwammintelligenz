@@ -95,5 +95,9 @@ PlatformIO im Repo-Root: `pio run -t upload`.
 
 `web/index.html` im Browser öffnen (Chrome/Edge auf Android oder Desktop, auf dem iPhone
 der Browser „Bluefy“), „Verbinden“ drücken. Zeigt live das Bild des Badges, im Modus
-„Malen“ lassen sich LEDs antippen. Funktioniert direkt aus dem Dateisystem oder über
-GitHub Pages.
+„Malen“ lassen sich LEDs antippen. Funktioniert direkt aus dem Dateisystem oder gehostet
+unter https://schwammhirn.c3fl.de/ (Web Bluetooth braucht HTTPS oder localhost).
+
+Deployment: Das `Dockerfile` im Repo-Root liefert `web/` per nginx aus. In Coolify eine
+neue Ressource vom Typ „Public Repository“ mit Build Pack „Dockerfile“ anlegen, Domain
+eintragen, fertig. Port ist 80, HTTPS macht Coolify per Let's Encrypt.
