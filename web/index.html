@@ -68,15 +68,6 @@
   </div>
 </div>
 
-<div class="card">
-  <canvas id="brain" width="900"></canvas>
-  <div class="row" style="margin-top:8px">
-    <span class="hint" id="canvasHint"></span>
-    <button id="clear" hidden>Löschen</button>
-    <button id="invert" hidden>Invertieren</button>
-  </div>
-</div>
-
 <div class="card" id="controls">
   <div class="row" data-modes="text">
     <input type="text" id="text" maxlength="63" placeholder="Laufschrift…" value="SCHWAMMHIRN">
@@ -86,6 +77,15 @@
   <label><span>Helligkeit</span><input type="range" id="bright" min="1" max="15" value="15"><span class="val" id="brightVal">15</span></label>
   <label data-modes="text"><span>Schriftgröße</span><input type="range" id="tsize" min="1" max="5" value="3"><span class="val" id="tsizeVal">3</span></label>
   <label data-modes="text"><span>Abstand oben</span><input type="range" id="ty" min="0" max="30" value="6"><span class="val" id="tyVal">6</span></label>
+</div>
+
+<div class="card">
+  <canvas id="brain" width="900"></canvas>
+  <div class="row" style="margin-top:8px">
+    <span class="hint" id="canvasHint"></span>
+    <button id="clear" hidden>Löschen</button>
+    <button id="invert" hidden>Invertieren</button>
+  </div>
 </div>
 
 <div class="card">
