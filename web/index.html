@@ -7,19 +7,33 @@
 <style>
   :root { color-scheme: dark; --bg: #1a1a14; --fg: #f2e9c9; --dim: #8a8468; --yel: #f0c419; --card: #26251c; }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   body { margin: 0; padding: 16px; font: 15px/1.4 system-ui, sans-serif; background: var(--bg); color: var(--fg); max-width: 720px; margin-inline: auto; }
   h1 { font-size: 1.3rem; margin: 0 0 12px; display: flex; align-items: center; gap: 12px; }
   h1 small { color: var(--dim); font-weight: normal; font-size: .85rem; }
   .card { background: var(--card); border-radius: 12px; padding: 12px; margin-bottom: 12px; }
   .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-  button { font: inherit; padding: 8px 14px; border-radius: 8px; border: 1px solid #444; background: #333; color: var(--fg); cursor: pointer; }
+  button { font: inherit; padding: 10px 14px; min-height: 44px; border-radius: 8px; border: 1px solid #444; background: #333; color: var(--fg); cursor: pointer; }
   button:hover { background: #3d3d3d; }
   button.active { background: var(--yel); color: #111; border-color: var(--yel); }
   button:disabled { opacity: .4; cursor: default; }
-  input[type=text] { font: inherit; flex: 1; min-width: 120px; padding: 8px; border-radius: 8px; border: 1px solid #444; background: #111; color: var(--fg); }
-  input[type=range] { flex: 1; min-width: 120px; accent-color: var(--yel); }
+  input[type=text] { font: inherit; flex: 1; min-width: 120px; padding: 10px; min-height: 44px; border-radius: 8px; border: 1px solid #444; background: #111; color: var(--fg); }
+  input[type=range] { flex: 1; min-width: 120px; accent-color: var(--yel); height: 32px; }
   label { display: flex; align-items: center; gap: 10px; margin: 6px 0; }
+  label > span:first-child { min-width: 7.5em; }
   label span.val { width: 3ch; text-align: right; color: var(--dim); font-variant-numeric: tabular-nums; }
+  label.check { gap: 8px; }
+  label.check input { width: 20px; height: 20px; accent-color: var(--yel); }
+  #controls .row { margin-bottom: 10px; }
+  @media (max-width: 560px) {
+    body { padding: 10px; }
+    .modes button { flex: 1 1 30%; }
+    #controls label:not(.check) { display: grid; grid-template-columns: 1fr auto; row-gap: 2px; }
+    #controls label > span:first-child { min-width: 0; grid-column: 1; grid-row: 1; }
+    #controls label span.val { grid-column: 2; grid-row: 1; }
+    #controls input[type=range] { grid-column: 1 / -1; grid-row: 2; width: 100%; }
+    label.check { display: flex; }
+  }
   canvas { width: 100%; touch-action: none; border-radius: 12px; display: block; }
   #log { font: 12px/1.4 ui-monospace, monospace; color: var(--dim); max-height: 120px; overflow-y: auto; white-space: pre-wrap; margin: 0; }
   .hint { color: var(--dim); font-size: .85rem; }
@@ -45,26 +59,12 @@
 </div>
 
 <div class="card">
-  <div class="row" id="modes">
+  <div class="row modes" id="modes">
     <button data-mode="neurons">Neuronen</button>
     <button data-mode="pulse">Wellen</button>
     <button data-mode="text">Laufschrift</button>
     <button data-mode="remote">Malen</button>
     <button data-mode="test">Löt-Test</button>
-  </div>
-  <div class="row" style="margin-top:10px">
-    <input type="text" id="text" maxlength="63" placeholder="Laufschrift…" value="SCHWAMMHIRN">
-    <button id="sendText">Senden</button>
-  </div>
-  <label>Tempo <input type="range" id="speed" min="0" max="100" value="4"><span class="val" id="speedVal">4</span></label>
-  <label>Helligkeit <input type="range" id="bright" min="1" max="15" value="15"><span class="val" id="brightVal">15</span></label>
-  <label>Schriftgröße <input type="range" id="tsize" min="1" max="5" value="3"><span class="val" id="tsizeVal">3</span></label>
-  <label>Abstand oben <input type="range" id="ty" min="0" max="30" value="6"><span class="val" id="tyVal">6</span></label>
-  <label><input type="checkbox" id="sync" checked> Einstellungen von Badges in der Nähe übernehmen</label>
-  <p class="hint" style="margin:0">Badges funken Modus, Tempo, Helligkeit und Schriftlayout an alle in Reichweite, die neueste Änderung gewinnt. Aus: dieses Badge behält seine Einstellungen. Pulse kommen immer an.</p>
-  <div class="row" style="margin-top:10px">
-    <input type="text" id="name" maxlength="20" placeholder="Anzeigename des Badges (BLE)">
-    <button id="sendName" disabled>Umbenennen</button>
   </div>
 </div>
 
@@ -77,7 +77,30 @@
   </div>
 </div>
 
-<div class="card"><pre id="log"></pre></div>
+<div class="card" id="controls">
+  <div class="row" data-modes="text">
+    <input type="text" id="text" maxlength="63" placeholder="Laufschrift…" value="SCHWAMMHIRN">
+    <button id="sendText">Senden</button>
+  </div>
+  <label data-modes="neurons pulse text test"><span>Tempo</span><input type="range" id="speed" min="0" max="100" value="4"><span class="val" id="speedVal">4</span></label>
+  <label><span>Helligkeit</span><input type="range" id="bright" min="1" max="15" value="15"><span class="val" id="brightVal">15</span></label>
+  <label data-modes="text"><span>Schriftgröße</span><input type="range" id="tsize" min="1" max="5" value="3"><span class="val" id="tsizeVal">3</span></label>
+  <label data-modes="text"><span>Abstand oben</span><input type="range" id="ty" min="0" max="30" value="6"><span class="val" id="tyVal">6</span></label>
+</div>
+
+<div class="card">
+  <details>
+    <summary style="cursor:pointer">Badge-Einstellungen</summary>
+    <label class="check"><input type="checkbox" id="sync" checked> Einstellungen von Badges in der Nähe übernehmen</label>
+    <p class="hint" style="margin:0 0 10px">Badges funken Modus, Tempo, Helligkeit und Schriftlayout an alle in Reichweite, die neueste Änderung gewinnt. Aus: dieses Badge behält seine Einstellungen. Pulse kommen immer an.</p>
+    <div class="row">
+      <input type="text" id="name" maxlength="20" placeholder="Anzeigename des Badges (BLE)">
+      <button id="sendName" disabled>Umbenennen</button>
+    </div>
+  </details>
+</div>
+
+<div class="card" id="logCard" hidden><pre id="log"></pre></div>
 
 <div class="card">
   <div class="row">
@@ -133,7 +156,7 @@ const TX = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
 const N = LED_XY.length;
 
 const $ = id => document.getElementById(id);
-const log = s => { const el = $('log'); el.textContent += s + '\n'; el.scrollTop = el.scrollHeight; };
+const log = s => { const el = $('log'); el.textContent += s + '\n'; el.scrollTop = el.scrollHeight; $('logCard').hidden = false; };
 
 // --- Zustand (spiegelt struct State der Firmware) ---------------------------
 const st = { mode: 'neurons', speed: 4, bright: 15, text: 'SCHWAMMHIRN', tsize: 3, ty: 6 };
@@ -388,6 +411,8 @@ function applyMode(m) {
   for (const b of $('modes').children) b.classList.toggle('active', b.dataset.mode === m);
   const paint = m === 'remote';
   $('clear').hidden = $('invert').hidden = !paint;
+  document.querySelectorAll('[data-modes]').forEach(el => el.hidden = !el.dataset.modes.split(' ').includes(m));
+  $('pulse').textContent = m === 'test' ? '↺ Test neu starten' : '⚡ Puls';
   $('canvasHint').textContent = paint ? 'LEDs antippen oder ziehen zum Malen.' : m === 'test' ? 'Löt-Test läuft, Meldungen im Log.' : (connected ? 'Live-Bild des Badges.' : 'Simulation. So sieht es auf dem Badge aus.');
   if (paint) frame.set(painted);
 }
