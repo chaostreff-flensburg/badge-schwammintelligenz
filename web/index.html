@@ -23,6 +23,12 @@
   canvas { width: 100%; touch-action: none; border-radius: 12px; display: block; }
   #log { font: 12px/1.4 ui-monospace, monospace; color: var(--dim); max-height: 120px; overflow-y: auto; white-space: pre-wrap; margin: 0; }
   .hint { color: var(--dim); font-size: .85rem; }
+  textarea { flex: 1; min-width: 200px; font: 13px/1.5 ui-monospace, monospace; background: #111; color: var(--fg); border: 1px solid #444; border-radius: 8px; padding: 8px; resize: vertical; }
+  code { font: 13px ui-monospace, monospace; background: #111; padding: 1px 5px; border-radius: 4px; }
+  summary { color: var(--fg); }
+  table.parts { border-collapse: collapse; margin: 6px 0; }
+  table.parts th, table.parts td { text-align: left; padding: 4px 16px 4px 0; border-bottom: 1px solid #333; }
+  table.parts th { color: var(--dim); font-weight: normal; }
   footer { margin: 24px 0 8px; padding-top: 12px; border-top: 1px solid #333; line-height: 1.6; }
   footer a { color: var(--yel); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
@@ -86,6 +92,33 @@
 </div>
 <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
 <p class="hint">Ohne Verbindung läuft hier dieselbe Animation wie auf dem Badge als Simulation. Web Bluetooth läuft in Chrome/Edge auf Android, Windows, macOS und Linux. Auf dem iPhone braucht es den Browser „Bluefy“.</p>
+<div class="card">
+  <details>
+    <summary style="cursor:pointer">Terminal statt Bluetooth: Serial-Kommandos für den aktuellen Zustand</summary>
+    <p class="hint">Für Firefox, Safari oder ohne Bluetooth: Badge per USB anschließen, ein serielles Terminal mit 115200 Baud öffnen und die Zeilen einfügen. macOS/Linux: <code>screen /dev/tty.usbmodem* 115200</code>, Windows: PuTTY. Die Box folgt den Reglern oben.</p>
+    <div class="row" style="align-items:flex-start">
+      <textarea id="cmds" readonly rows="8" spellcheck="false"></textarea>
+      <button id="copyCmds">Kopieren</button>
+    </div>
+  </details>
+</div>
+
+<div class="card">
+  <details>
+    <summary style="cursor:pointer">Löthinweise für den Bausatz</summary>
+    <p class="hint">Die 110 LEDs sind ab Werk bestückt. Von Hand kommen nur diese Teile auf die Rückseite:</p>
+    <table class="parts">
+      <tr><th>Paketinhalt</th><th>Position</th></tr>
+      <tr><td>ESP32-C3-Zero</td><td>U1</td></tr>
+      <tr><td>Taster Alps SPEH (3×)</td><td>SW1, SW2, SW3</td></tr>
+      <tr><td>1 µF</td><td>C1</td></tr>
+      <tr><td>10 Ω (11×)</td><td>R1 bis R11</td></tr>
+      <tr><td>10 kΩ (2×)</td><td>R12, R13</td></tr>
+    </table>
+    <p class="hint">Die Positionen stehen im Bestückungsdruck auf der Rückseite. Danach Firmware flashen (Button oben) und den Modus „Löt-Test“ starten: Er füllt jede Zeile und jede Spalte LED für LED. Fehlt eine einzelne LED, ist es deren Lötstelle. Fehlt eine ganze Zeile oder Spalte, ist es der zugehörige Widerstand R1 bis R11 oder der Pin am ESP.</p>
+  </details>
+</div>
+
 <footer class="hint">
   Das Schwammhirn-Badge entstand für das <strong>Hacks on the Beach 2026</strong> in Flensburg.
   Ein Projekt des <a href="https://c3fl.de/">Chaostreff Flensburg</a>.
@@ -260,9 +293,30 @@ function draw() {
   }
 }
 
+// Serial-Kommandos, die den aktuellen Zustand herstellen. Endet mit Zeilenumbruch, damit das
+// Terminal auch die letzte Zeile ausführt.
+let lastCmds = '';
+function updateCommandBox() {
+  const lines = [`speed ${st.speed}`, `bright ${st.bright}`, `tsize ${st.tsize}`, `ty ${st.ty}`,
+    `sync ${$('sync').checked ? 'on' : 'off'}`];
+  const name = $('name').value.trim();
+  if (name) lines.push(`name ${name}`);
+  if (st.mode === 'text' || $('text').value.trim()) lines.push(`text ${normalizeText($('text').value)}`);
+  if (st.mode === 'remote') lines.push('frame ' + Array.from(painted, b => b.toString(16).padStart(2, '0')).join(''));
+  lines.push(`mode ${st.mode}`);
+  const text = lines.join('\n') + '\n';
+  if (text !== lastCmds) { lastCmds = text; $('cmds').value = text; }
+}
+$('copyCmds').onclick = async () => {
+  try { await navigator.clipboard.writeText($('cmds').value); $('copyCmds').textContent = 'Kopiert ✓'; }
+  catch { $('cmds').select(); document.execCommand('copy'); $('copyCmds').textContent = 'Kopiert ✓'; }
+  setTimeout(() => $('copyCmds').textContent = 'Kopieren', 1500);
+};
+
 function tick() {
   if (!connected) simulate();
   draw();
+  updateCommandBox();
   requestAnimationFrame(tick);
 }
 
