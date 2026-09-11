@@ -179,7 +179,7 @@ let lastTestStep = -1, testStartedAt = 0;
 function renderTest() {
   const PINS = 11, GROUPS = 2 * PINS, STEPS = PINS;
   if (lastTestStep < 0) testStartedAt = performance.now();
-  const stepMs = 400 - st.speed * 3;
+  const stepMs = 150 - st.speed;
   const step = Math.floor((performance.now() - testStartedAt) / stepMs) % (GROUPS * STEPS);
   const group = Math.floor(step / STEPS), k = step % STEPS, byRow = group < PINS, pin = byRow ? group : group - PINS;
   frame.fill(0);

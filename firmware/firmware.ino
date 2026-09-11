@@ -282,7 +282,7 @@ void renderTest()
 {
   static uint32_t startedAt = 0;
   if (testLast < 0) startedAt = millis();
-  uint32_t stepMs = 400 - st.speed * 3;
+  uint32_t stepMs = 150 - st.speed; // 146 ms bei Tempo 4, 50 ms bei Tempo 100
   int step = ((millis() - startedAt) / stepMs) % (TEST_GROUPS * TEST_STEPS);
   int group = step / TEST_STEPS, k = step % TEST_STEPS;
   bool byRow = group < PIN_COUNT;
