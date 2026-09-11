@@ -72,4 +72,28 @@ Die folgenden Preise beziehen sich auf ein einzelnes Badge wenn wir Material fü
 | 1 | ca. 4 € | ESP32-C3 |
 | ? | ??? | ??? |
 
+## Firmware
 
+Liegt in `firmware/` und läuft auf dem Waveshare ESP32-C3-Zero. Bauen wahlweise mit der
+Arduino IDE (Board „Waveshare ESP32-C3-Zero“, Bibliothek NimBLE-Arduino 2.x) oder mit
+PlatformIO im Repo-Root: `pio run -t upload`.
+
+- `firmware/led_map.h` wird von `tools/gen_led_map.py` aus `pcb/pcb.kicad_pcb` erzeugt
+  (Pin-Paar und Position jeder LED). Nach Layoutänderungen neu ausführen, das Skript
+  schreibt auch `web/led_map.js`.
+- Ein Timer-Interrupt scannt die Charlieplex-Matrix mit 4 Bit Helligkeit, `loop()`
+  rendert Animationen in einen Framebuffer. Modi: Neuronen, Wellen, Laufschrift, Rohbild vom Handy.
+- Taster: kurz drücken löst eine Welle aus (auch auf Badges in Reichweite), lang drücken
+  wechselt den Modus. Alle drei Taster liegen auf demselben Eingang.
+- Sync: Badges senden Modus, Tempo, Helligkeit und Phase per BLE-Advertising. Die höchste
+  Änderungsgeneration gewinnt, bei Gleichstand die kleinere ID. Kein Verbindungsaufbau nötig.
+- Steuerung per Serial (115200) oder BLE mit denselben Textkommandos, Liste am Anfang
+  von `firmware/firmware.ino`. BLE nutzt den Nordic-UART-Service, jede BLE-Terminal-App
+  funktioniert also auch.
+
+### Web-Steuerung
+
+`web/index.html` im Browser öffnen (Chrome/Edge auf Android oder Desktop, auf dem iPhone
+der Browser „Bluefy“), „Verbinden“ drücken. Zeigt live das Bild des Badges, im Modus
+„Malen“ lassen sich LEDs antippen. Funktioniert direkt aus dem Dateisystem oder über
+GitHub Pages.
