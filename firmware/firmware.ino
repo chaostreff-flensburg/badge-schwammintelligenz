@@ -10,13 +10,16 @@
 //     über BLE-Advertising. Ein Tastendruck löst eine Welle auf allen aus.
 //
 // Kommandos (Serial 115200 oder BLE RX, eine Zeile pro Kommando):
-//   mode <0-3|neurons|pulse|text|remote>   Modus wählen
+//   mode <0-4|neurons|pulse|text|test|remote>   Modus wählen
+//                      test: Löt-Test, füllt jede Zeile LED für LED, dann aus, nächste Zeile;
+//                      danach dasselbe mit den Spalten. So läuft jeder GPIO als Kathode und Anode.
 //   text <Text>        Laufschrift setzen (ASCII, Umlaute werden ersetzt)
+//   name <Name>        BLE-Anzeigename (max. 20 Zeichen), Standard Schwammhirn-<ID>
 //   tsize <1-5>        Schriftgröße der Laufschrift (Leinwand-Pixel pro Font-Pixel)
 //   ty <0-30>          Abstand der Laufschrift vom oberen Rand in Leinwand-Pixeln
 //   speed <0-100>      Tempo
 //   bright <1-15>      Helligkeit
-//   pulse              Welle auslösen (auch auf Badges in Reichweite)
+//   pulse              Welle auslösen (auch auf Badges in Reichweite); im Löt-Test: Test neu starten
 //   frame <220 Hex>    Rohbild, ein Byte pro LED, schaltet auf Modus remote
 //   sync <on|off>      Sync mit anderen Badges
 //   mirror <on|off>    Framebuffer als "F<hex>" per BLE-Notify streamen (~10 Hz)
@@ -42,7 +45,7 @@ constexpr int BUTTON_PIN = 21; // alle drei Taster parallel, aktiv HIGH
 constexpr int STATUS_LED = SOC_GPIO_PIN_COUNT + 10;
 
 // Typen stehen vor der ersten Funktion, weil der Arduino-Präprozessor dort seine Prototypen einfügt.
-enum Mode : uint8_t { NEURONS, PULSE, TEXT, REMOTE, MODE_COUNT };
+enum Mode : uint8_t { NEURONS, PULSE, TEXT, TEST, REMOTE, MODE_COUNT }; // Taster rotiert bis TEST; ab TEST kein Sync, kein Speichern
 
 struct __attribute__((packed)) SyncPacket
 {
@@ -103,14 +106,15 @@ void ARDUINO_ISR_ATTR onScanTick()
 // ---------------------------------------------------------------------------
 // Zustand
 // ---------------------------------------------------------------------------
-const char* const MODE_NAMES[MODE_COUNT] = {"neurons", "pulse", "text", "remote"};
+const char* const MODE_NAMES[MODE_COUNT] = {"neurons", "pulse", "text", "test", "remote"};
 
 struct State
 {
   Mode mode = NEURONS;
-  uint8_t speed = 50;     // 0..100
+  uint8_t speed = 4;      // 0..100
   uint8_t brightness = 15; // 1..15
   char text[64] = "SCHWAMMHIRN";
+  char name[21] = "";     // BLE-Anzeigename, leer = Standard aus myId
   uint8_t textScale = 3;  // 1..5
   uint8_t textY = 6;      // 0..30
   bool syncEnabled = true;
@@ -270,6 +274,42 @@ void renderText(uint32_t t)
   sampleCanvas(SCALE >= 3 ? 0 : 1); // breite Striche ohne Nachbarschaft, sonst bleiben Buchstaben Blobs
 }
 
+// Löt-Test: Gruppe 0..10 = Zeilen, 11..21 = Spalten. Je Gruppe 10 Schritte zum Auffüllen,
+// dann ein Schritt dunkel. Meldet jede neu hinzukommende LED.
+int testLast = -1; // -1 = Test nicht aktiv, sonst zuletzt gemeldeter Schritt
+constexpr int TEST_GROUPS = 2 * PIN_COUNT, TEST_STEPS = PIN_COUNT; // 10 LEDs + 1 Pause
+void renderTest()
+{
+  static uint32_t startedAt = 0;
+  if (testLast < 0) startedAt = millis();
+  uint32_t stepMs = 150 - st.speed; // 146 ms bei Tempo 4, 50 ms bei Tempo 100
+  int step = ((millis() - startedAt) / stepMs) % (TEST_GROUPS * TEST_STEPS);
+  int group = step / TEST_STEPS, k = step % TEST_STEPS;
+  bool byRow = group < PIN_COUNT;
+  int pin = byRow ? group : group - PIN_COUNT;
+  memset(fb, 0, sizeof(fb));
+  int added = -1;
+  if (k < TEST_STEPS - 1)
+  {
+    int n = 0;
+    for (int other = 0; other < PIN_COUNT && n <= k; ++other) // Partner-Pins aufsteigend
+      for (int i = 0; i < LED_COUNT; ++i)
+        if ((byRow ? LEDS[i].row == pin && LEDS[i].col == other : LEDS[i].col == pin && LEDS[i].row == other))
+        {
+          fb[i] = 255;
+          if (n == k) added = i;
+          ++n;
+        }
+  }
+  if (step != testLast)
+  {
+    testLast = step;
+    String where = String(byRow ? "row" : "col") + pin + " (GPIO" + MATRIX_PINS[pin] + (byRow ? " low)" : " high)");
+    if (added < 0) reply("test " + where + " fertig");
+    else reply("test " + where + " +D" + (added + 1) + " " + (byRow ? "col" : "row") + (byRow ? LEDS[added].col : LEDS[added].row));
+  }
+}
+
 void renderFrame()
 {
   static uint32_t last = 0;
@@ -282,9 +322,11 @@ void renderFrame()
     case PULSE: renderPulseMode(t); break;
     case TEXT: renderText(t); break;
     case REMOTE: break; // fb kommt per "frame"-Kommando
+    case TEST: renderTest(); break;
     default: break;
   }
-  renderWaves();
+  if (st.mode != TEST) testLast = -1;
+  if (st.mode != TEST) renderWaves();
   show();
 }
 
@@ -336,7 +378,7 @@ void onSyncPacket(const SyncPacket& p)
   if (known && peer->pulseSeq != p.pulseSeq) triggerWave(p.pulseOrigin < LED_COUNT ? p.pulseOrigin : 0);
   *peer = {p.id, p.pulseSeq, millis()};
 
-  if (!st.syncEnabled || p.mode == REMOTE || st.mode == REMOTE) return;
+  if (!st.syncEnabled || p.mode >= TEST || st.mode >= TEST) return;
   bool newer = p.generation > generation || (p.generation == generation && p.id < myId);
   if (!newer) return;
   int16_t drift = (int16_t)(p.phase - (uint16_t)animTime());
@@ -382,6 +424,14 @@ void setMode(Mode m)
 {
   st.mode = m;
   markDirty();
+}
+
+void applyName() // nach setupBle() aufrufen
+{
+  if (!st.name[0]) snprintf(st.name, sizeof(st.name), "Schwammhirn-%04X", myId);
+  NimBLEDevice::setDeviceName(st.name);
+  adv->setName(st.name);
+  if (adv->isAdvertising()) adv->refreshAdvertisingData();
 }
 
 void setText(const char* src)
@@ -436,6 +486,17 @@ void handleCommand(String line)
     markDirty();
     reply(String("ok text ") + st.text);
   }
+  else if (cmd == "name")
+  {
+    arg.trim();
+    int o = 0;
+    for (unsigned i = 0; i < arg.length() && o < (int)sizeof(st.name) - 1; ++i)
+      if (arg[i] >= 0x20 && arg[i] < 0x7F) st.name[o++] = arg[i];
+    st.name[o] = 0;
+    applyName();
+    dirtySince = millis();
+    reply(String("ok name ") + st.name);
+  }
   else if (cmd == "speed")
   {
     st.speed = constrain(arg.toInt(), 0, 100);
@@ -464,6 +525,12 @@ void handleCommand(String line)
   }
   else if (cmd == "pulse")
   {
+    if (st.mode == TEST) // im Löt-Test startet ein Puls (Taster kurz, Web-Button) den Durchlauf neu
+    {
+      testLast = -1;
+      reply("ok test restart");
+      return;
+    }
     pulseOrigin = arg.length() ? constrain(arg.toInt(), 0, LED_COUNT - 1) : random(LED_COUNT);
     ++pulseSeq;
     advertDirty = true;
@@ -495,7 +562,7 @@ void handleCommand(String line)
   else if (cmd == "status")
   {
     reply(String("mode=") + MODE_NAMES[st.mode] + " speed=" + st.speed + " bright=" + st.brightness + " tsize=" + st.textScale +
-          " ty=" + st.textY + " text=" + st.text + " sync=" + (st.syncEnabled ? "on" : "off") + " gen=" + generation + " id=" + String(myId, HEX) + " peers=" + peerCount());
+          " ty=" + st.textY + " text=" + st.text + " sync=" + (st.syncEnabled ? "on" : "off") + " gen=" + generation + " id=" + String(myId, HEX) + " peers=" + peerCount() + " name=" + st.name);
   }
   else reply("err unknown: " + cmd);
 }
@@ -550,7 +617,7 @@ void handleButton()
   if (now && !longFired && millis() - pressedAt > 700)
   {
     longFired = true;
-    setMode((Mode)((st.mode + 1) % REMOTE)); // remote nur per Kommando
+    setMode((Mode)((st.mode + 1) % REMOTE)); // remote nur per Kommando, test ist Teil der Rotation
     reply(String("button: mode ") + MODE_NAMES[st.mode]);
   }
   if (!now && last)
@@ -568,30 +635,33 @@ void loadSettings()
 {
   prefs.begin("hirn");
   st.mode = (Mode)prefs.getUChar("mode", NEURONS);
-  if (st.mode >= REMOTE) st.mode = NEURONS;
-  st.speed = prefs.getUChar("speed", 50);
+  if (st.mode >= TEST) st.mode = NEURONS;
+  st.speed = prefs.getUChar("speed", 4);
   st.brightness = constrain(prefs.getUChar("bright", 15), 1, 15);
   prefs.getString("text", st.text, sizeof(st.text));
   st.textScale = constrain(prefs.getUChar("tsize", 3), 1, 5);
   st.textY = min<uint8_t>(prefs.getUChar("ty", 6), 30);
+  prefs.getString("name", st.name, sizeof(st.name));
 }
 
 void saveSettingsIfDue()
 {
   if (!dirtySince || millis() - dirtySince < 2000) return;
   dirtySince = 0;
-  prefs.putUChar("mode", st.mode == REMOTE ? NEURONS : st.mode);
+  prefs.putUChar("mode", st.mode >= TEST ? NEURONS : st.mode);
   prefs.putUChar("speed", st.speed);
   prefs.putUChar("bright", st.brightness);
   prefs.putString("text", st.text);
   prefs.putUChar("tsize", st.textScale);
   prefs.putUChar("ty", st.textY);
+  prefs.putString("name", st.name);
 }
 
 // ---------------------------------------------------------------------------
 void setupBle()
 {
-  NimBLEDevice::init("Schwammhirn");
+  if (!st.name[0]) snprintf(st.name, sizeof(st.name), "Schwammhirn-%04X", myId);
+  NimBLEDevice::init(st.name);
   NimBLEDevice::setPower(9); // dBm
   NimBLEServer* server = NimBLEDevice::createServer();
   server->setCallbacks(&serverCallbacks);
@@ -606,7 +676,7 @@ void setupBle()
 
   adv = NimBLEDevice::getAdvertising();
   adv->enableScanResponse(true);
-  adv->setName("Schwammhirn");
+  adv->setName(st.name);
   adv->setMinInterval(320); // 200 ms
   adv->setMaxInterval(480); // 300 ms
   updateAdvert();

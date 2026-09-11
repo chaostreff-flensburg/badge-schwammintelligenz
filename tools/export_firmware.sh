@@ -6,8 +6,8 @@ set -e
 cd "$(dirname "$0")/.."
 BUILD=.pio/build/esp32c3zero
 BOOT_APP0=$(find ~/.platformio/packages/framework-arduinoespressif32 -name boot_app0.bin | head -1)
+VERSION=$(git describe --always --dirty) # vor dem Kopieren, sonst macht web/flash den Baum "dirty"
 cp "$BUILD/bootloader.bin" "$BUILD/partitions.bin" "$BUILD/firmware.bin" "$BOOT_APP0" web/flash/
-VERSION=$(git describe --always --dirty)
 cat > web/flash/manifest.json <<JSON
 {
   "name": "Schwammhirn",

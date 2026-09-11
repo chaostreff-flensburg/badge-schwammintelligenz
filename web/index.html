@@ -41,16 +41,22 @@
     <button data-mode="pulse">Wellen</button>
     <button data-mode="text">Laufschrift</button>
     <button data-mode="remote">Malen</button>
+    <button data-mode="test">Löt-Test</button>
   </div>
   <div class="row" style="margin-top:10px">
     <input type="text" id="text" maxlength="63" placeholder="Laufschrift…" value="SCHWAMMHIRN">
     <button id="sendText">Senden</button>
   </div>
-  <label>Tempo <input type="range" id="speed" min="0" max="100" value="50"><span class="val" id="speedVal">50</span></label>
+  <label>Tempo <input type="range" id="speed" min="0" max="100" value="4"><span class="val" id="speedVal">4</span></label>
   <label>Helligkeit <input type="range" id="bright" min="1" max="15" value="15"><span class="val" id="brightVal">15</span></label>
   <label>Schriftgröße <input type="range" id="tsize" min="1" max="5" value="3"><span class="val" id="tsizeVal">3</span></label>
   <label>Abstand oben <input type="range" id="ty" min="0" max="30" value="6"><span class="val" id="tyVal">6</span></label>
-  <label><input type="checkbox" id="sync" checked> Mit anderen Badges synchronisieren</label>
+  <label><input type="checkbox" id="sync" checked> Einstellungen von Badges in der Nähe übernehmen</label>
+  <p class="hint" style="margin:0">Badges funken Modus, Tempo, Helligkeit und Schriftlayout an alle in Reichweite, die neueste Änderung gewinnt. Aus: dieses Badge behält seine Einstellungen. Pulse kommen immer an.</p>
+  <div class="row" style="margin-top:10px">
+    <input type="text" id="name" maxlength="20" placeholder="Anzeigename des Badges (BLE)">
+    <button id="sendName" disabled>Umbenennen</button>
+  </div>
 </div>
 
 <div class="card">
@@ -89,7 +95,7 @@ const $ = id => document.getElementById(id);
 const log = s => { const el = $('log'); el.textContent += s + '\n'; el.scrollTop = el.scrollHeight; };
 
 // --- Zustand (spiegelt struct State der Firmware) ---------------------------
-const st = { mode: 'neurons', speed: 50, bright: 15, text: 'SCHWAMMHIRN', tsize: 3, ty: 6 };
+const st = { mode: 'neurons', speed: 4, bright: 15, text: 'SCHWAMMHIRN', tsize: 3, ty: 6 };
 let frame = new Uint8Array(N);       // was angezeigt wird (Simulation, Mirror oder gemaltes Bild)
 let painted = new Uint8Array(N);     // Bild im Modus "Malen"
 let painting = false;
@@ -168,6 +174,26 @@ function renderText(t) {
   }
   sampleCanvas(SCALE >= 3 ? 0 : 1);
 }
+// Löt-Test wie in der Firmware: Zeilen auffüllen, dunkel, nächste; danach Spalten.
+let lastTestStep = -1, testStartedAt = 0;
+function renderTest() {
+  const PINS = 11, GROUPS = 2 * PINS, STEPS = PINS;
+  if (lastTestStep < 0) testStartedAt = performance.now();
+  const stepMs = 150 - st.speed;
+  const step = Math.floor((performance.now() - testStartedAt) / stepMs) % (GROUPS * STEPS);
+  const group = Math.floor(step / STEPS), k = step % STEPS, byRow = group < PINS, pin = byRow ? group : group - PINS;
+  frame.fill(0);
+  if (k < STEPS - 1) {
+    const members = [];
+    for (let i = 0; i < N; i++) if ((byRow ? LED_RC[i][0] : LED_RC[i][1]) === pin) members.push(i);
+    members.sort((a, b) => (byRow ? LED_RC[a][1] - LED_RC[b][1] : LED_RC[a][0] - LED_RC[b][0]));
+    for (let n = 0; n <= k && n < members.length; n++) frame[members[n]] = 255;
+  }
+  if (step !== lastTestStep) {
+    lastTestStep = step;
+    $('canvasHint').textContent = `Löt-Test: ${byRow ? 'Zeile' : 'Spalte'} ${pin}` + (k < STEPS - 1 ? `, ${k + 1} von 10` : ' fertig');
+  }
+}
 let lastSim = performance.now();
 function simulate() {
   const now = performance.now(), dt = now - lastSim, t = animTime();
@@ -177,7 +203,9 @@ function simulate() {
     case 'pulse': renderPulseMode(t); break;
     case 'text': renderText(t); break;
     case 'remote': frame.set(painted); break;
+    case 'test': renderTest(); return;
   }
+  lastTestStep = -1;
   renderWaves();
 }
 
@@ -233,7 +261,13 @@ function tick() {
 // --- BLE -----------------------------------------------------------------------
 async function connect() {
   try {
-    device = await navigator.bluetooth.requestDevice({ filters: [{ namePrefix: 'Schwammhirn' }], optionalServices: [SERVICE] });
+    device = await navigator.bluetooth.requestDevice({
+      filters: [
+        { manufacturerData: [{ companyIdentifier: 0xffff, dataPrefix: new Uint8Array([0x53, 0x48]) }] }, // "SH" im Sync-Paket
+        { namePrefix: 'Schwammhirn' },
+      ],
+      optionalServices: [SERVICE],
+    });
     device.addEventListener('gattserverdisconnected', onDisconnected);
     const server = await device.gatt.connect();
     const svc = await server.getPrimaryService(SERVICE);
@@ -250,9 +284,9 @@ async function connect() {
 function onDisconnected() { rx = null; setConnected(false); log('getrennt'); }
 function setConnected(on) {
   connected = on;
-  $('state').textContent = on ? 'verbunden' : 'Simulation';
+  $('state').textContent = on ? 'verbunden mit ' + (device?.name || 'Badge') : 'Simulation';
   $('connect').textContent = on ? 'Trennen' : 'Mit Badge verbinden';
-  $('status').disabled = !on;
+  $('status').disabled = $('sendName').disabled = !on;
   if (!on) $('peers').textContent = '';
 }
 let queue = Promise.resolve();
@@ -268,7 +302,7 @@ function onNotify(s) {
     return;
   }
   log('< ' + s);
-  const m = s.match(/mode=(\w+) speed=(\d+) bright=(\d+) tsize=(\d+) ty=(\d+) text=(.*) sync=(\w+) gen=\d+ id=\w+ peers=(\d+)/);
+  const m = s.match(/mode=(\w+) speed=(\d+) bright=(\d+) tsize=(\d+) ty=(\d+) text=(.*) sync=(\w+) gen=\d+ id=\w+ peers=(\d+) name=(.*)$/);
   if (m) {
     applyMode(m[1]);
     for (const [id, v] of [['speed', m[2]], ['bright', m[3]], ['tsize', m[4]], ['ty', m[5]]]) {
@@ -277,7 +311,10 @@ function onNotify(s) {
     st.text = m[6]; $('text').value = m[6];
     $('sync').checked = m[7] === 'on';
     $('peers').textContent = m[8] + ' Badge(s) in Reichweite';
+    $('name').value = m[9];
   }
+  const nm = s.match(/^ok name (.*)$/);
+  if (nm) { $('name').value = nm[1]; $('state').textContent = 'verbunden mit ' + nm[1]; }
   const mm = s.match(/^(?:ok|button:) mode (\w+)/);
   if (mm) applyMode(mm[1]);
   if (/^ok text/.test(s)) applyMode('text');
@@ -289,7 +326,7 @@ function applyMode(m) {
   for (const b of $('modes').children) b.classList.toggle('active', b.dataset.mode === m);
   const paint = m === 'remote';
   $('clear').hidden = $('invert').hidden = !paint;
-  $('canvasHint').textContent = paint ? 'LEDs antippen oder ziehen zum Malen.' : (connected ? 'Live-Bild des Badges.' : 'Simulation. So sieht es auf dem Badge aus.');
+  $('canvasHint').textContent = paint ? 'LEDs antippen oder ziehen zum Malen.' : m === 'test' ? 'Löt-Test läuft, Meldungen im Log.' : (connected ? 'Live-Bild des Badges.' : 'Simulation. So sieht es auf dem Badge aus.');
   if (paint) frame.set(painted);
 }
 let frameTimer = null;
@@ -327,7 +364,7 @@ $('clear').onclick = () => { painted.fill(0); sendFrame(); };
 $('invert').onclick = () => { painted = painted.map(v => 255 - v); sendFrame(); };
 
 $('connect').onclick = () => device?.gatt.connected ? device.gatt.disconnect() : connect();
-$('pulse').onclick = () => { const o = (Math.random() * N) | 0; triggerWave(o); send('pulse ' + o); };
+$('pulse').onclick = () => { if (st.mode === 'test') { lastTestStep = -1; send('pulse'); return; } const o = (Math.random() * N) | 0; triggerWave(o); send('pulse ' + o); };
 $('status').onclick = () => send('status');
 $('sendText').onclick = () => { st.text = normalizeText($('text').value); $('text').value = st.text; applyMode('text'); send('text ' + st.text); };
 $('text').addEventListener('keydown', e => { if (e.key === 'Enter') $('sendText').click(); });
@@ -343,6 +380,8 @@ for (const id of ['speed', 'bright', 'tsize', 'ty']) {
     sliderTimer[id] = setTimeout(() => send(id + ' ' + $(id).value), 150);
   };
 }
+$('sendName').onclick = () => send('name ' + $('name').value.trim());
+$('name').addEventListener('keydown', e => { if (e.key === 'Enter') $('sendName').click(); });
 $('sync').onchange = () => send('sync ' + ($('sync').checked ? 'on' : 'off'));
 
 if (!navigator.bluetooth) log('Dieser Browser kann kein Web Bluetooth. Die Simulation läuft trotzdem. Zum Verbinden Chrome/Edge auf Android oder Desktop nutzen, auf iPhone „Bluefy“.');

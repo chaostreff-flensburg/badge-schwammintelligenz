@@ -151,10 +151,13 @@ def main():
     rows_js = ",\n".join(
         f"  [{norm(x, x0, w)}, {norm(y, y0, h)}]" for _, _, _, _, x, y in leds
     )
+    rc_js = ",".join(f"[{row},{col}]" for _, _, col, row, _, _ in leds)
     (ROOT / "web" / "led_map.js").write_text(
         "// Generiert von tools/gen_led_map.py aus pcb/pcb.kicad_pcb. Nicht von Hand ändern.\n"
         f"const BOARD_ASPECT = {w / h:.4f};\n"
         f"const LED_XY = [\n{rows_js}\n];\n"
+        f"// [Zeile, Spalte] je LED, gleiche Reihenfolge wie LED_XY\n"
+        f"const LED_RC = [{rc_js}];\n"
         f"// Platinenkontur als Polylinien [x0,y0,x1,y1,...], gleiche Normierung wie LED_XY\n"
         f"const BOARD_OUTLINE = [\n{outline_js}\n];\n"
         f"const BOARD_HOLES = [{holes_js}];\n"
