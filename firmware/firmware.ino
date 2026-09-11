@@ -13,6 +13,7 @@
 //   mode <0-4|neurons|pulse|text|remote|test>   Modus wählen
 //                      test: Löt-Test, eine LED nach der anderen in Zeilen/Spalten-Reihenfolge
 //   text <Text>        Laufschrift setzen (ASCII, Umlaute werden ersetzt)
+//   name <Name>        BLE-Anzeigename (max. 20 Zeichen), Standard Schwammhirn-<ID>
 //   tsize <1-5>        Schriftgröße der Laufschrift (Leinwand-Pixel pro Font-Pixel)
 //   ty <0-30>          Abstand der Laufschrift vom oberen Rand in Leinwand-Pixeln
 //   speed <0-100>      Tempo
@@ -112,6 +113,7 @@ struct State
   uint8_t speed = 4;      // 0..100
   uint8_t brightness = 15; // 1..15
   char text[64] = "SCHWAMMHIRN";
+  char name[21] = "";     // BLE-Anzeigename, leer = Standard aus myId
   uint8_t textScale = 3;  // 1..5
   uint8_t textY = 6;      // 0..30
   bool syncEnabled = true;
@@ -417,6 +419,14 @@ void setMode(Mode m)
   markDirty();
 }
 
+void applyName() // nach setupBle() aufrufen
+{
+  if (!st.name[0]) snprintf(st.name, sizeof(st.name), "Schwammhirn-%04X", myId);
+  NimBLEDevice::setDeviceName(st.name);
+  adv->setName(st.name);
+  if (adv->isAdvertising()) adv->refreshAdvertisingData();
+}
+
 void setText(const char* src)
 {
   // UTF-8-Umlaute auf ASCII abbilden, Kleinbuchstaben hochsetzen
@@ -468,6 +478,17 @@ void handleCommand(String line)
     if (st.mode != TEXT) st.mode = TEXT;
     markDirty();
     reply(String("ok text ") + st.text);
+  }
+  else if (cmd == "name")
+  {
+    arg.trim();
+    int o = 0;
+    for (unsigned i = 0; i < arg.length() && o < (int)sizeof(st.name) - 1; ++i)
+      if (arg[i] >= 0x20 && arg[i] < 0x7F) st.name[o++] = arg[i];
+    st.name[o] = 0;
+    applyName();
+    dirtySince = millis();
+    reply(String("ok name ") + st.name);
   }
   else if (cmd == "speed")
   {
@@ -528,7 +549,7 @@ void handleCommand(String line)
   else if (cmd == "status")
   {
     reply(String("mode=") + MODE_NAMES[st.mode] + " speed=" + st.speed + " bright=" + st.brightness + " tsize=" + st.textScale +
-          " ty=" + st.textY + " text=" + st.text + " sync=" + (st.syncEnabled ? "on" : "off") + " gen=" + generation + " id=" + String(myId, HEX) + " peers=" + peerCount());
+          " ty=" + st.textY + " text=" + st.text + " sync=" + (st.syncEnabled ? "on" : "off") + " gen=" + generation + " id=" + String(myId, HEX) + " peers=" + peerCount() + " name=" + st.name);
   }
   else reply("err unknown: " + cmd);
 }
@@ -607,6 +628,7 @@ void loadSettings()
   prefs.getString("text", st.text, sizeof(st.text));
   st.textScale = constrain(prefs.getUChar("tsize", 3), 1, 5);
   st.textY = min<uint8_t>(prefs.getUChar("ty", 6), 30);
+  prefs.getString("name", st.name, sizeof(st.name));
 }
 
 void saveSettingsIfDue()
@@ -619,12 +641,14 @@ void saveSettingsIfDue()
   prefs.putString("text", st.text);
   prefs.putUChar("tsize", st.textScale);
   prefs.putUChar("ty", st.textY);
+  prefs.putString("name", st.name);
 }
 
 // ---------------------------------------------------------------------------
 void setupBle()
 {
-  NimBLEDevice::init("Schwammhirn");
+  if (!st.name[0]) snprintf(st.name, sizeof(st.name), "Schwammhirn-%04X", myId);
+  NimBLEDevice::init(st.name);
   NimBLEDevice::setPower(9); // dBm
   NimBLEServer* server = NimBLEDevice::createServer();
   server->setCallbacks(&serverCallbacks);
@@ -639,7 +663,7 @@ void setupBle()
 
   adv = NimBLEDevice::getAdvertising();
   adv->enableScanResponse(true);
-  adv->setName("Schwammhirn");
+  adv->setName(st.name);
   adv->setMinInterval(320); // 200 ms
   adv->setMaxInterval(480); // 300 ms
   updateAdvert();

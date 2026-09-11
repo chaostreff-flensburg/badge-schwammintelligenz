@@ -51,7 +51,12 @@
   <label>Helligkeit <input type="range" id="bright" min="1" max="15" value="15"><span class="val" id="brightVal">15</span></label>
   <label>Schriftgröße <input type="range" id="tsize" min="1" max="5" value="3"><span class="val" id="tsizeVal">3</span></label>
   <label>Abstand oben <input type="range" id="ty" min="0" max="30" value="6"><span class="val" id="tyVal">6</span></label>
-  <label><input type="checkbox" id="sync" checked> Mit anderen Badges synchronisieren</label>
+  <label><input type="checkbox" id="sync" checked> Einstellungen von Badges in der Nähe übernehmen</label>
+  <p class="hint" style="margin:0">Badges funken Modus, Tempo, Helligkeit und Schriftlayout an alle in Reichweite, die neueste Änderung gewinnt. Aus: dieses Badge behält seine Einstellungen. Pulse kommen immer an.</p>
+  <div class="row" style="margin-top:10px">
+    <input type="text" id="name" maxlength="20" placeholder="Anzeigename des Badges (BLE)">
+    <button id="sendName" disabled>Umbenennen</button>
+  </div>
 </div>
 
 <div class="card">
@@ -251,7 +256,13 @@ function tick() {
 // --- BLE -----------------------------------------------------------------------
 async function connect() {
   try {
-    device = await navigator.bluetooth.requestDevice({ filters: [{ namePrefix: 'Schwammhirn' }], optionalServices: [SERVICE] });
+    device = await navigator.bluetooth.requestDevice({
+      filters: [
+        { manufacturerData: [{ companyIdentifier: 0xffff, dataPrefix: new Uint8Array([0x53, 0x48]) }] }, // "SH" im Sync-Paket
+        { namePrefix: 'Schwammhirn' },
+      ],
+      optionalServices: [SERVICE],
+    });
     device.addEventListener('gattserverdisconnected', onDisconnected);
     const server = await device.gatt.connect();
     const svc = await server.getPrimaryService(SERVICE);
@@ -268,9 +279,9 @@ async function connect() {
 function onDisconnected() { rx = null; setConnected(false); log('getrennt'); }
 function setConnected(on) {
   connected = on;
-  $('state').textContent = on ? 'verbunden' : 'Simulation';
+  $('state').textContent = on ? 'verbunden mit ' + (device?.name || 'Badge') : 'Simulation';
   $('connect').textContent = on ? 'Trennen' : 'Mit Badge verbinden';
-  $('status').disabled = !on;
+  $('status').disabled = $('sendName').disabled = !on;
   if (!on) $('peers').textContent = '';
 }
 let queue = Promise.resolve();
@@ -286,7 +297,7 @@ function onNotify(s) {
     return;
   }
   log('< ' + s);
-  const m = s.match(/mode=(\w+) speed=(\d+) bright=(\d+) tsize=(\d+) ty=(\d+) text=(.*) sync=(\w+) gen=\d+ id=\w+ peers=(\d+)/);
+  const m = s.match(/mode=(\w+) speed=(\d+) bright=(\d+) tsize=(\d+) ty=(\d+) text=(.*) sync=(\w+) gen=\d+ id=\w+ peers=(\d+) name=(.*)$/);
   if (m) {
     applyMode(m[1]);
     for (const [id, v] of [['speed', m[2]], ['bright', m[3]], ['tsize', m[4]], ['ty', m[5]]]) {
@@ -295,7 +306,10 @@ function onNotify(s) {
     st.text = m[6]; $('text').value = m[6];
     $('sync').checked = m[7] === 'on';
     $('peers').textContent = m[8] + ' Badge(s) in Reichweite';
+    $('name').value = m[9];
   }
+  const nm = s.match(/^ok name (.*)$/);
+  if (nm) { $('name').value = nm[1]; $('state').textContent = 'verbunden mit ' + nm[1]; }
   const mm = s.match(/^(?:ok|button:) mode (\w+)/);
   if (mm) applyMode(mm[1]);
   if (/^ok text/.test(s)) applyMode('text');
@@ -361,6 +375,8 @@ for (const id of ['speed', 'bright', 'tsize', 'ty']) {
     sliderTimer[id] = setTimeout(() => send(id + ' ' + $(id).value), 150);
   };
 }
+$('sendName').onclick = () => send('name ' + $('name').value.trim());
+$('name').addEventListener('keydown', e => { if (e.key === 'Enter') $('sendName').click(); });
 $('sync').onchange = () => send('sync ' + ($('sync').checked ? 'on' : 'off'));
 
 if (!navigator.bluetooth) log('Dieser Browser kann kein Web Bluetooth. Die Simulation läuft trotzdem. Zum Verbinden Chrome/Edge auf Android oder Desktop nutzen, auf iPhone „Bluefy“.');

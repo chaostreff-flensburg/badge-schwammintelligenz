@@ -89,6 +89,9 @@ PlatformIO im Repo-Root: `pio run -t upload`.
   wechselt den Modus. Alle drei Taster liegen auf demselben Eingang.
 - Sync: Badges senden Modus, Tempo, Helligkeit und Phase per BLE-Advertising. Die höchste
   Änderungsgeneration gewinnt, bei Gleichstand die kleinere ID. Kein Verbindungsaufbau nötig.
+- BLE-Anzeigename ist standardmäßig `Schwammhirn-<ID>` aus der Bluetooth-MAC, per Kommando
+  `name …` oder auf der Web-Seite änderbar. Die Web-Seite findet Badges über die
+  Herstellerkennung im Werbepaket, unabhängig vom Namen.
 - Steuerung per Serial (115200) oder BLE mit denselben Textkommandos, Liste am Anfang
   von `firmware/firmware.ino`. BLE nutzt den Nordic-UART-Service, jede BLE-Terminal-App
   funktioniert also auch.
