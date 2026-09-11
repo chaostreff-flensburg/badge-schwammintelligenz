@@ -11,7 +11,8 @@
 //
 // Kommandos (Serial 115200 oder BLE RX, eine Zeile pro Kommando):
 //   mode <0-4|neurons|pulse|text|test|remote>   Modus wählen
-//                      test: Löt-Test, eine LED nach der anderen in Zeilen/Spalten-Reihenfolge
+//                      test: Löt-Test, füllt jede Zeile LED für LED, dann aus, nächste Zeile;
+//                      danach dasselbe mit den Spalten. So läuft jeder GPIO als Kathode und Anode.
 //   text <Text>        Laufschrift setzen (ASCII, Umlaute werden ersetzt)
 //   name <Name>        BLE-Anzeigename (max. 20 Zeichen), Standard Schwammhirn-<ID>
 //   tsize <1-5>        Schriftgröße der Laufschrift (Leinwand-Pixel pro Font-Pixel)
@@ -273,33 +274,39 @@ void renderText(uint32_t t)
   sampleCanvas(SCALE >= 3 ? 0 : 1); // breite Striche ohne Nachbarschaft, sonst bleiben Buchstaben Blobs
 }
 
-// Löt-Test: genau eine LED, Zeile für Zeile, darin Spalte für Spalte. Meldet jeden Schritt.
+// Löt-Test: Gruppe 0..10 = Zeilen, 11..21 = Spalten. Je Gruppe 10 Schritte zum Auffüllen,
+// dann ein Schritt dunkel. Meldet jede neu hinzukommende LED.
 int testLast = -1; // -1 = Test nicht aktiv, sonst zuletzt gemeldeter Schritt
+constexpr int TEST_GROUPS = 2 * PIN_COUNT, TEST_STEPS = PIN_COUNT; // 10 LEDs + 1 Pause
 void renderTest()
 {
-  static uint8_t order[LED_COUNT];
-  static bool ordered = false;
-  if (!ordered)
+  static uint32_t startedAt = 0;
+  if (testLast < 0) startedAt = millis();
+  uint32_t stepMs = 400 - st.speed * 3;
+  int step = ((millis() - startedAt) / stepMs) % (TEST_GROUPS * TEST_STEPS);
+  int group = step / TEST_STEPS, k = step % TEST_STEPS;
+  bool byRow = group < PIN_COUNT;
+  int pin = byRow ? group : group - PIN_COUNT;
+  memset(fb, 0, sizeof(fb));
+  int added = -1;
+  if (k < TEST_STEPS - 1)
   {
     int n = 0;
-    for (int r = 0; r < PIN_COUNT; ++r)
-      for (int c = 0; c < PIN_COUNT; ++c)
-        for (int i = 0; i < LED_COUNT; ++i)
-          if (LEDS[i].row == r && LEDS[i].col == c) order[n++] = i;
-    ordered = true;
+    for (int other = 0; other < PIN_COUNT && n <= k; ++other) // Partner-Pins aufsteigend
+      for (int i = 0; i < LED_COUNT; ++i)
+        if ((byRow ? LEDS[i].row == pin && LEDS[i].col == other : LEDS[i].col == pin && LEDS[i].row == other))
+        {
+          fb[i] = 255;
+          if (n == k) added = i;
+          ++n;
+        }
   }
-  static uint32_t startedAt = 0;
-  if (testLast < 0) startedAt = millis(); // Durchlauf beginnt beim Einschalten des Modus vorne
-  uint32_t stepMs = 1500 - st.speed * 13;
-  int step = ((millis() - startedAt) / stepMs) % LED_COUNT;
-  memset(fb, 0, sizeof(fb));
-  int led = order[step];
-  fb[led] = 255;
   if (step != testLast)
   {
     testLast = step;
-    reply(String("test D") + (led + 1) + " row" + LEDS[led].row + " col" + LEDS[led].col + " (GPIO" + MATRIX_PINS[LEDS[led].row] +
-          " low, GPIO" + MATRIX_PINS[LEDS[led].col] + " high)");
+    String where = String(byRow ? "row" : "col") + pin + " (GPIO" + MATRIX_PINS[pin] + (byRow ? " low)" : " high)");
+    if (added < 0) reply("test " + where + " fertig");
+    else reply("test " + where + " +D" + (added + 1) + " " + (byRow ? "col" : "row") + (byRow ? LEDS[added].col : LEDS[added].row));
   }
 }
 

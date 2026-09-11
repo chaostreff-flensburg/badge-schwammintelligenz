@@ -174,19 +174,24 @@ function renderText(t) {
   }
   sampleCanvas(SCALE >= 3 ? 0 : 1);
 }
-// Löt-Test: eine LED nach der anderen, Zeile für Zeile, darin Spalte für Spalte (wie die Firmware)
-const testOrder = LED_XY.map((_, i) => i).sort((a, b) => (LED_RC[a][0] - LED_RC[b][0]) || (LED_RC[a][1] - LED_RC[b][1]));
+// Löt-Test wie in der Firmware: Zeilen auffüllen, dunkel, nächste; danach Spalten.
 let lastTestStep = -1, testStartedAt = 0;
 function renderTest() {
+  const PINS = 11, GROUPS = 2 * PINS, STEPS = PINS;
   if (lastTestStep < 0) testStartedAt = performance.now();
-  const stepMs = 1500 - st.speed * 13;
-  const step = Math.floor((performance.now() - testStartedAt) / stepMs) % N;
+  const stepMs = 400 - st.speed * 3;
+  const step = Math.floor((performance.now() - testStartedAt) / stepMs) % (GROUPS * STEPS);
+  const group = Math.floor(step / STEPS), k = step % STEPS, byRow = group < PINS, pin = byRow ? group : group - PINS;
   frame.fill(0);
-  const led = testOrder[step];
-  frame[led] = 255;
+  if (k < STEPS - 1) {
+    const members = [];
+    for (let i = 0; i < N; i++) if ((byRow ? LED_RC[i][0] : LED_RC[i][1]) === pin) members.push(i);
+    members.sort((a, b) => (byRow ? LED_RC[a][1] - LED_RC[b][1] : LED_RC[a][0] - LED_RC[b][0]));
+    for (let n = 0; n <= k && n < members.length; n++) frame[members[n]] = 255;
+  }
   if (step !== lastTestStep) {
     lastTestStep = step;
-    $('canvasHint').textContent = `Löt-Test: D${led + 1}, Zeile ${LED_RC[led][0]}, Spalte ${LED_RC[led][1]}`;
+    $('canvasHint').textContent = `Löt-Test: ${byRow ? 'Zeile' : 'Spalte'} ${pin}` + (k < STEPS - 1 ? `, ${k + 1} von 10` : ' fertig');
   }
 }
 let lastSim = performance.now();
