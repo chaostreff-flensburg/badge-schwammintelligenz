@@ -98,6 +98,10 @@ der Browser „Bluefy“), „Verbinden“ drücken. Zeigt live das Bild des Bad
 „Malen“ lassen sich LEDs antippen. Funktioniert direkt aus dem Dateisystem oder gehostet
 unter https://schwammhirn.c3fl.de/ (Web Bluetooth braucht HTTPS oder localhost).
 
+Firmware flashen ohne Toolchain: Auf der Seite gibt es einen Button „Firmware flashen“ (ESP
+Web Tools, Chrome/Edge am Desktop). Die Binaries liegen in `web/flash/`. Nach einem Firmware-
+Build mit `pio run` aktualisiert `tools/export_firmware.sh` Binaries und Manifest, dann committen.
+
 Deployment: Das `Dockerfile` im Repo-Root liefert `web/` per nginx aus. In Coolify eine
 neue Ressource vom Typ „Public Repository“ mit Build Pack „Dockerfile“ anlegen, Domain
 eintragen, fertig. Port ist 80, HTTPS macht Coolify per Let's Encrypt.
