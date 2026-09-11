@@ -62,6 +62,7 @@
   <div class="row modes" id="modes">
     <button data-mode="neurons">Neuronen</button>
     <button data-mode="pulse">Wellen</button>
+    <button data-mode="cortex">Cortex</button>
     <button data-mode="text">Laufschrift</button>
     <button data-mode="remote">Malen</button>
     <button data-mode="test">Löt-Test</button>
@@ -73,7 +74,7 @@
     <input type="text" id="text" maxlength="63" placeholder="Laufschrift…" value="SCHWAMMHIRN">
     <button id="sendText">Senden</button>
   </div>
-  <label data-modes="neurons pulse text test"><span>Tempo</span><input type="range" id="speed" min="0" max="100" value="4"><span class="val" id="speedVal">4</span></label>
+  <label data-modes="neurons pulse cortex text test"><span>Tempo</span><input type="range" id="speed" min="0" max="100" value="4"><span class="val" id="speedVal">4</span></label>
   <label><span>Helligkeit</span><input type="range" id="bright" min="1" max="15" value="15"><span class="val" id="brightVal">15</span></label>
   <label data-modes="text"><span>Schriftgröße</span><input type="range" id="tsize" min="1" max="5" value="3"><span class="val" id="tsizeVal">3</span></label>
   <label data-modes="text"><span>Abstand oben</span><input type="range" id="ty" min="0" max="30" value="6"><span class="val" id="tyVal">6</span></label>
@@ -258,6 +259,31 @@ function renderTest() {
     $('canvasHint').textContent = `Löt-Test: ${byRow ? 'Zeile' : 'Spalte'} ${pin}` + (k < STEPS - 1 ? `, ${k + 1} von 10` : ' fertig');
   }
 }
+// Cortex: ein Hirnareal blitzt auf, vom Mittelpunkt laufen schwächere Wellen in den Rest
+let cortexNext = 0, cortexArea = -1, cortexFlashAt = 0;
+function renderCortex(dt) {
+  const decay = 1 + (dt >> 3);
+  for (let i = 0; i < N; i++) frame[i] = frame[i] > decay ? frame[i] - decay : 0;
+  const now = performance.now();
+  if (now >= cortexNext) {
+    let next; do { next = (Math.random() * AREAS.length) | 0; } while (next === cortexArea && AREAS.length > 1);
+    cortexArea = next;
+    cortexFlashAt = now;
+    cortexNext = now + 2600 - st.speed * 20;
+    $('canvasHint').textContent = 'Cortex: ' + AREAS[cortexArea].name;
+  }
+  const age = now - cortexFlashAt, a = AREAS[cortexArea];
+  if (age < 450) for (let i = 0; i < N; i++) if (LED_AREA[i] === cortexArea && Math.random() < 0.5) frame[i] = 255;
+  const r = (age - 200) * 0.2;
+  if (r > 0 && age < 2000) {
+    const fade = 0.4 * (1 - age / 2000);
+    for (let i = 0; i < N; i++) {
+      if (LED_AREA[i] === cortexArea) continue;
+      const d = Math.hypot(LED_XY[i][0] - a.x, LED_XY[i][1] - a.y), k = 1 - Math.abs(d - r) / 25;
+      if (k > 0) frame[i] = Math.max(frame[i], 255 * k * fade);
+    }
+  }
+}
 let lastSim = performance.now();
 function simulate() {
   const now = performance.now(), dt = now - lastSim, t = animTime();
@@ -265,6 +291,7 @@ function simulate() {
   switch (st.mode) {
     case 'neurons': renderNeurons(dt); break;
     case 'pulse': renderPulseMode(t); break;
+    case 'cortex': renderCortex(dt); break;
     case 'text': renderText(t); break;
     case 'remote': frame.set(painted); break;
     case 'test': renderTest(); return;
@@ -320,13 +347,14 @@ function draw() {
 // Terminal auch die letzte Zeile ausführt.
 let lastCmds = '';
 function updateCommandBox() {
-  const lines = [`speed ${st.speed}`, `bright ${st.bright}`, `tsize ${st.tsize}`, `ty ${st.ty}`,
-    `sync ${$('sync').checked ? 'on' : 'off'}`];
+  // nur, was der aktuelle Modus auch nutzt
+  const lines = [`bright ${st.bright}`];
+  if (st.mode !== 'remote') lines.push(`speed ${st.speed}`);
+  if (st.mode === 'text') lines.push(`tsize ${st.tsize}`, `ty ${st.ty}`, `text ${normalizeText($('text').value)}`);
+  if (st.mode === 'remote') lines.push('frame ' + Array.from(painted, b => b.toString(16).padStart(2, '0')).join(''));
   const name = $('name').value.trim();
   if (name) lines.push(`name ${name}`);
-  if (st.mode === 'text' || $('text').value.trim()) lines.push(`text ${normalizeText($('text').value)}`);
-  if (st.mode === 'remote') lines.push('frame ' + Array.from(painted, b => b.toString(16).padStart(2, '0')).join(''));
-  lines.push(`mode ${st.mode}`);
+  lines.push(`sync ${$('sync').checked ? 'on' : 'off'}`, `mode ${st.mode}`);
   const text = lines.join('\n') + '\n';
   if (text !== lastCmds) { lastCmds = text; $('cmds').value = text; }
 }

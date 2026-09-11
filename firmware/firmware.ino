@@ -10,7 +10,8 @@
 //     über BLE-Advertising. Ein Tastendruck löst eine Welle auf allen aus.
 //
 // Kommandos (Serial 115200 oder BLE RX, eine Zeile pro Kommando):
-//   mode <0-4|neurons|pulse|text|test|remote>   Modus wählen
+//   mode <0-5|neurons|pulse|cortex|text|test|remote>   Modus wählen
+//                      cortex: ein Hirnareal blitzt auf, schwächere Wellen laufen in den Rest
 //                      test: Löt-Test, füllt jede Zeile LED für LED, dann aus, nächste Zeile;
 //                      danach dasselbe mit den Spalten. So läuft jeder GPIO als Kathode und Anode.
 //   text <Text>        Laufschrift setzen (ASCII, Umlaute werden ersetzt)
@@ -45,7 +46,7 @@ constexpr int BUTTON_PIN = 21; // alle drei Taster parallel, aktiv HIGH
 constexpr int STATUS_LED = SOC_GPIO_PIN_COUNT + 10;
 
 // Typen stehen vor der ersten Funktion, weil der Arduino-Präprozessor dort seine Prototypen einfügt.
-enum Mode : uint8_t { NEURONS, PULSE, TEXT, TEST, REMOTE, MODE_COUNT }; // Taster rotiert bis TEST; ab TEST kein Sync, kein Speichern
+enum Mode : uint8_t { NEURONS, PULSE, CORTEX, TEXT, TEST, REMOTE, MODE_COUNT }; // Taster rotiert bis TEST; ab TEST kein Sync, kein Speichern
 
 struct __attribute__((packed)) SyncPacket
 {
@@ -106,7 +107,7 @@ void ARDUINO_ISR_ATTR onScanTick()
 // ---------------------------------------------------------------------------
 // Zustand
 // ---------------------------------------------------------------------------
-const char* const MODE_NAMES[MODE_COUNT] = {"neurons", "pulse", "text", "test", "remote"};
+const char* const MODE_NAMES[MODE_COUNT] = {"neurons", "pulse", "cortex", "text", "test", "remote"};
 
 struct State
 {
@@ -236,6 +237,43 @@ void renderNeurons(uint32_t dt)
     if (random(100) < 20 + st.speed / 2) fb[random(LED_COUNT)] = 255;
 }
 
+// Cortex: ein Hirnareal (siehe AREAS in led_map.h) blitzt flackernd auf, vom Mittelpunkt läuft
+// eine schwächere Welle durch die übrigen Areale.
+void renderCortex(uint32_t dt)
+{
+  static uint32_t nextAt = 0, flashAt = 0;
+  static int area = -1;
+  uint8_t decay = 1 + dt / 8;
+  for (int i = 0; i < LED_COUNT; ++i) fb[i] = fb[i] > decay ? fb[i] - decay : 0;
+  uint32_t now = millis();
+  if (now >= nextAt)
+  {
+    int next;
+    do next = random(AREA_COUNT); while (next == area && AREA_COUNT > 1);
+    area = next;
+    flashAt = now;
+    nextAt = now + 2600 - st.speed * 20;
+  }
+  uint32_t age = now - flashAt;
+  if (age < 450)
+    for (int i = 0; i < LED_COUNT; ++i)
+      if (LEDS[i].area == area && random(2) == 0) fb[i] = 255;
+  float r = ((int32_t)age - 200) * 0.2f;
+  if (r > 0 && age < 2000)
+  {
+    float fade = 0.4f * (1.0f - age / 2000.0f);
+    int ax = AREAS[area].x, ay = AREAS[area].y;
+    for (int i = 0; i < LED_COUNT; ++i)
+    {
+      if (LEDS[i].area == area) continue;
+      float k = 1.0f - fabsf(hypotf(LEDS[i].x - ax, LEDS[i].y - ay) - r) / 25.0f;
+      if (k <= 0) continue;
+      uint8_t v = (uint8_t)(255 * k * fade);
+      if (v > fb[i]) fb[i] = v;
+    }
+  }
+}
+
 void renderPulseMode(uint32_t t)
 {
   static uint32_t nextAt = 0;
@@ -320,6 +358,7 @@ void renderFrame()
   {
     case NEURONS: renderNeurons(dt); break;
     case PULSE: renderPulseMode(t); break;
+    case CORTEX: renderCortex(dt); break;
     case TEXT: renderText(t); break;
     case REMOTE: break; // fb kommt per "frame"-Kommando
     case TEST: renderTest(); break;

@@ -85,12 +85,12 @@ Bluetooth verbinden und steuern. Keine Installation nötig, Chrome oder Edge am 
 Bibliothek NimBLE-Arduino 2.x) oder mit PlatformIO im Repo-Root: `pio run -t upload`.
 
 - `firmware/led_map.h` wird von `tools/gen_led_map.py` aus `pcb/pcb.kicad_pcb` erzeugt
-  (Pin-Paar und Position jeder LED). Nach Layoutänderungen neu ausführen, das Skript
-  schreibt auch `web/led_map.js`.
+  (Pin-Paar, Position und Hirnareal jeder LED, die Areale aus den Beschriftungen auf
+  Cmts.User). Nach Layoutänderungen neu ausführen, das Skript schreibt auch `web/led_map.js`.
 - Ein Timer-Interrupt scannt die Charlieplex-Matrix mit 4 Bit Helligkeit, `loop()`
   rendert Animationen in einen Framebuffer.
 - Taster: kurz drücken löst eine Welle aus (auch auf Badges in Reichweite), lang drücken
-  wechselt den Modus (Neuronen, Wellen, Laufschrift, Löt-Test). Im Löt-Test startet kurz
+  wechselt den Modus (Neuronen, Wellen, Cortex, Laufschrift, Löt-Test). Im Löt-Test startet kurz
   drücken den Durchlauf von vorne. Alle drei Taster liegen auf demselben Eingang.
 - Sync: Badges senden Modus, Tempo, Helligkeit, Schriftlayout und Phase per BLE-Advertising.
   Die höchste Änderungsgeneration gewinnt, bei Gleichstand die kleinere ID. Kein
@@ -104,6 +104,7 @@ Bibliothek NimBLE-Arduino 2.x) oder mit PlatformIO im Repo-Root: `pio run -t upl
 | --- | --- | --- |
 | Neuronen | `mode neurons` | zufällige Blitze, die ausklingen (Standard) |
 | Wellen | `mode pulse` | Ringe laufen von einem zufälligen Punkt nach außen |
+| Cortex | `mode cortex` | ein Hirnareal (Frontal-, Parietal-, Temporal-, Okzipitallappen, Kleinhirn, Stammhirn, aus den Beschriftungen im PCB) blitzt auf, schwächere Wellen laufen von dort in den Rest |
 | Laufschrift | `mode text` | Text läuft durch, Größe und Abstand oben einstellbar |
 | Löt-Test | `mode test` | füllt jede Zeile LED für LED, dann dunkel, nächste Zeile; danach dasselbe spaltenweise. Jede neue LED wird gemeldet. Fehlt eine LED, ist es die Lötstelle; fehlt eine Zeile oder Spalte, der GPIO oder sein 10-Ω-Widerstand. Wird nicht synchronisiert und nicht gespeichert. |
 | Malen | `mode remote` | zeigt ein Rohbild, das per `frame` gesendet wurde (Web-Seite: LEDs antippen) |
@@ -117,7 +118,7 @@ Eine Zeile pro Kommando, Antwort beginnt mit `ok` oder `err`.
 
 | Kommando | Bedeutung |
 | --- | --- |
-| `mode <name>` oder `mode <0-4>` | Modus wählen: `neurons`, `pulse`, `text`, `test`, `remote` |
+| `mode <name>` oder `mode <0-5>` | Modus wählen: `neurons`, `pulse`, `cortex`, `text`, `test`, `remote` |
 | `text <Text>` | Laufschrift setzen, max. 63 Zeichen, Umlaute werden ersetzt, schaltet auf Laufschrift |
 | `tsize <1-5>` | Schriftgröße (Leinwand-Pixel pro Font-Pixel), Standard 3 |
 | `ty <0-30>` | Abstand der Schrift vom oberen Rand, Standard 6 |
