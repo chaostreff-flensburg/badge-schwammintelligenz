@@ -10,8 +10,10 @@
 //     über BLE-Advertising. Ein Tastendruck löst eine Welle auf allen aus.
 //
 // Kommandos (Serial 115200 oder BLE RX, eine Zeile pro Kommando):
-//   mode <0-5|neurons|pulse|cortex|text|test|remote>   Modus wählen
+//   mode <0-6|neurons|pulse|cortex|radar|text|test|remote>   Modus wählen
 //                      cortex: ein Hirnareal blitzt auf, schwächere Wellen laufen in den Rest
+//                      radar: Suchmodus, Radarstrahl kreist, je Badge in Reichweite ein Herzschlag-Ring,
+//                             schneller und heller je näher (Signalstärke der Werbepakete)
 //                      test: Löt-Test, füllt jede Zeile LED für LED, dann aus, nächste Zeile;
 //                      danach dasselbe mit den Spalten. So läuft jeder GPIO als Kathode und Anode.
 //   text <Text>        Laufschrift setzen (ASCII, Umlaute werden ersetzt)
@@ -25,6 +27,7 @@
 //   sync <on|off>      Sync mit anderen Badges
 //   mirror <on|off>    Framebuffer als "F<hex>" per BLE-Notify streamen (~10 Hz)
 //   status             Zustand ausgeben
+//   peers              Badges in Reichweite mit Signalstärke auflisten
 
 #include <Arduino.h>
 #include <NimBLEDevice.h>
@@ -46,7 +49,7 @@ constexpr int BUTTON_PIN = 21; // alle drei Taster parallel, aktiv HIGH
 constexpr int STATUS_LED = SOC_GPIO_PIN_COUNT + 10;
 
 // Typen stehen vor der ersten Funktion, weil der Arduino-Präprozessor dort seine Prototypen einfügt.
-enum Mode : uint8_t { NEURONS, PULSE, CORTEX, TEXT, TEST, REMOTE, MODE_COUNT }; // Taster rotiert bis TEST; ab TEST kein Sync, kein Speichern
+enum Mode : uint8_t { NEURONS, PULSE, CORTEX, RADAR, TEXT, TEST, REMOTE, MODE_COUNT }; // Taster rotiert bis TEST; ab TEST kein Sync, kein Speichern
 
 struct __attribute__((packed)) SyncPacket
 {
@@ -60,6 +63,14 @@ struct __attribute__((packed)) SyncPacket
   uint8_t pulseSeq, pulseOrigin;
   uint8_t textScale, textY;
 };
+
+// Badges in Reichweite, gesehen über ihre Sync-Pakete
+struct Peer { uint16_t id; uint8_t pulseSeq; uint32_t lastSeen; int8_t rssi; };
+Peer peers[16];
+constexpr uint32_t PEER_TIMEOUT_MS = 10000;
+inline bool peerActive(const Peer& p) { return p.id && millis() - p.lastSeen < PEER_TIMEOUT_MS; }
+// Nähe 0..1 aus der Signalstärke. Gemessen: nebeneinander auf dem Tisch -75 dBm, anderer Raum -97 dBm.
+float peerNearness(const Peer& p) { return constrain((p.rssi + 95) / 30.0f, 0.0f, 1.0f); }
 
 constexpr bool pinInMatrix(int gpio)
 {
@@ -107,7 +118,7 @@ void ARDUINO_ISR_ATTR onScanTick()
 // ---------------------------------------------------------------------------
 // Zustand
 // ---------------------------------------------------------------------------
-const char* const MODE_NAMES[MODE_COUNT] = {"neurons", "pulse", "cortex", "text", "test", "remote"};
+const char* const MODE_NAMES[MODE_COUNT] = {"neurons", "pulse", "cortex", "radar", "text", "test", "remote"};
 
 struct State
 {
@@ -274,6 +285,63 @@ void renderCortex(uint32_t dt)
   }
 }
 
+// Suche: Radarstrahl kreist um die Mitte, je Badge in Reichweite ein Herzschlag-Ring von innen
+// nach außen, schneller und heller je näher. Gleiche Parameter wie die Web-Simulation.
+void renderRadar(uint32_t t, uint32_t dt)
+{
+  constexpr int CX = 132, CY = 118;
+  static float angle[LED_COUNT], dist[LED_COUNT];
+  static bool prepared = false;
+  if (!prepared)
+  {
+    for (int i = 0; i < LED_COUNT; ++i)
+    {
+      angle[i] = atan2f(LEDS[i].y - CY, LEDS[i].x - CX);
+      dist[i] = hypotf(LEDS[i].x - CX, LEDS[i].y - CY);
+    }
+    prepared = true;
+  }
+  uint8_t decay = 3 + dt / 4;
+  for (int i = 0; i < LED_COUNT; ++i) fb[i] = fb[i] > decay ? fb[i] - decay : 0;
+
+  int nodes = 0;
+  float maxNear = 0;
+  for (Peer& p : peers)
+    if (peerActive(p))
+    {
+      ++nodes;
+      maxNear = max(maxNear, peerNearness(p));
+    }
+
+  float sweep = fmodf(t * (0.0012f + maxNear * 0.0025f), 2 * PI) - PI;
+  for (int i = 0; i < LED_COUNT; ++i)
+  {
+    float d = fabsf(angle[i] - sweep);
+    if (d > PI) d = 2 * PI - d;
+    float k = 1.0f - d / 0.35f;
+    if (k > 0) fb[i] = max(fb[i], (uint8_t)(90 * k));
+  }
+
+  int n = 0;
+  for (Peer& p : peers)
+  {
+    if (!peerActive(p)) continue;
+    float near = peerNearness(p);
+    uint32_t period = 2200 - near * 1700;
+    float amp = 0.35f + 0.65f * near;
+    uint32_t age = (t + n++ * period / nodes) % period;
+    if (age > period * 0.8f) continue;
+    float r = age * 0.28f;
+    for (int i = 0; i < LED_COUNT; ++i)
+    {
+      float k = 1.0f - fabsf(dist[i] - r) / 22.0f;
+      if (k <= 0) continue;
+      uint8_t v = (uint8_t)(255 * k * amp * (1.0f - (float)age / period));
+      if (v > fb[i]) fb[i] = v;
+    }
+  }
+}
+
 void renderPulseMode(uint32_t t)
 {
   static uint32_t nextAt = 0;
@@ -359,6 +427,7 @@ void renderFrame()
     case NEURONS: renderNeurons(dt); break;
     case PULSE: renderPulseMode(t); break;
     case CORTEX: renderCortex(dt); break;
+    case RADAR: renderRadar(t, dt); break;
     case TEXT: renderText(t); break;
     case REMOTE: break; // fb kommt per "frame"-Kommando
     case TEST: renderTest(); break;
@@ -373,8 +442,6 @@ void renderFrame()
 // Sync über BLE-Advertising (Manufacturer Data)
 // ---------------------------------------------------------------------------
 
-struct Peer { uint16_t id; uint8_t pulseSeq; uint32_t lastSeen; };
-Peer peers[16];
 
 NimBLECharacteristic* txChar = nullptr;
 NimBLEAdvertising* adv = nullptr;
@@ -396,14 +463,17 @@ void updateAdvert()
   advertDirty = false;
 }
 
+
 int peerCount()
 {
   int n = 0;
-  for (Peer& p : peers) if (p.id && millis() - p.lastSeen < 10000) ++n;
+  for (Peer& p : peers) if (peerActive(p)) ++n;
   return n;
 }
 
-void onSyncPacket(const SyncPacket& p)
+
+
+void onSyncPacket(const SyncPacket& p, int rssi)
 {
   Peer* peer = nullptr;
   Peer* slot = nullptr;
@@ -415,7 +485,8 @@ void onSyncPacket(const SyncPacket& p)
   bool known = peer != nullptr;
   if (!peer) peer = slot ? slot : &peers[0];
   if (known && peer->pulseSeq != p.pulseSeq) triggerWave(p.pulseOrigin < LED_COUNT ? p.pulseOrigin : 0);
-  *peer = {p.id, p.pulseSeq, millis()};
+  int8_t smoothed = known && peerActive(*peer) ? (peer->rssi * 3 + rssi) / 4 : rssi; // RSSI schwankt stark
+  *peer = {p.id, p.pulseSeq, millis(), smoothed};
 
   if (!st.syncEnabled || p.mode >= TEST || st.mode >= TEST) return;
   bool newer = p.generation > generation || (p.generation == generation && p.id < myId);
@@ -446,7 +517,7 @@ class ScanCallbacks : public NimBLEScanCallbacks
     SyncPacket p;
     memcpy(&p, d.data(), sizeof(p));
     if (p.company[0] != 0xFF || p.company[1] != 0xFF || p.magic[0] != 'S' || p.magic[1] != 'H' || p.id == myId) return;
-    onSyncPacket(p);
+    onSyncPacket(p, dev->getRSSI());
   }
 } scanCallbacks;
 
@@ -598,6 +669,13 @@ void handleCommand(String line)
     st.mirror = arg != "off" && arg != "0";
     reply(String("ok mirror ") + (st.mirror ? "on" : "off"));
   }
+  else if (cmd == "peers")
+  {
+    for (Peer& p : peers)
+      if (peerActive(p))
+        reply(String("peer id=") + String(p.id, HEX) + " rssi=" + p.rssi + " near=" + (int)(peerNearness(p) * 100) + "% age=" + (millis() - p.lastSeen) + "ms");
+    reply(String("peers=") + peerCount());
+  }
   else if (cmd == "status")
   {
     reply(String("mode=") + MODE_NAMES[st.mode] + " speed=" + st.speed + " bright=" + st.brightness + " tsize=" + st.textScale +
@@ -727,7 +805,7 @@ void setupBle()
   scan->setDuplicateFilter(0);
   scan->setMaxResults(0);
   scan->setInterval(100);
-  scan->setWindow(40);
+  scan->setWindow(90); // fast dauernd lauschen, sonst gehen viele Werbepakete der Nachbarn verloren
   scan->start(0);
 }
 
