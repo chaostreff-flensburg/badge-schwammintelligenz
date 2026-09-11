@@ -90,7 +90,7 @@ Bibliothek NimBLE-Arduino 2.x) oder mit PlatformIO im Repo-Root: `pio run -t upl
 - Ein Timer-Interrupt scannt die Charlieplex-Matrix mit 4 Bit Helligkeit, `loop()`
   rendert Animationen in einen Framebuffer.
 - Taster: kurz drücken löst eine Welle aus (auch auf Badges in Reichweite), lang drücken
-  wechselt den Modus (Neuronen, Wellen, Cortex, Laufschrift, Löt-Test). Im Löt-Test startet kurz
+  wechselt den Modus (Neuronen, Wellen, Cortex, Suche, Laufschrift, Löt-Test). Im Löt-Test startet kurz
   drücken den Durchlauf von vorne. Alle drei Taster liegen auf demselben Eingang.
 - Sync: Badges senden Modus, Tempo, Helligkeit, Schriftlayout und Phase per BLE-Advertising.
   Die höchste Änderungsgeneration gewinnt, bei Gleichstand die kleinere ID. Kein
@@ -104,6 +104,7 @@ Bibliothek NimBLE-Arduino 2.x) oder mit PlatformIO im Repo-Root: `pio run -t upl
 | --- | --- | --- |
 | Neuronen | `mode neurons` | zufällige Blitze, die ausklingen (Standard) |
 | Wellen | `mode pulse` | Ringe laufen von einem zufälligen Punkt nach außen |
+| Suche | `mode radar` | Radarstrahl kreist um die Mitte. Je Badge in Reichweite ein Herzschlag-Ring von innen nach außen, schneller und heller je näher (Signalstärke der Werbepakete, −95 dBm weit bis −65 dBm direkt daneben) |
 | Cortex | `mode cortex` | ein Hirnareal (Frontal-, Parietal-, Temporal-, Okzipitallappen, Kleinhirn, Stammhirn, aus den Beschriftungen im PCB) blitzt auf, schwächere Wellen laufen von dort in den Rest |
 | Laufschrift | `mode text` | Text läuft durch, Größe und Abstand oben einstellbar |
 | Löt-Test | `mode test` | füllt jede Zeile LED für LED, dann dunkel, nächste Zeile; danach dasselbe spaltenweise. Jede neue LED wird gemeldet. Fehlt eine LED, ist es die Lötstelle; fehlt eine Zeile oder Spalte, der GPIO oder sein 10-Ω-Widerstand. Wird nicht synchronisiert und nicht gespeichert. |
@@ -118,7 +119,7 @@ Eine Zeile pro Kommando, Antwort beginnt mit `ok` oder `err`.
 
 | Kommando | Bedeutung |
 | --- | --- |
-| `mode <name>` oder `mode <0-5>` | Modus wählen: `neurons`, `pulse`, `cortex`, `text`, `test`, `remote` |
+| `mode <name>` oder `mode <0-6>` | Modus wählen: `neurons`, `pulse`, `cortex`, `radar`, `text`, `test`, `remote` |
 | `text <Text>` | Laufschrift setzen, max. 63 Zeichen, Umlaute werden ersetzt, schaltet auf Laufschrift |
 | `tsize <1-5>` | Schriftgröße (Leinwand-Pixel pro Font-Pixel), Standard 3 |
 | `ty <0-30>` | Abstand der Schrift vom oberen Rand, Standard 6 |
@@ -129,6 +130,7 @@ Eine Zeile pro Kommando, Antwort beginnt mit `ok` oder `err`.
 | `name <Name>` | BLE-Anzeigename, max. 20 Zeichen, leer = Standard `Schwammhirn-<ID>` |
 | `sync on` / `sync off` | Einstellungen von Badges in der Nähe übernehmen oder ignorieren |
 | `mirror on` / `mirror off` | Framebuffer etwa 10-mal pro Sekunde als `F<220 Hex>` per BLE-Notify streamen (Live-Bild der Web-Seite) |
+| `peers` | Badges in Reichweite mit ID, Signalstärke, Nähe und Alter des letzten Pakets auflisten |
 | `status` | Zustand ausgeben: Modus, Tempo, Helligkeit, Schriftlayout, Text, Sync, Generation, ID, Badges in Reichweite, Name |
 
 Modus, Tempo, Helligkeit, Text, Schriftlayout und Name bleiben über Neustarts erhalten.

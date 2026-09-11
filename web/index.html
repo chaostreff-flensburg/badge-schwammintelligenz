@@ -63,6 +63,7 @@
     <button data-mode="neurons">Neuronen</button>
     <button data-mode="pulse">Wellen</button>
     <button data-mode="cortex">Cortex</button>
+    <button data-mode="radar">Suche</button>
     <button data-mode="text">Laufschrift</button>
     <button data-mode="remote">Malen</button>
     <button data-mode="test">Löt-Test</button>
@@ -74,6 +75,8 @@
     <input type="text" id="text" maxlength="63" placeholder="Laufschrift…" value="SCHWAMMHIRN">
     <button id="sendText">Senden</button>
   </div>
+  <label data-modes="radar"><span>Nodes (Simulation)</span><input type="range" id="simNodes" min="0" max="4" value="0"><span class="val" id="simNodesVal">0</span></label>
+  <label data-modes="radar"><span>Nähe (Simulation)</span><input type="range" id="simNear" min="0" max="100" value="30"><span class="val" id="simNearVal">30</span></label>
   <label data-modes="neurons pulse cortex text test"><span>Tempo</span><input type="range" id="speed" min="0" max="100" value="4"><span class="val" id="speedVal">4</span></label>
   <label><span>Helligkeit</span><input type="range" id="bright" min="1" max="15" value="15"><span class="val" id="brightVal">15</span></label>
   <label data-modes="text"><span>Schriftgröße</span><input type="range" id="tsize" min="1" max="5" value="3"><span class="val" id="tsizeVal">3</span></label>
@@ -284,6 +287,34 @@ function renderCortex(dt) {
     }
   }
 }
+// Suche: Radarstrahl kreist um die Mitte (Suchen), je Node ein Herzschlag-Ring von innen nach
+// außen, schneller und heller mit der Nähe. Im Web kommen Nodes und Nähe aus den Reglern,
+// auf dem Badge aus der Signalstärke der Werbepakete.
+const CENTER = { x: 132, y: 118 };
+const ledAngle = LED_XY.map(([x, y]) => Math.atan2(y - CENTER.y, x - CENTER.x));
+const ledDist = LED_XY.map(([x, y]) => Math.hypot(x - CENTER.x, y - CENTER.y));
+function renderRadar(t, dt) {
+  const nodes = +$('simNodes').value, near = $('simNear').value / 100;
+  const decay = 3 + (dt >> 2);
+  for (let i = 0; i < N; i++) frame[i] = frame[i] > decay ? frame[i] - decay : 0;
+  const sweep = (t * (0.0012 + near * 0.0025)) % (2 * Math.PI) - Math.PI;
+  for (let i = 0; i < N; i++) {
+    let d = Math.abs(ledAngle[i] - sweep); if (d > Math.PI) d = 2 * Math.PI - d;
+    const k = 1 - d / 0.35;
+    if (k > 0) frame[i] = Math.max(frame[i], 90 * k);
+  }
+  const period = 2200 - near * 1700, amp = 0.35 + 0.65 * near;
+  for (let n = 0; n < nodes; n++) {
+    const age = (t + n * period / nodes) % period, r = age * 0.28;
+    if (age > period * 0.8) continue;
+    for (let i = 0; i < N; i++) {
+      const k = 1 - Math.abs(ledDist[i] - r) / 22;
+      if (k > 0) frame[i] = Math.max(frame[i], 255 * k * amp * (1 - age / period));
+    }
+  }
+  const hint = nodes ? `Suche: ${nodes} Badge(s), Nähe ${Math.round(near * 100)} %` : 'Suche: kein Badge in Reichweite';
+  if ($('canvasHint').textContent !== hint) $('canvasHint').textContent = hint;
+}
 let lastSim = performance.now();
 function simulate() {
   const now = performance.now(), dt = now - lastSim, t = animTime();
@@ -292,6 +323,7 @@ function simulate() {
     case 'neurons': renderNeurons(dt); break;
     case 'pulse': renderPulseMode(t); break;
     case 'cortex': renderCortex(dt); break;
+    case 'radar': renderRadar(t, dt); break;
     case 'text': renderText(t); break;
     case 'remote': frame.set(painted); break;
     case 'test': renderTest(); return;
@@ -486,6 +518,7 @@ $('text').addEventListener('keydown', e => { if (e.key === 'Enter') $('sendText'
 $('text').addEventListener('input', () => { if (!connected) { st.text = normalizeText($('text').value); if (st.mode !== 'text') applyMode('text'); } });
 for (const b of $('modes').children) b.onclick = () => { applyMode(b.dataset.mode); send('mode ' + b.dataset.mode); if (b.dataset.mode === 'remote') sendFrame(); };
 const sliderTimer = {};
+for (const id of ['simNodes', 'simNear']) $(id).oninput = () => $(id + 'Val').textContent = $(id).value;
 for (const id of ['speed', 'bright', 'tsize', 'ty']) {
   $(id).oninput = () => {
     st[id] = +$(id).value;
