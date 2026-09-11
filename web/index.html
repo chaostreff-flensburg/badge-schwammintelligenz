@@ -364,7 +364,7 @@ $('clear').onclick = () => { painted.fill(0); sendFrame(); };
 $('invert').onclick = () => { painted = painted.map(v => 255 - v); sendFrame(); };
 
 $('connect').onclick = () => device?.gatt.connected ? device.gatt.disconnect() : connect();
-$('pulse').onclick = () => { const o = (Math.random() * N) | 0; triggerWave(o); send('pulse ' + o); };
+$('pulse').onclick = () => { if (st.mode === 'test') { lastTestStep = -1; send('pulse'); return; } const o = (Math.random() * N) | 0; triggerWave(o); send('pulse ' + o); };
 $('status').onclick = () => send('status');
 $('sendText').onclick = () => { st.text = normalizeText($('text').value); $('text').value = st.text; applyMode('text'); send('text ' + st.text); };
 $('text').addEventListener('keydown', e => { if (e.key === 'Enter') $('sendText').click(); });

@@ -19,7 +19,7 @@
 //   ty <0-30>          Abstand der Laufschrift vom oberen Rand in Leinwand-Pixeln
 //   speed <0-100>      Tempo
 //   bright <1-15>      Helligkeit
-//   pulse              Welle auslösen (auch auf Badges in Reichweite)
+//   pulse              Welle auslösen (auch auf Badges in Reichweite); im Löt-Test: Test neu starten
 //   frame <220 Hex>    Rohbild, ein Byte pro LED, schaltet auf Modus remote
 //   sync <on|off>      Sync mit anderen Badges
 //   mirror <on|off>    Framebuffer als "F<hex>" per BLE-Notify streamen (~10 Hz)
@@ -525,6 +525,12 @@ void handleCommand(String line)
   }
   else if (cmd == "pulse")
   {
+    if (st.mode == TEST) // im Löt-Test startet ein Puls (Taster kurz, Web-Button) den Durchlauf neu
+    {
+      testLast = -1;
+      reply("ok test restart");
+      return;
+    }
     pulseOrigin = arg.length() ? constrain(arg.toInt(), 0, LED_COUNT - 1) : random(LED_COUNT);
     ++pulseSeq;
     advertDirty = true;

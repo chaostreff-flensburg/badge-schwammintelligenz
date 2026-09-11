@@ -86,7 +86,8 @@ PlatformIO im Repo-Root: `pio run -t upload`.
   Löt-Test (`mode test`: eine LED nach der anderen in Zeilen/Spalten-Reihenfolge, jede wird per
   Serial und BLE mit Zeile, Spalte und GPIO-Paar gemeldet; eine fehlende LED zeigt die Lötstelle).
 - Taster: kurz drücken löst eine Welle aus (auch auf Badges in Reichweite), lang drücken
-  wechselt den Modus (Neuronen, Wellen, Laufschrift, Löt-Test). Alle drei Taster liegen auf demselben Eingang.
+  wechselt den Modus (Neuronen, Wellen, Laufschrift, Löt-Test). Im Löt-Test startet kurz
+  drücken den Durchlauf von vorne. Alle drei Taster liegen auf demselben Eingang.
 - Sync: Badges senden Modus, Tempo, Helligkeit und Phase per BLE-Advertising. Die höchste
   Änderungsgeneration gewinnt, bei Gleichstand die kleinere ID. Kein Verbindungsaufbau nötig.
 - BLE-Anzeigename ist standardmäßig `Schwammhirn-<ID>` aus der Bluetooth-MAC, per Kommando
