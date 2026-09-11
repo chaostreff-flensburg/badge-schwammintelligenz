@@ -81,6 +81,7 @@ def main():
     leds = []
     edge = []
     segs, curves, holes = [], [], []
+    areas = []  # Hirnareale: Beschriftungen auf Cmts.User, LEDs werden dem nächsten zugeordnet
     for e in pcb:
         if is_node(e, "footprint"):
             ref = next(p[2] for p in e if is_node(p, "property") and p[1] == "Reference")
@@ -91,6 +92,9 @@ def main():
             row = int(pads["1"].removeprefix("/Row"))  # Pad 1 = Kathode
             col = int(pads["2"].removeprefix("/Col"))  # Pad 2 = Anode
             leds.append((ref, int(ref[1:]), col, row, float(at[1]), float(at[2])))
+        elif e[0] == "gr_text" and any(is_node(p, "layer") and p[1] == "Cmts.User" for p in e):
+            at = child(e, "at")
+            areas.append((e[1].replace("-\\n", "").replace("\\n", " ").replace("\n", " "), float(at[1]), float(at[2])))
         elif e[0] in ("gr_line", "gr_arc", "gr_curve", "gr_poly", "gr_circle") and any(
             is_node(p, "layer") and p[1] == "Edge.Cuts" for p in e
         ):
@@ -113,15 +117,21 @@ def main():
     assert len({(l[2], l[3]) for l in leds}) == 110, "Col/Row-Paare nicht eindeutig"
     assert all(l[2] != l[3] for l in leds), "Col == Row"
 
+    areas.sort(key=lambda a: a[1])
+    assert areas, "keine Areal-Beschriftungen auf Cmts.User"
+    nearest = lambda x, y: min(range(len(areas)), key=lambda i: (areas[i][1] - x) ** 2 + (areas[i][2] - y) ** 2)
+    led_area = [nearest(x, y) for _, _, _, _, x, y in leds]
+
     x0, x1 = min(x for x, _ in edge), max(x for x, _ in edge)
     y0, y1 = min(y for _, y in edge), max(y for _, y in edge)
     w, h = x1 - x0, y1 - y0
     norm = lambda v, lo, span: round((v - lo) / span * 255)
 
     rows_h = "".join(
-        f"  {{{col:2d}, {row:2d}, {norm(x, x0, w):3d}, {norm(y, y0, h):3d}}}, // {ref}\n"
-        for ref, _, col, row, x, y in leds
+        f"  {{{col:2d}, {row:2d}, {norm(x, x0, w):3d}, {norm(y, y0, h):3d}, {led_area[i]}}}, // {ref}\n"
+        for i, (ref, _, col, row, x, y) in enumerate(leds)
     )
+    areas_h = "".join(f"  {{{norm(x, x0, w):3d}, {norm(y, y0, h):3d}}}, // {name}\n" for name, x, y in areas)
     (ROOT / "firmware" / "led_map.h").write_text(
         "// Generiert von tools/gen_led_map.py aus pcb/pcb.kicad_pcb. Nicht von Hand ändern.\n"
         "#pragma once\n#include <stdint.h>\n\n"
@@ -133,8 +143,12 @@ def main():
         "  uint8_t row; // Pin-Index der Kathode (LOW zum Leuchten)\n"
         "  uint8_t x;   // Position 0..255 über die Platinenbreite\n"
         "  uint8_t y;   // Position 0..255 über die Platinenhöhe (0 = oben)\n"
+        "  uint8_t area; // Hirnareal, Index in AREAS\n"
         "};\n\n"
-        f"constexpr Led LEDS[LED_COUNT] = {{\n{rows_h}}};\n"
+        f"constexpr Led LEDS[LED_COUNT] = {{\n{rows_h}}};\n\n"
+        f"constexpr int AREA_COUNT = {len(areas)};\n"
+        "struct Area { uint8_t x, y; }; // Mittelpunkt, gleiche Normierung wie Led\n"
+        f"constexpr Area AREAS[AREA_COUNT] = {{\n{areas_h}}};\n"
     )
 
     for c in curves:  # kubische Bezier-Kurven als 8 Liniensegmente
@@ -152,19 +166,26 @@ def main():
         f"  [{norm(x, x0, w)}, {norm(y, y0, h)}]" for _, _, _, _, x, y in leds
     )
     rc_js = ",".join(f"[{row},{col}]" for _, _, col, row, _, _ in leds)
+    areas_js = ",\n".join(f'  {{ name: "{name}", x: {norm(x, x0, w)}, y: {norm(y, y0, h)} }}' for name, x, y in areas)
     (ROOT / "web" / "led_map.js").write_text(
         "// Generiert von tools/gen_led_map.py aus pcb/pcb.kicad_pcb. Nicht von Hand ändern.\n"
         f"const BOARD_ASPECT = {w / h:.4f};\n"
         f"const LED_XY = [\n{rows_js}\n];\n"
         f"// [Zeile, Spalte] je LED, gleiche Reihenfolge wie LED_XY\n"
         f"const LED_RC = [{rc_js}];\n"
+        f"// Hirnareale (Beschriftungen auf Cmts.User) und Areal-Index je LED\n"
+        f"const AREAS = [\n{areas_js}\n];\n"
+        f"const LED_AREA = [{','.join(map(str, led_area))}];\n"
         f"// Platinenkontur als Polylinien [x0,y0,x1,y1,...], gleiche Normierung wie LED_XY\n"
         f"const BOARD_OUTLINE = [\n{outline_js}\n];\n"
         f"const BOARD_HOLES = [{holes_js}];\n"
         f"// 5x7-Zeichensatz aus firmware/font5x7.h, ASCII 32..90, ein Byte pro Spalte\n"
         f"const FONT5X7 = {font_js};\n"
     )
+    from collections import Counter
+    counts = Counter(led_area)
     print(f"{len(leds)} LEDs, Platine {w:.1f} x {h:.1f} mm, Kontur {len(outline)} Polylinien, {len(holes)} Bohrungen")
+    print("Areale: " + ", ".join(f"{name} {counts[i]}" for i, (name, _, _) in enumerate(areas)))
 
 
 if __name__ == "__main__":
