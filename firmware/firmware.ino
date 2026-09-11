@@ -10,7 +10,8 @@
 //     über BLE-Advertising. Ein Tastendruck löst eine Welle auf allen aus.
 //
 // Kommandos (Serial 115200 oder BLE RX, eine Zeile pro Kommando):
-//   mode <0-3|neurons|pulse|text|remote>   Modus wählen
+//   mode <0-4|neurons|pulse|text|remote|test>   Modus wählen
+//                      test: Löt-Test, eine LED nach der anderen in Zeilen/Spalten-Reihenfolge
 //   text <Text>        Laufschrift setzen (ASCII, Umlaute werden ersetzt)
 //   tsize <1-5>        Schriftgröße der Laufschrift (Leinwand-Pixel pro Font-Pixel)
 //   ty <0-30>          Abstand der Laufschrift vom oberen Rand in Leinwand-Pixeln
@@ -42,7 +43,7 @@ constexpr int BUTTON_PIN = 21; // alle drei Taster parallel, aktiv HIGH
 constexpr int STATUS_LED = SOC_GPIO_PIN_COUNT + 10;
 
 // Typen stehen vor der ersten Funktion, weil der Arduino-Präprozessor dort seine Prototypen einfügt.
-enum Mode : uint8_t { NEURONS, PULSE, TEXT, REMOTE, MODE_COUNT };
+enum Mode : uint8_t { NEURONS, PULSE, TEXT, REMOTE, TEST, MODE_COUNT }; // ab REMOTE nur per Kommando, nicht per Taster oder Sync
 
 struct __attribute__((packed)) SyncPacket
 {
@@ -103,12 +104,12 @@ void ARDUINO_ISR_ATTR onScanTick()
 // ---------------------------------------------------------------------------
 // Zustand
 // ---------------------------------------------------------------------------
-const char* const MODE_NAMES[MODE_COUNT] = {"neurons", "pulse", "text", "remote"};
+const char* const MODE_NAMES[MODE_COUNT] = {"neurons", "pulse", "text", "remote", "test"};
 
 struct State
 {
   Mode mode = NEURONS;
-  uint8_t speed = 50;     // 0..100
+  uint8_t speed = 4;      // 0..100
   uint8_t brightness = 15; // 1..15
   char text[64] = "SCHWAMMHIRN";
   uint8_t textScale = 3;  // 1..5
@@ -270,6 +271,36 @@ void renderText(uint32_t t)
   sampleCanvas(SCALE >= 3 ? 0 : 1); // breite Striche ohne Nachbarschaft, sonst bleiben Buchstaben Blobs
 }
 
+// Löt-Test: genau eine LED, Zeile für Zeile, darin Spalte für Spalte. Meldet jeden Schritt.
+int testLast = -1; // -1 = Test nicht aktiv, sonst zuletzt gemeldeter Schritt
+void renderTest()
+{
+  static uint8_t order[LED_COUNT];
+  static bool ordered = false;
+  if (!ordered)
+  {
+    int n = 0;
+    for (int r = 0; r < PIN_COUNT; ++r)
+      for (int c = 0; c < PIN_COUNT; ++c)
+        for (int i = 0; i < LED_COUNT; ++i)
+          if (LEDS[i].row == r && LEDS[i].col == c) order[n++] = i;
+    ordered = true;
+  }
+  static uint32_t startedAt = 0;
+  if (testLast < 0) startedAt = millis(); // Durchlauf beginnt beim Einschalten des Modus vorne
+  uint32_t stepMs = 1500 - st.speed * 13;
+  int step = ((millis() - startedAt) / stepMs) % LED_COUNT;
+  memset(fb, 0, sizeof(fb));
+  int led = order[step];
+  fb[led] = 255;
+  if (step != testLast)
+  {
+    testLast = step;
+    reply(String("test D") + (led + 1) + " row" + LEDS[led].row + " col" + LEDS[led].col + " (GPIO" + MATRIX_PINS[LEDS[led].row] +
+          " low, GPIO" + MATRIX_PINS[LEDS[led].col] + " high)");
+  }
+}
+
 void renderFrame()
 {
   static uint32_t last = 0;
@@ -282,9 +313,11 @@ void renderFrame()
     case PULSE: renderPulseMode(t); break;
     case TEXT: renderText(t); break;
     case REMOTE: break; // fb kommt per "frame"-Kommando
+    case TEST: renderTest(); break;
     default: break;
   }
-  renderWaves();
+  if (st.mode != TEST) testLast = -1;
+  if (st.mode != TEST) renderWaves();
   show();
 }
 
@@ -336,7 +369,7 @@ void onSyncPacket(const SyncPacket& p)
   if (known && peer->pulseSeq != p.pulseSeq) triggerWave(p.pulseOrigin < LED_COUNT ? p.pulseOrigin : 0);
   *peer = {p.id, p.pulseSeq, millis()};
 
-  if (!st.syncEnabled || p.mode == REMOTE || st.mode == REMOTE) return;
+  if (!st.syncEnabled || p.mode >= REMOTE || st.mode >= REMOTE) return;
   bool newer = p.generation > generation || (p.generation == generation && p.id < myId);
   if (!newer) return;
   int16_t drift = (int16_t)(p.phase - (uint16_t)animTime());
@@ -569,7 +602,7 @@ void loadSettings()
   prefs.begin("hirn");
   st.mode = (Mode)prefs.getUChar("mode", NEURONS);
   if (st.mode >= REMOTE) st.mode = NEURONS;
-  st.speed = prefs.getUChar("speed", 50);
+  st.speed = prefs.getUChar("speed", 4);
   st.brightness = constrain(prefs.getUChar("bright", 15), 1, 15);
   prefs.getString("text", st.text, sizeof(st.text));
   st.textScale = constrain(prefs.getUChar("tsize", 3), 1, 5);
@@ -580,7 +613,7 @@ void saveSettingsIfDue()
 {
   if (!dirtySince || millis() - dirtySince < 2000) return;
   dirtySince = 0;
-  prefs.putUChar("mode", st.mode == REMOTE ? NEURONS : st.mode);
+  prefs.putUChar("mode", st.mode >= REMOTE ? NEURONS : st.mode);
   prefs.putUChar("speed", st.speed);
   prefs.putUChar("bright", st.brightness);
   prefs.putString("text", st.text);

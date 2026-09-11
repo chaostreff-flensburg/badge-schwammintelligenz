@@ -82,7 +82,9 @@ PlatformIO im Repo-Root: `pio run -t upload`.
   (Pin-Paar und Position jeder LED). Nach Layoutänderungen neu ausführen, das Skript
   schreibt auch `web/led_map.js`.
 - Ein Timer-Interrupt scannt die Charlieplex-Matrix mit 4 Bit Helligkeit, `loop()`
-  rendert Animationen in einen Framebuffer. Modi: Neuronen, Wellen, Laufschrift, Rohbild vom Handy.
+  rendert Animationen in einen Framebuffer. Modi: Neuronen, Wellen, Laufschrift, Rohbild vom Handy,
+  Löt-Test (`mode test`: eine LED nach der anderen in Zeilen/Spalten-Reihenfolge, jede wird per
+  Serial und BLE mit Zeile, Spalte und GPIO-Paar gemeldet; eine fehlende LED zeigt die Lötstelle).
 - Taster: kurz drücken löst eine Welle aus (auch auf Badges in Reichweite), lang drücken
   wechselt den Modus. Alle drei Taster liegen auf demselben Eingang.
 - Sync: Badges senden Modus, Tempo, Helligkeit und Phase per BLE-Advertising. Die höchste
@@ -99,8 +101,9 @@ der Browser „Bluefy“), „Verbinden“ drücken. Zeigt live das Bild des Bad
 unter https://schwammhirn.c3fl.de/ (Web Bluetooth braucht HTTPS oder localhost).
 
 Firmware flashen ohne Toolchain: Auf der Seite gibt es einen Button „Firmware flashen“ (ESP
-Web Tools, Chrome/Edge am Desktop). Die Binaries liegen in `web/flash/`. Nach einem Firmware-
-Build mit `pio run` aktualisiert `tools/export_firmware.sh` Binaries und Manifest, dann committen.
+Web Tools, Chrome/Edge am Desktop). Die Binaries liegen in `web/flash/`. Nach einer Firmware-
+Änderung: `pio run`, Code committen, dann `tools/export_firmware.sh` (schreibt den Commit-Hash als
+Version ins Manifest) und die Binaries als eigenen Commit nachschieben.
 
 Deployment: Das `Dockerfile` im Repo-Root liefert `web/` per nginx aus. In Coolify eine
 neue Ressource vom Typ „Public Repository“ mit Build Pack „Dockerfile“ anlegen, Domain

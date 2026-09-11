@@ -41,12 +41,13 @@
     <button data-mode="pulse">Wellen</button>
     <button data-mode="text">Laufschrift</button>
     <button data-mode="remote">Malen</button>
+    <button data-mode="test">Löt-Test</button>
   </div>
   <div class="row" style="margin-top:10px">
     <input type="text" id="text" maxlength="63" placeholder="Laufschrift…" value="SCHWAMMHIRN">
     <button id="sendText">Senden</button>
   </div>
-  <label>Tempo <input type="range" id="speed" min="0" max="100" value="50"><span class="val" id="speedVal">50</span></label>
+  <label>Tempo <input type="range" id="speed" min="0" max="100" value="4"><span class="val" id="speedVal">4</span></label>
   <label>Helligkeit <input type="range" id="bright" min="1" max="15" value="15"><span class="val" id="brightVal">15</span></label>
   <label>Schriftgröße <input type="range" id="tsize" min="1" max="5" value="3"><span class="val" id="tsizeVal">3</span></label>
   <label>Abstand oben <input type="range" id="ty" min="0" max="30" value="6"><span class="val" id="tyVal">6</span></label>
@@ -89,7 +90,7 @@ const $ = id => document.getElementById(id);
 const log = s => { const el = $('log'); el.textContent += s + '\n'; el.scrollTop = el.scrollHeight; };
 
 // --- Zustand (spiegelt struct State der Firmware) ---------------------------
-const st = { mode: 'neurons', speed: 50, bright: 15, text: 'SCHWAMMHIRN', tsize: 3, ty: 6 };
+const st = { mode: 'neurons', speed: 4, bright: 15, text: 'SCHWAMMHIRN', tsize: 3, ty: 6 };
 let frame = new Uint8Array(N);       // was angezeigt wird (Simulation, Mirror oder gemaltes Bild)
 let painted = new Uint8Array(N);     // Bild im Modus "Malen"
 let painting = false;
@@ -168,6 +169,21 @@ function renderText(t) {
   }
   sampleCanvas(SCALE >= 3 ? 0 : 1);
 }
+// Löt-Test: eine LED nach der anderen, Zeile für Zeile, darin Spalte für Spalte (wie die Firmware)
+const testOrder = LED_XY.map((_, i) => i).sort((a, b) => (LED_RC[a][0] - LED_RC[b][0]) || (LED_RC[a][1] - LED_RC[b][1]));
+let lastTestStep = -1, testStartedAt = 0;
+function renderTest() {
+  if (lastTestStep < 0) testStartedAt = performance.now();
+  const stepMs = 1500 - st.speed * 13;
+  const step = Math.floor((performance.now() - testStartedAt) / stepMs) % N;
+  frame.fill(0);
+  const led = testOrder[step];
+  frame[led] = 255;
+  if (step !== lastTestStep) {
+    lastTestStep = step;
+    $('canvasHint').textContent = `Löt-Test: D${led + 1}, Zeile ${LED_RC[led][0]}, Spalte ${LED_RC[led][1]}`;
+  }
+}
 let lastSim = performance.now();
 function simulate() {
   const now = performance.now(), dt = now - lastSim, t = animTime();
@@ -177,7 +193,9 @@ function simulate() {
     case 'pulse': renderPulseMode(t); break;
     case 'text': renderText(t); break;
     case 'remote': frame.set(painted); break;
+    case 'test': renderTest(); return;
   }
+  lastTestStep = -1;
   renderWaves();
 }
 
@@ -289,7 +307,7 @@ function applyMode(m) {
   for (const b of $('modes').children) b.classList.toggle('active', b.dataset.mode === m);
   const paint = m === 'remote';
   $('clear').hidden = $('invert').hidden = !paint;
-  $('canvasHint').textContent = paint ? 'LEDs antippen oder ziehen zum Malen.' : (connected ? 'Live-Bild des Badges.' : 'Simulation. So sieht es auf dem Badge aus.');
+  $('canvasHint').textContent = paint ? 'LEDs antippen oder ziehen zum Malen.' : m === 'test' ? 'Löt-Test läuft, Meldungen im Log.' : (connected ? 'Live-Bild des Badges.' : 'Simulation. So sieht es auf dem Badge aus.');
   if (paint) frame.set(painted);
 }
 let frameTimer = null;
