@@ -23,6 +23,9 @@
   canvas { width: 100%; touch-action: none; border-radius: 12px; display: block; }
   #log { font: 12px/1.4 ui-monospace, monospace; color: var(--dim); max-height: 120px; overflow-y: auto; white-space: pre-wrap; margin: 0; }
   .hint { color: var(--dim); font-size: .85rem; }
+  footer { margin: 24px 0 8px; padding-top: 12px; border-top: 1px solid #333; line-height: 1.6; }
+  footer a { color: var(--yel); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -83,6 +86,11 @@
 </div>
 <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
 <p class="hint">Ohne Verbindung läuft hier dieselbe Animation wie auf dem Badge als Simulation. Web Bluetooth läuft in Chrome/Edge auf Android, Windows, macOS und Linux. Auf dem iPhone braucht es den Browser „Bluefy“.</p>
+<footer class="hint">
+  Das Schwammhirn-Badge entstand für das <strong>Hacks on the Beach 2026</strong> in Flensburg.
+  Ein Projekt des <a href="https://c3fl.de/">Chaostreff Flensburg</a>.
+  Schaltplan, Platine, Firmware und diese Seite: <a href="https://github.com/chaostreff-flensburg/badge-schwammintelligenz">github.com/chaostreff-flensburg/badge-schwammintelligenz</a>.
+</footer>
 
 <script src="led_map.js"></script>
 <script>
