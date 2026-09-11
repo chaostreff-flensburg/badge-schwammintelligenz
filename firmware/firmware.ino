@@ -10,7 +10,7 @@
 //     über BLE-Advertising. Ein Tastendruck löst eine Welle auf allen aus.
 //
 // Kommandos (Serial 115200 oder BLE RX, eine Zeile pro Kommando):
-//   mode <0-4|neurons|pulse|text|remote|test>   Modus wählen
+//   mode <0-4|neurons|pulse|text|test|remote>   Modus wählen
 //                      test: Löt-Test, eine LED nach der anderen in Zeilen/Spalten-Reihenfolge
 //   text <Text>        Laufschrift setzen (ASCII, Umlaute werden ersetzt)
 //   name <Name>        BLE-Anzeigename (max. 20 Zeichen), Standard Schwammhirn-<ID>
@@ -44,7 +44,7 @@ constexpr int BUTTON_PIN = 21; // alle drei Taster parallel, aktiv HIGH
 constexpr int STATUS_LED = SOC_GPIO_PIN_COUNT + 10;
 
 // Typen stehen vor der ersten Funktion, weil der Arduino-Präprozessor dort seine Prototypen einfügt.
-enum Mode : uint8_t { NEURONS, PULSE, TEXT, REMOTE, TEST, MODE_COUNT }; // ab REMOTE nur per Kommando, nicht per Taster oder Sync
+enum Mode : uint8_t { NEURONS, PULSE, TEXT, TEST, REMOTE, MODE_COUNT }; // Taster rotiert bis TEST; ab TEST kein Sync, kein Speichern
 
 struct __attribute__((packed)) SyncPacket
 {
@@ -105,7 +105,7 @@ void ARDUINO_ISR_ATTR onScanTick()
 // ---------------------------------------------------------------------------
 // Zustand
 // ---------------------------------------------------------------------------
-const char* const MODE_NAMES[MODE_COUNT] = {"neurons", "pulse", "text", "remote", "test"};
+const char* const MODE_NAMES[MODE_COUNT] = {"neurons", "pulse", "text", "test", "remote"};
 
 struct State
 {
@@ -371,7 +371,7 @@ void onSyncPacket(const SyncPacket& p)
   if (known && peer->pulseSeq != p.pulseSeq) triggerWave(p.pulseOrigin < LED_COUNT ? p.pulseOrigin : 0);
   *peer = {p.id, p.pulseSeq, millis()};
 
-  if (!st.syncEnabled || p.mode >= REMOTE || st.mode >= REMOTE) return;
+  if (!st.syncEnabled || p.mode >= TEST || st.mode >= TEST) return;
   bool newer = p.generation > generation || (p.generation == generation && p.id < myId);
   if (!newer) return;
   int16_t drift = (int16_t)(p.phase - (uint16_t)animTime());
@@ -604,7 +604,7 @@ void handleButton()
   if (now && !longFired && millis() - pressedAt > 700)
   {
     longFired = true;
-    setMode((Mode)((st.mode + 1) % REMOTE)); // remote nur per Kommando
+    setMode((Mode)((st.mode + 1) % REMOTE)); // remote nur per Kommando, test ist Teil der Rotation
     reply(String("button: mode ") + MODE_NAMES[st.mode]);
   }
   if (!now && last)
@@ -622,7 +622,7 @@ void loadSettings()
 {
   prefs.begin("hirn");
   st.mode = (Mode)prefs.getUChar("mode", NEURONS);
-  if (st.mode >= REMOTE) st.mode = NEURONS;
+  if (st.mode >= TEST) st.mode = NEURONS;
   st.speed = prefs.getUChar("speed", 4);
   st.brightness = constrain(prefs.getUChar("bright", 15), 1, 15);
   prefs.getString("text", st.text, sizeof(st.text));
@@ -635,7 +635,7 @@ void saveSettingsIfDue()
 {
   if (!dirtySince || millis() - dirtySince < 2000) return;
   dirtySince = 0;
-  prefs.putUChar("mode", st.mode >= REMOTE ? NEURONS : st.mode);
+  prefs.putUChar("mode", st.mode >= TEST ? NEURONS : st.mode);
   prefs.putUChar("speed", st.speed);
   prefs.putUChar("bright", st.brightness);
   prefs.putString("text", st.text);
