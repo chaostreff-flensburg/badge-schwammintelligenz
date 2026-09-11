@@ -63,6 +63,19 @@
 </div>
 
 <div class="card"><pre id="log"></pre></div>
+
+<div class="card">
+  <div class="row">
+    <esp-web-install-button manifest="flash/manifest.json">
+      <button slot="activate">⬇ Firmware flashen</button>
+      <span slot="unsupported" class="hint">Flashen geht nur in Chrome oder Edge am Desktop (Web Serial).</span>
+      <span slot="not-allowed" class="hint">Flashen braucht HTTPS.</span>
+    </esp-web-install-button>
+    <span class="hint" id="fwVersion"></span>
+  </div>
+  <p class="hint" style="margin:8px 0 0">Badge per USB anstecken, Button drücken, Port wählen. Keine Installation nötig, die Firmware kommt aus diesem Repo-Stand.</p>
+</div>
+<script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
 <p class="hint">Ohne Verbindung läuft hier dieselbe Animation wie auf dem Badge als Simulation. Web Bluetooth läuft in Chrome/Edge auf Android, Windows, macOS und Linux. Auf dem iPhone braucht es den Browser „Bluefy“.</p>
 
 <script src="led_map.js"></script>
@@ -333,6 +346,7 @@ for (const id of ['speed', 'bright', 'tsize', 'ty']) {
 $('sync').onchange = () => send('sync ' + ($('sync').checked ? 'on' : 'off'));
 
 if (!navigator.bluetooth) log('Dieser Browser kann kein Web Bluetooth. Die Simulation läuft trotzdem. Zum Verbinden Chrome/Edge auf Android oder Desktop nutzen, auf iPhone „Bluefy“.');
+fetch('flash/manifest.json').then(r => r.json()).then(m => $('fwVersion').textContent = 'Version ' + m.version).catch(() => {});
 applyMode('neurons');
 tick();
 </script>
